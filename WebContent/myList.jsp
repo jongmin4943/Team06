@@ -41,9 +41,6 @@
             <div class="inner">
               <h1>My List</h1>
               <p>기억에 남는 맛집,관광지를 정리해보세요</p>
-                <div class="scroll-icon">
-                    <a class="scrollTo" data-scrollTo="portfolio" href="#"><img src="img/scroll-icon.png" alt=""></a>
-                </div>    
             </div>
         </div>
         <video autoplay loop muted>

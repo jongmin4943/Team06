@@ -38,11 +38,8 @@
         <div class="video-content">
             <div class="inner">
               <h1>About <em>Us</em></h1>
-              <p>저희는..</p>
-              <p>박찬우, 윤종민입니다.</p>
-                <div class="scroll-icon">
-                    <a class="scrollTo" data-scrollTo="portfolio" href="#"><img src="img/scroll-icon.png" alt=""></a>
-                </div>    
+              <p>My Journey를 사용해주셔서 감사합니다</p>
+              <p>박찬우 윤종민</p>
             </div>
         </div>
         <video autoplay loop muted>
