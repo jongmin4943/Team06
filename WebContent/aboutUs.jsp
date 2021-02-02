@@ -27,7 +27,7 @@
 <body>
 <nav>
         <div class="logo">
-            <a href="main.jsp">About <em>Us</em></a>
+            <a href="main.jsp">My <em>Journey</em></a>
         </div>
         <div class="menu-icon">
         <span></span>

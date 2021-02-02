@@ -26,7 +26,7 @@
 
     <nav>
         <div class="logo">
-            <a href="index.html">My <em>Journey</em></a>
+            <a href="main.jsp">My <em>Journey</em></a>
         </div>
         <div class="menu-icon">
         <span></span>

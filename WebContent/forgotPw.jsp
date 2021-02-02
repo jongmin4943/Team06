@@ -47,13 +47,12 @@
                         <input type="text" name="id" maxlength="10">
                     </td>
                 </tr>
-                        
+                <tr>
                     <td id="title">Name</td>
                     <td>
                         <input type="text" name="name" maxlength="12">
                     </td>
                 </tr>
-                    
                 <tr>
                     <td id="title">E-mail</td>
                     <td>
