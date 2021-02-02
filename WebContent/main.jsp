@@ -88,6 +88,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="portfolio-item">
                     <a href="img/big_portfolio_item_3.jpg" data-lightbox="image-1"><div class="thumb">
+                    <a href="naverMap.jsp">
                         <div class="hover-effect">
                             <div class="hover-content">
                                 <h1>검색 <em>Search Places</em></h1>
