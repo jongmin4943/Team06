@@ -27,7 +27,7 @@
 <body>
 <nav>
         <div class="logo">
-            <a href="index.html">About <em>Us</em></a>
+            <a href="main.jsp">About <em>Us</em></a>
         </div>
         <div class="menu-icon">
         <span></span>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <video autoplay loop muted>
-        	<source src="highway-loop.mp4" type="video/mp4" />
+        	<source src="img/highway-loop.mp4" type="video/mp4" />
         </video>
     </div>
     
@@ -53,16 +53,16 @@
           <div class="main-menu">
               <ul>
                   <li>
-                      <a href="http://localhost:8080/MyJourney/index.jsp">Home</a>
+                      <a href="main.jsp">Home</a>
                   </li>
                   <li>
-                      <a href="http://localhost:8080/MyJourney/signIn.jsp">Sign - In</a>
+                      <a href="signIn.jsp">Sign - In</a>
                   </li>
                   <li>
-                      <a href="http://localhost:8080/MyJourney/myList.jsp">My Trips</a>
+                      <a href="myList.jsp">My Trips</a>
                   </li>
                   <li>
-                      <a href="http://localhost:8080/MyJourney/aboutUs.jsp">About Us</a>
+                      <a href="aboutUs.jsp">About Us</a>
                   </li>
               </ul>
               <p>We create awesome lists for you.</p>

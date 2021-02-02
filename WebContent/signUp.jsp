@@ -30,7 +30,7 @@
         
         // 취소 버튼 클릭시 로그인 화면으로 이동
         function goLoginForm() {
-            location.href="LoginForm.jsp";
+            location.href="signIn.jsp";
         }
     </script>
     
@@ -45,13 +45,13 @@
         
         <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
         <!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
-        <form method="post" action="../pro/JoinPro.jsp" name="userInfo" 
+        <form method="post" action="main.jsp" name="userInfo" 
                 onsubmit="return checkValue()">
             <table>
                 <tr>
                     <td id="title">ID</td>
                     <td>
-                        <input type="text" name="id" maxlength="50">
+                        <input type="text" name="id" maxlength="20">
                         <input type="button" value="중복확인" >    
                     </td>
                 </tr>
@@ -59,28 +59,28 @@
                 <tr>
                     <td id="title">Password</td>
                     <td>
-                        <input type="password" name="password" maxlength="50">
+                        <input type="password" name="password" maxlength="20">
                     </td>
                 </tr>
                 
                 <tr>
                     <td id="title">Check Password</td>
                     <td>
-                        <input type="password" name="passwordcheck" maxlength="50">
+                        <input type="password" name="passwordcheck" maxlength="20">
                     </td>
                 </tr>
                     
                 <tr>
                     <td id="title">Name</td>
                     <td>
-                        <input type="text" name="name" maxlength="50">
+                        <input type="text" name="name" maxlength="20">
                     </td>
                 </tr>
                     
                 <tr>
                     <td id="title">E-mail</td>
                     <td>
-                        <input type="text" name="mail1" maxlength="50">@
+                        <input type="text" name="mail1" maxlength="20">@
                         <select name="mail2">
                             <option>naver.com</option>
                             <option>gmail.com</option>

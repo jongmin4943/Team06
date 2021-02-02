@@ -46,7 +46,7 @@
             </div>
         </div>
         <video autoplay loop muted>
-        	<source src="highway-loop.mp4" type="video/mp4" />
+        	<source src="img/highway-loop.mp4" type="video/mp4" />
         </video>
     </div>
 
@@ -55,8 +55,8 @@
         <div class="container-fluid">
             <div class="col-md-4 col-sm-6">
                 <div class="portfolio-item">
-                    <a href="img/big_portfolio_item_4.jpg" data-lightbox="image-1"><div class="thumb">
-                    <a href="http://localhost:8080/MyJourney/myList.jsp">
+                    <a href="img/meal5.jpg" data-lightbox="image-1"><div class="thumb">
+                    <a href="myList.jsp">
                         <div class="hover-effect">
                             <div class="hover-content">
                                 <h1>내 맛집 <em>My restaurant</em></h1>
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <div class="image">
-                            <img src="img/meal2.jpg">
+                            <img src="img/meal5.jpg">
                         </div>
                     </div></a>
                 </div>
@@ -72,7 +72,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="portfolio-item">
                     <a href="img/big_portfolio_item_2.jpg" data-lightbox="image-1"><div class="thumb">
-                    <a href="http://localhost:8080/MyJourney/myList.jsp">    
+                    <a href="myList.jsp">    
                         <div class="hover-effect">
                             <div class="hover-content">
                                 <h1>내 여행지 <em>My Trip</em></h1>
@@ -108,7 +108,7 @@
     <footer>
         <div class="container-fluid">
             <div class="col-md-12">
-                <p>Copyright &copy; 2018 Company Name 
+                <p>Copyright &copy; Team06 
     
     | Designed by TemplateMo</p>
             </div>
@@ -125,16 +125,16 @@
           <div class="main-menu">
               <ul>
                   <li>
-                      <a href="http://localhost:8080/MyJourney/index.html">Home</a>
+                      <a href="main.jsp">Home</a>
                   </li>
                   <li>
-                      <a href="http://localhost:8080/MyJourney/signIn.jsp">Sign - In</a>
+                      <a href="signIn.jsp">Sign - In</a>
                   </li>
                   <li>
-                      <a href="http://localhost:8080/MyJourney/myList.jsp">My Trips</a>
+                      <a href="myList.jsp">My Trips</a>
                   </li>
                   <li>
-                      <a href="http://localhost:8080/MyJourney/aboutUs.jsp">About Us</a>
+                      <a href="aboutUs.jsp">About Us</a>
                   </li>
               </ul>
               <p>We create awesome lists for you.</p>

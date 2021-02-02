@@ -1,57 +1,53 @@
 package user;
 
 public class UserDto {
-	private String id;
-	private String pw;
-	private String name;
-	private String email;
+	private String userID;
+	private String userPassword;
+	private String userName;
+	private String userEmail;
+
 	public UserDto() {
-		this("","","","");
+		this("", "", "", "");
 	}
 
-	public UserDto(String id, String pw, String name, String email) {
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.email = email;
+	public UserDto(String userID, String userPassword, String userName, String userEmail) {
+		super();
+		this.userID = userID;
+		this.userPassword = userPassword;
+		this.userName = userName;
+		this.userEmail = userEmail;
 	}
 
-	public String getId() {
-		return id;
+	public String getUserID() {
+		return userID;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 
-	public String getPw() {
-		return pw;
+	public String getUserPassword() {
+		return userPassword;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
-	@Override
-	public String toString() {
-		return "[id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + "]";
-	}
-	
-	
 }

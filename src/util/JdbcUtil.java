@@ -7,11 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JdbcUtil {
-	private static String url = "jdbc:h2:tcp://localhost/~/test";
-	private static String user = "sa";
-	private static String password = "12345";
+	private static String url = "jdbc:mysql://localhost:3306/BBS";
+	private static String user = "root";
+	private static String password = "comstudy21";
 	
-	//나중에 외부에서 설정하게 하면 된다
 	public void set(String url, String user, String password) {
 		this.url = url;
 		this.user = user;
@@ -20,9 +19,7 @@ public class JdbcUtil {
 	
 	public static Connection getConnection() {
 		try {
-			Class.forName("org.h2.Driver");
-			//드라이버 검색
-			//DB 서버가 실행 중이어야 접속 가능.
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(url, user, password);
 			return conn;
 		} catch (ClassNotFoundException e) {

@@ -61,10 +61,10 @@ public class UserDao {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(INSERT);
-			pstmt.setString(1, dto.getId());
-			pstmt.setString(2, dto.getPw());
-			pstmt.setString(3, dto.getName());
-			pstmt.setString(4, dto.getEmail());
+			pstmt.setString(1, dto.getUserID());
+			pstmt.setString(2, dto.getUserPassword());
+			pstmt.setString(3, dto.getUserName());
+			pstmt.setString(4, dto.getUserEmail());
 			int cnt = pstmt.executeUpdate();
 			if(cnt > 0) {
 				System.out.println("입력 성공");
@@ -85,10 +85,10 @@ public class UserDao {
 		try {
 			pstmt = conn.prepareStatement(UPDATE);
 			
-			pstmt.setString(1, user.getId());
-			pstmt.setString(2, user.getPw());
-			pstmt.setString(3, user.getName());
-			pstmt.setString(4, user.getEmail());
+			pstmt.setString(1, user.getUserID());
+			pstmt.setString(2, user.getUserPassword());
+			pstmt.setString(3, user.getUserName());
+			pstmt.setString(4, user.getUserEmail());
 			
 			int cnt = pstmt.executeUpdate();
 			if(cnt>0) {
@@ -109,7 +109,7 @@ public class UserDao {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(DELETE);
-			pstmt.setString(1, user.getEmail());
+			pstmt.setString(1, user.getUserEmail());
 			int cnt = pstmt.executeUpdate();
 			if(cnt > 0) {
 				System.out.println("삭제 완료");
@@ -125,6 +125,7 @@ public class UserDao {
 		}
 		
 	}
+	
 	
 	
 	public static void main(String[] args) {
