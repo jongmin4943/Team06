@@ -13,10 +13,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" content="text/html">
 <title>Sign Up Checking</title>
 </head>
 <body>
+<%
+	UserDao dao = new UserDao();
+	int a = dao.insert(user);
+	PrintWriter script = response.getWriter();
+	if(a == -1) {
+	script.println("<script>");
+	script.println("alert('이미 존재하는 아이디입니다.')");
+	script.println("location.href = 'main.jsp'");
+	script.println("</script>");
+	} else {
+	script.println("<script>");
+	script.println("alert('회원가입 되셨습니다.')");
+	script.println("location.href = 'main.jsp'");
+	script.println("</script>");
+	}
+%>
 
 </body>
 </html>

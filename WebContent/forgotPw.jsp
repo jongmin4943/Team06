@@ -23,16 +23,16 @@
         // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
         function checkValue()
         {
-            if(!document.userInfo.UserID.value){
+            if(!document.userInfo.userID.value){
                 alert("아이디를 입력하세요.");
                 return false;
             }
             
-            if(!document.userInfo.UserEmail.value){
+            if(!document.userInfo.userEmail.value){
                 alert("이메일을 입력하세요.");
                 return false;
             }
-            if(!document.userInfo.UserName.value){
+            if(!document.userInfo.userName.value){
                 alert("이름을 입력하세요.");
                 return false;
             }

@@ -21,6 +21,10 @@
         <script src="./js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 	<script type="text/javascript">
         // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
+        function goCheck() {
+        	alert("아직 구현중..");
+        }
+        
         function checkValue()
         {
             if(!document.userInfo.userID.value){
@@ -28,13 +32,13 @@
                 return false;
             }
             
-            if(!document.userInfo.UserPassword.value){
+            if(!document.userInfo.userPassword.value){
                 alert("비밀번호를 입력하세요.");
                 return false;
             }
             
             // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-            if(document.userInfo.UserPassword.value != document.userInfo.UserPasswordCheck.value ){
+            if(document.userInfo.userPassword.value != document.userInfo.userPasswordCheck.value ){
                 alert("비밀번호를 동일하게 입력하세요.");
                 return false;
             }
@@ -85,6 +89,7 @@
                 <h3 style="text-align: center;">Sign Up</h3>
                 <div class="form-group"> <!-- 위에서 아래로 내려오는 폼 작성 -->
                 	<input type="text" class="form-control" placeholder="ID" name="userID" maxlength="20">
+                	<input type="button" value="중복확인" name="checkID" style="margin-top:10" onclick="goCheck()">
                 </div>
                 <div class="form-group">
                 	<input type="password" class="form-control" placeholder="Password" name="userPassword" maxlength="20">

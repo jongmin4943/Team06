@@ -57,7 +57,7 @@ public class UserDao {
 	 * 새 유저정보 넣기
 	 * @param dto
 	 */
-	public void insert(UserDto dto) {
+	public int insert(UserDto dto) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(INSERT);
@@ -65,15 +65,10 @@ public class UserDao {
 			pstmt.setString(2, dto.getUserPassword());
 			pstmt.setString(3, dto.getUserName());
 			pstmt.setString(4, dto.getUserEmail());
-			int cnt = pstmt.executeUpdate();
-			if(cnt > 0) {
-				System.out.println("입력 성공");
-			} else {
-				System.out.println("입력 실패");
-				conn.rollback();
-			}
+			return pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("이미 존재하는 아이디");
+			return -1;
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
@@ -127,9 +122,9 @@ public class UserDao {
 	
 	public static void main(String[] args) {
 		UserDao user = new UserDao();
-		user.insert(new UserDto("min","2345","민종윤","bad"));
+//		user.insert(new UserDto("min","2345","민종윤","bad"));
 //		user.update(new UserDto("Yoon","1357","민종윤","bad"));
-//		user.delete(new UserDto(null,null,null,"bad"));
+		user.delete(new UserDto(null,null,null,"bad"));
 		List<UserDto> list = user.getAll();
 		for(UserDto users : list) {
 			System.out.println(users);
