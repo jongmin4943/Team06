@@ -19,7 +19,7 @@ public class JdbcUtil {
 	
 	public static Connection getConnection() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(url, user, password);
 			return conn;
 		} catch (ClassNotFoundException e) {

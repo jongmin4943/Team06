@@ -12,9 +12,9 @@ import util.JdbcUtil;
 
 public class UserDao {
 	static final String SELECT = "SELECT * FROM USER";
-	static final String INSERT = "INSERT INTO USER (ID, PW, NAME, EMAIL) VALUES(?,?,?,?)";
-	static final String UPDATE = "UPDATE USER SET ID=?, PW=?, NAME=? WHERE EMAIL=?";
-	static final String DELETE = "DELETE FROM USER WHERE EMAIL=?";
+	static final String INSERT = "INSERT INTO USER VALUES(?,?,?,?)";
+	static final String UPDATE = "UPDATE USER SET UserID=?, UserPassword=?, UserName=? WHERE UserEmail=?";
+	static final String DELETE = "DELETE FROM USER WHERE UserEmail=?";
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -68,7 +68,6 @@ public class UserDao {
 			int cnt = pstmt.executeUpdate();
 			if(cnt > 0) {
 				System.out.println("입력 성공");
-				conn.commit();
 			} else {
 				System.out.println("입력 실패");
 				conn.rollback();
@@ -93,7 +92,6 @@ public class UserDao {
 			int cnt = pstmt.executeUpdate();
 			if(cnt>0) {
 				System.out.println("수정 성공");
-				conn.commit();
 			} else {
 				System.out.println("수정 실패 : email이 존재하지 않음");
 				conn.rollback();
@@ -113,7 +111,6 @@ public class UserDao {
 			int cnt = pstmt.executeUpdate();
 			if(cnt > 0) {
 				System.out.println("삭제 완료");
-				conn.commit();
 			} else {
 				System.out.println("삭제 실패 : 존재하지 않는 이메일");
 				conn.rollback();
@@ -130,7 +127,7 @@ public class UserDao {
 	
 	public static void main(String[] args) {
 		UserDao user = new UserDao();
-//		user.insert(new UserDto("min","2345","민종윤","bad"));
+		user.insert(new UserDto("min","2345","민종윤","bad"));
 //		user.update(new UserDto("Yoon","1357","민종윤","bad"));
 //		user.delete(new UserDto(null,null,null,"bad"));
 		List<UserDto> list = user.getAll();

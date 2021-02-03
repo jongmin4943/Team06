@@ -50,4 +50,10 @@ public class UserDto {
 		this.userEmail = userEmail;
 	}
 
+	@Override
+	public String toString() {
+		return "UserDto [userID=" + userID + ", userPassword=" + userPassword + ", userName=" + userName
+				+ ", userEmail=" + userEmail + "]";
+	}
+	
 }
