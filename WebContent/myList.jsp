@@ -17,14 +17,21 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/fontAwesome.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/light-box.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/templatemo-style.css">
-
+		
         <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 <meta charset="UTF-8">
 <title>My List</title>
 </head>
+<style>
+iframe{
+width:100%;
+height:100%;
+padding-top:82px;
 
+}
+</style>
 <body>
 <nav>
         <div class="logo">
@@ -40,7 +47,10 @@
         <div class="video-content">
             <div class="inner">
               <h1>My List</h1>
-              <p>기억에 남는 맛집,관광지를 정리해보세요</p>
+              <p>기억에 남는 맛집,관광지를<br /> 정리해보세요</p>
+                   	<table id="tata">
+	<iframe src="List01.html" ></iframe>
+	</table>
             </div>
         </div>
         <video autoplay loop muted>
@@ -70,7 +80,11 @@
           </div>
         </div>
       </div>
+
     </section>
+
+	
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
