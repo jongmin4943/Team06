@@ -22,11 +22,22 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 	<%
-	UserDao dao = new UserDao();
+	String userID = null;
 	PrintWriter pr = response.getWriter();
+	if(session.getAttribute("userID") != null) {
+		userID = (String)session.getAttribute("userID");
+	}
+	if(userID != null) {
+		pr.println("<script>");
+		pr.println("alert('로그인 상태입니다.')");
+		pr.println("location.href = 'main.jsp'");
+		pr.println("</script>");
+	}
+	UserDao dao = new UserDao();
 	
 	int check = dao.loginCheck(user.getUserID(), user.getUserPassword());
 	if(check == 1) {
+		session.setAttribute("userID", user.getUserID());
 		pr.println("<script>");
 		pr.println("alert('로그인 성공!')");
 		pr.println("location.href = 'main.jsp'");

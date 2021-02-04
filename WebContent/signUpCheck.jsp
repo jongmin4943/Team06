@@ -23,9 +23,19 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 	<%
+	String userID = null;
+	PrintWriter pr = response.getWriter();
+	if(session.getAttribute("userID") != null) {
+		userID = (String)session.getAttribute("userID");
+	}
+	if(userID != null) {
+		pr.println("<script>");
+		pr.println("alert('로그인 상태입니다.')");
+		pr.println("location.href = 'main.jsp'");
+		pr.println("</script>");
+	}
 	UserDao dao = new UserDao();
 	int a = dao.insert(user);
-	PrintWriter pr = response.getWriter();
 	if(a == -1) {/* insert() 는 retrun값으로 pstmt.executeUpdate()의 int값을 받는다. 실행중 오류가 나면  */
 	pr.println("<script>");/* 예를 들면 PRIMARY KEY로 등록한 ID가 같아서 데이터 베이스에서 못받아 Exception이 생기면 */
 	pr.println("alert('이미 존재하는 아이디입니다.')"); /* -1을 반환 한다. */
@@ -34,7 +44,7 @@ request.setCharacterEncoding("UTF-8");
 	} else {
 	pr.println("<script>");
 	pr.println("alert('회원가입 되셨습니다.')");
-	pr.println("location.href = 'main.jsp'");
+	pr.println("location.href = 'signIn.jsp'");
 	pr.println("</script>");
 	}
 %>

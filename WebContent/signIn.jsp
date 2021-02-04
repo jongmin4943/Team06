@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page import="java.io.PrintWriter"%>
 <html>
 <head>
 <meta charset="utf-8" pageEncoding="utf-8">
@@ -59,6 +60,19 @@ body {
 </style>
 </head>
 <body>
+<%
+	String userID = null;
+	PrintWriter pr = response.getWriter();
+	if(session.getAttribute("userID") != null) {
+		userID = (String)session.getAttribute("userID");
+	}
+	if(userID != null) {
+		pr.println("<script>");
+		pr.println("alert('로그인 상태입니다.')");
+		pr.println("location.href = 'main.jsp'");
+		pr.println("</script>");
+	}
+%>
 	<nav>
 		<div class="logo">
 			<a href="main.jsp">My <em>Journey</em> <b><font size="6"

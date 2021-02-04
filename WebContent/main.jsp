@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +31,12 @@
 </head>
 
 <body>
+<%
+	String userID = null;
+	if(session.getAttribute("userID") != null){
+		userID = (String) session.getAttribute("userID");
+	}
+%>
 
 	<nav>
 		<div class="logo">
@@ -141,12 +148,27 @@
 		<div class="container">
 			<div class="row">
 				<div class="main-menu">
+				<%
+					if(userID == null) {
+				%>
 					<ul>
 						<li><a href="main.jsp">Home</a></li>
 						<li><a href="signIn.jsp">Sign - In</a></li>
 						<li><a href="myList.jsp">My Trips</a></li>
 						<li><a href="aboutUs.jsp">About Us</a></li>
 					</ul>
+				<%
+					} else { 
+				%>
+					<ul>
+						<li><a href="main.jsp">Home</a></li>
+						<li><a href="signOut.jsp">Sign - Out</a></li>
+						<li><a href="myList.jsp">My Trips</a></li>
+						<li><a href="aboutUs.jsp">About Us</a></li>
+					</ul>
+				<%
+					}
+				%>
 					<p>We create awesome lists for you.</p>
 				</div>
 			</div>
