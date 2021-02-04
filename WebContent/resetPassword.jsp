@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" pageEncoding="utf-8">
@@ -26,26 +27,24 @@
 	rel="stylesheet">
 
 <script src="./js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <script type="text/javascript">
-        function checkValue()
-        {
-            if(!document.userInfo.userID.value){
-                alert("아이디를 입력하세요.");
-                return false;
-            }
-            
-            if(!document.userInfo.userPassword.value){
-                alert("비밀번호를 입력하세요.");
-                return false;
-            }
-        }
-        function goSignUpForm() {
-            location.href="signUp.jsp";
-        }
-        function goForgotPwForm() {
-            location.href="forgotPw.jsp";
-        }
-    </script>
+	function checkValue() {
+		if (!document.userInfo.userPassword.value) {
+			alert("비밀번호를 입력하세요.");
+			return false;
+		}
+		if (document.userInfo.userPassword.value != document.userInfo.userPasswordCheck.value) {
+			alert("비밀번호를 동일하게 입력하세요.");
+			return false;
+		}
+	}
+
+	function goSignInForm() {
+		location.href = "signIn.jsp";
+	}
+</script>
 <style type="text/css">
 body {
 	background-color: darkgray;
@@ -62,7 +61,7 @@ body {
 	<nav>
 		<div class="logo">
 			<a href="main.jsp">My <em>Journey</em> <b><font size="6"
-					color="gray">Sign In</font></b></a>
+					color="gray">Sign Up</font></b></a>
 		</div>
 		<div class="menu-icon">
 			<span></span>
@@ -74,35 +73,27 @@ body {
 	<br>
 	<br>
 	<div class="container">
-		<!-- 컨테이너 클래스 이용 -->
 		<div class="col-lg-4"></div>
-		<!-- 창을 중앙으로 모으기 -->
 		<div class="col-lg-4">
-			<div class="jumbotron" style="padding-top: 20px;">
-				<!-- 점보트론 박스 이용. 중앙에서 시작할수있게 탑에서 20패딩 -->
-				<form action="loginCheck.jsp" method="post" name="userInfo"
+			<div class="jumbotron" style="padding-top: 20px">
+				<form method="post" action="updatePassword.jsp" name="userInfo"
 					onsubmit="return checkValue()">
-					<h3 style="text-align: center;">Sign In</h3>
+					<h3 style="text-align: center;">Reset Password</h3>
 					<div class="form-group">
-						<!-- 위에서 아래로 내려오는 폼 작성 -->
-						<input type="text" class="form-control" placeholder="ID"
-							name="userID" maxlength="20">
+						<input type="password" class="form-control"
+							placeholder="New Password" name="userPassword" maxlength="20">
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" placeholder="Password"
-							name="userPassword" maxlength="20">
+						<input type="password" class="form-control"
+							placeholder="Confirm Password" name="userPasswordCheck"
+							maxlength="20">
 					</div>
-					<input class="btn" type="submit" value="Sign In"> <input
-						class="btn" type="button" value="Sign Up" onclick="goSignUpForm()">
-					<input type="button" value="forgot password?"
-						style="width: 125; height: 35; margin-top: 10;"
-						onclick="goForgotPwForm()">
+					<input class="btn" type="submit" value="Reset"> <input
+						class="btn" type="button" value="Cancle" onclick="goSignInForm()">
 				</form>
 			</div>
 		</div>
-		<div class="col-lg-4"></div>
 	</div>
-
 	<section class="overlay-menu">
 		<div class="container">
 			<div class="row">
@@ -121,12 +112,15 @@ body {
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+	</script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/main.js"></script>
 
+
 </body>
 </html>
-
-
