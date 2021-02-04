@@ -94,7 +94,7 @@ body {
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
 				<!-- 점보트론 박스 이용. 중앙에서 시작할수있게 탑에서 20패딩 -->
-				<form action="loginCheck.jsp" method="post" name="userInfo"
+				<form action="signInCheck.jsp" method="post" name="userInfo"
 					onsubmit="return checkValue()">
 					<h3 style="text-align: center;">Sign In</h3>
 					<div class="form-group">
