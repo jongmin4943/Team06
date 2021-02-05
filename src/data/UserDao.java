@@ -1,4 +1,4 @@
-package user;
+package data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -74,7 +74,50 @@ public class UserDao {
 		}
 	}
 	
-	private void update(UserDto user) {
+	public int loginCheck(String id, String pw) {
+		String selectID = "SELECT * FROM USER WHERE UserID=?";
+		conn = JdbcUtil.getConnection();
+		try {
+			pstmt = conn.prepareStatement(selectID);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(pw.equals(rs.getString("userPassword"))) {
+					return 1;
+				}
+			}
+			return -1;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
+		}
+	}
+	
+	public int confirmUser(String id, String name, String email) {
+		String selectID = "SELECT * FROM USER WHERE UserID=?";
+		conn = JdbcUtil.getConnection();
+		try {
+			pstmt = conn.prepareStatement(selectID);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(name.equals(rs.getString("userName")) && email.equals(rs.getString("userEmail"))) {
+					return 1;
+				}
+			}
+			return -1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		
+		
+	}
+	
+	public void update(UserDto user) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(UPDATE);
@@ -98,7 +141,7 @@ public class UserDao {
 		}
 	}
 	
-	private void delete(UserDto user) {
+	public void delete(UserDto user) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(DELETE);
@@ -124,7 +167,7 @@ public class UserDao {
 		UserDao user = new UserDao();
 //		user.insert(new UserDto("min","2345","민종윤","bad"));
 //		user.update(new UserDto("Yoon","1357","민종윤","bad"));
-		user.delete(new UserDto(null,null,null,"bad"));
+//		user.delete(new UserDto(null,null,null,"bad"));
 		List<UserDto> list = user.getAll();
 		for(UserDto users : list) {
 			System.out.println(users);

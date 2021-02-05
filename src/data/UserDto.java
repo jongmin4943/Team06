@@ -1,4 +1,4 @@
-package user;
+package data;
 
 public class UserDto {
 	private String userID;
