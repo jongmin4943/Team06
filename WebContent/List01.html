@@ -123,7 +123,21 @@ width:40px;
 </style>
 </head>
 <body>
-
+<input type="button" value="Night" onclick="
+	if(document.querySelector('body').dataset.mode ==='day'){
+		document.querySelector('body').style.backgroundColor = 'gray';
+		document.querySelector('body').style.color = 'white';	
+		document.querySelector('table').style.color = 'white';	
+		document.querySelector('body').dataset.mode = 'night'
+		this.value = 'day'
+	}else{
+		document.querySelector('body').style.backgroundColor = 'rgb(238,242,242)';
+		document.querySelector('body').style.color = 'black';	
+		document.querySelector('table').style.color = 'black';	
+		document.querySelector('body').dataset.mode = 'day'
+		this.value = 'Night'	
+	}
+">
 	<table>
 		<hr>
 
