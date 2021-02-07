@@ -13,7 +13,7 @@ import util.JdbcUtil;
 public class UserDao {
 	static final String SELECT = "SELECT * FROM USER";
 	static final String INSERT = "INSERT INTO USER VALUES(?,?,?,?)";
-	static final String UPDATE = "UPDATE USER SET UserID=?, UserPassword=?, UserName=? WHERE UserEmail=?";
+	static final String UPDATE = "UPDATE USER SET UserPassword=? WHERE userID=?";
 	static final String DELETE = "DELETE FROM USER WHERE UserEmail=?";
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -74,7 +74,7 @@ public class UserDao {
 		}
 	}
 	
-	public int loginCheck(String id, String pw) {
+	public boolean loginCheck(String id, String pw) {
 		String selectID = "SELECT * FROM USER WHERE UserID=?";
 		conn = JdbcUtil.getConnection();
 		try {
@@ -83,20 +83,19 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(pw.equals(rs.getString("userPassword"))) {
-					return 1;
+					return true;
 				}
 			}
-			return -1;
-			
+			return false;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return -1;
+			return false;
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
 	}
 	
-	public int confirmUser(String id, String name, String email) {
+	public boolean confirmUser(String id, String name, String email) {
 		String selectID = "SELECT * FROM USER WHERE UserID=?";
 		conn = JdbcUtil.getConnection();
 		try {
@@ -105,16 +104,28 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(name.equals(rs.getString("userName")) && email.equals(rs.getString("userEmail"))) {
-					return 1;
+					return true;
 				}
 			}
-			return -1;
+			return false;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public int updatePassword(String id, String pw) {
+		conn = JdbcUtil.getConnection();
+		try {
+			pstmt = conn.prepareStatement(UPDATE);
+			pstmt.setString(1, pw);
+			pstmt.setString(2, id);
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("업데이트 실패");
 			return -1;
 		}
-		
-		
 	}
 	
 	public void update(UserDto user) {

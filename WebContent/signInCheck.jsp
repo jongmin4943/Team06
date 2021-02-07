@@ -35,14 +35,14 @@ request.setCharacterEncoding("UTF-8");
 	}
 	UserDao dao = new UserDao();
 	
-	int check = dao.loginCheck(user.getUserID(), user.getUserPassword());
-	if(check == 1) {
+	boolean check = dao.loginCheck(user.getUserID(), user.getUserPassword());
+	if(check) {
 		session.setAttribute("userID", user.getUserID());
 		pr.println("<script>");
 		pr.println("alert('로그인 성공!')");
 		pr.println("location.href = 'main.jsp'");
 		pr.println("</script>");
-	} else if(check == -1) {
+	} else {
 		pr.println("<script>");
 		pr.println("alert('아이디나 패스워드가 틀렸습니다.')");
 		pr.println("history.back();");

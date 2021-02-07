@@ -21,12 +21,14 @@ request.setCharacterEncoding("utf-8");
 	UserDao dao = new UserDao();
 	PrintWriter pr = response.getWriter();
 	
-	int check = dao.confirmUser(user.getUserID(),user.getUserName(),user.getUserEmail());
-	if(check == 1) {
+	boolean check = dao.confirmUser(user.getUserID(),user.getUserName(),user.getUserEmail());
+	if(check) {
+		String userID = request.getParameter("userID");
 		pr.println("<script>");
-		pr.println("location.href = 'resetPassword.jsp'");
+		pr.print("location.href = 'resetPassword.jsp?userID=");
+		pr.println(userID+"'");//get으로 넘어온 id값을 reset페이지쪽에 넘겨준다
 		pr.println("</script>");
-	} else if(check == -1){
+	} else {
 		pr.println("<script>");
 		pr.println("alert('입력하신 정보가 존재하지 않습니다.')");
 		pr.println("history.back();");

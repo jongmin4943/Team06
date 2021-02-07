@@ -1,8 +1,15 @@
+<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+request.setCharacterEncoding("utf-8");
+String userID = request.getParameter("userID");
+System.out.println(userID);
+%>
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="utf-8" pageEncoding="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>My Journey</title>
@@ -61,7 +68,7 @@ body {
 	<nav>
 		<div class="logo">
 			<a href="main.jsp">My <em>Journey</em> <b><font size="6"
-					color="gray">Sign Up</font></b></a>
+					color="gray">Reset Password</font></b></a>
 		</div>
 		<div class="menu-icon">
 			<span></span>
@@ -76,6 +83,7 @@ body {
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px">
+			
 				<form method="post" action="updatePassword.jsp" name="userInfo"
 					onsubmit="return checkValue()">
 					<h3 style="text-align: center;">Reset Password</h3>
@@ -88,8 +96,9 @@ body {
 							placeholder="Confirm Password" name="userPasswordCheck"
 							maxlength="20">
 					</div>
-					<input class="btn" type="submit" value="Reset"> <input
-						class="btn" type="button" value="Cancle" onclick="goSignInForm()">
+					<input class="btn" type="submit" value="Reset"> 
+					<input type="hidden" name="userID" value="<%=userID%>" /> <!--넘어온 id값을 update쪽에 넘긴다-->
+					<input class="btn" type="button" value="Cancle" onclick="goSignInForm()">
 				</form>
 			</div>
 		</div>
@@ -120,7 +129,6 @@ body {
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/main.js"></script>
-
 
 </body>
 </html>

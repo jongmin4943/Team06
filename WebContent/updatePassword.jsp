@@ -7,14 +7,32 @@ request.setCharacterEncoding("UTF-8");
 <%@ page import="data.UserDto" %>
 <%@ page import="java.io.PrintWriter" %>
 <jsp:useBean id="user" class="data.UserDto" scope="page" />
-<jsp:setProperty name="user" property="userID" />
+<jsp:setProperty name="user" property="userPassword" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Updating New Password</title>
 </head>
 <body>
-<h2>구현중</h2>
+	<%
+	String userID = request.getParameter("userID");
+	UserDao dao = new UserDao();
+	PrintWriter pr = response.getWriter();
+	int update = dao.updatePassword(userID,user.getUserPassword());
+	if(update == -1) {
+		pr.println("<script>");
+		pr.println("alert('서버 연동 실패')");
+		pr.println("history.back();");
+		pr.println("</script>");
+		
+	} else {
+		pr.println("<script>");
+		pr.println("alert('변경되었습니다')");
+		pr.println("location.href = 'signIn.jsp'");
+		pr.println("</script>");
+	}
+	%>
+
 </body>
 </html>
