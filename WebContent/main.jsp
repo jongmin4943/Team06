@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" pageEncoding="utf-8">
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>My Journey</title>
 
@@ -85,7 +85,7 @@
 								</div>
 								<div class="image">
 									<img src="img/meal5.jpg">
-								</div>
+								</div></a>
 						</div></a>
 				</div>
 			</div>
@@ -104,7 +104,7 @@
 								</div>
 								<div class="image">
 									<img src="img/portfolio_item_2.jpg">
-								</div>
+								</div></a>
 						</div></a>
 				</div>
 			</div>
@@ -123,7 +123,7 @@
 								</div>
 								<div class="image">
 									<img src="img/portfolio_item_3.jpg">
-								</div>
+								</div></a>
 						</div></a>
 				</div>
 			</div>

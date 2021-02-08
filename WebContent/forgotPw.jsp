@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 <html>
 <head>
-<meta charset="utf-8" pageEncoding="utf-8">
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>My Journey</title>
 

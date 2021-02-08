@@ -54,7 +54,6 @@ public class UserDao {
 		return list;
 	}
 	public static UserDto selectUser(String userID) {	//날아온 아이디값을 이용해 그 사람의 정보를 수집.
-		List<UserDto> list = new ArrayList<UserDto>();
 		conn = JdbcUtil.getConnection();
 		UserDto user = null;
 		try {
@@ -198,11 +197,10 @@ public class UserDao {
 	
 	
 	public static void main(String[] args) {
-		UserDao user = new UserDao();
 //		user.insert(new UserDto("min","2345","민종윤","bad"));
 //		user.update(new UserDto("Yoon","1357","민종윤","bad"));
 //		user.delete(new UserDto(null,null,null,"bad"));
-		List<UserDto> list = user.getAll();
+		List<UserDto> list = UserDao.getAll();
 		for(UserDto users : list) {
 			System.out.println(users);
 		}

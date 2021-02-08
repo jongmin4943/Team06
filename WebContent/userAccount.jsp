@@ -43,6 +43,7 @@ input {
 <body>
 <%
 	String userID = null;
+	String userName = null;
 	String userEmail = null;
 	PrintWriter pr = response.getWriter();
 	if(session.getAttribute("userID") != null) {		
@@ -57,6 +58,7 @@ input {
 	UserDto dto = UserDao.selectUser(userID);	//세션에서 나온 아이디값으로 이 아이디의 정보를 데이터베이스에서 가져옴
 	if(dto != null){
 		userEmail = dto.getUserEmail(); // 이 공간에 뭐든 담아줄수있음.
+		userName = dto.getUserName(); 
 	} else {
 		pr.println("<script>");
 		pr.println("alert('잘못된 접근!')");
@@ -95,7 +97,7 @@ function goSignOut() {	//로그아웃
 		<div class="jumbotron" style="padding-top: 20px;">
 		<form action="deleteAccount.jsp" method="post" name="userInfo" id="userInfo">
 			<h3 style="text-align: center;">My Account</h3>
-			<h4 style="text-align: center;"><%=userID%>님의 회원정보</h4>	<!-- 위에서 날아온 userID를 담아서 실시간으로 보여줌 -->
+			<h4 style="text-align: center;"><%=userName%>님의 회원정보</h4>	<!-- 위에서 날아온 userID를 담아서 실시간으로 보여줌 -->
 			<div class="form-group">
 			<span>
 			아이디

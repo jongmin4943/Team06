@@ -12,9 +12,9 @@ public class JdbcUtil {
 	private static String password = "comstudy21";
 	
 	public void set(String url, String user, String password) {
-		this.url = url;
-		this.user = user;
-		this.password = password;
+		JdbcUtil.url = url;
+		JdbcUtil.user = user;
+		JdbcUtil.password = password;
 	}
 	
 	public static Connection getConnection() {
