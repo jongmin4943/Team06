@@ -10,9 +10,20 @@
 <title>간단한 지도 표시하기</title>
 <script type="text/javascript"
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8esv7n6ji6"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div id="map" style="width: 100%; height: 400px;"></div>
+<div class="container">
+	<div class="jumbotron">
+		<div id="map" class="form-group" style="width: 100%; height: 600px;"></div>
+		<input type="text" placeholder="검색" maxlength="30" />
+		<input id="btn" type="button" value="검색" />
+	</div>
+</div>
 
 	<script>
 var mapOptions = {

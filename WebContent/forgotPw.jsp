@@ -97,7 +97,7 @@ body {
 							name="userName" maxlength="10">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control"
+						<input type="email" class="form-control"
 							placeholder="Email Address" name="userEmail" maxlength="30">
 					</div>
 					<input class="btn" type="submit" value="Submit"> <input
