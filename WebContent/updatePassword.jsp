@@ -27,8 +27,8 @@ request.setCharacterEncoding("UTF-8");
 		
 	} else {
 		pr.println("<script>");
-		pr.println("alert('변경되었습니다')");
-		pr.println("location.href = 'signIn.jsp'");
+		pr.println("alert('변경되었습니다. 로그인 해주세요')");
+		pr.println("location.href = 'signOut.jsp'");
 		pr.println("</script>");
 	}
 	%>
