@@ -80,7 +80,7 @@ function goSignOut() {	//로그아웃
 	<nav>
 		<div class="logo">
 			<a href="main.jsp">My <em>Journey</em> <b><font size="6"
-					color="gray">Sign In</font></b></a>
+					color="gray">My Account</font></b></a>
 		</div>
 		<div class="menu-icon">
 			<span></span>
