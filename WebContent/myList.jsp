@@ -100,9 +100,10 @@ padding-top:82px;
 				%>
 					<ul>
 						<li><a href="main.jsp">Home</a></li>
-						<li><a href="signOut.jsp">Sign - Out</a></li>
+						<li><a href="userAccount.jsp">My Account</a></li>
 						<li><a href="myList.jsp">My Trips</a></li>
 						<li><a href="aboutUs.jsp">About Us</a></li>
+						<li><a href="signOut.jsp">Sign - Out</a></li>
 					</ul>
 				<%
 					}

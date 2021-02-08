@@ -12,19 +12,20 @@ import util.JdbcUtil;
 
 public class UserDao {
 	static final String SELECT = "SELECT * FROM USER";
+	static final String SELECTID = "SELECT * FROM USER WHERE userID=?";
 	static final String INSERT = "INSERT INTO USER VALUES(?,?,?,?)";
 	static final String UPDATE = "UPDATE USER SET UserPassword=? WHERE userID=?";
 	static final String DELETE = "DELETE FROM USER WHERE UserEmail=?";
-	private Connection conn = null;
-	private PreparedStatement pstmt = null;
-	private ResultSet rs = null;
-	private Statement stmt = null;
+	static private Connection conn = null;
+	static private PreparedStatement pstmt = null;
+	static private ResultSet rs = null;
+	static private Statement stmt = null;
 	
 	/**
 	 * 유저 정보 전부 얻기
 	 * @return 유저정보 ArrayList
 	 */
-	public List<UserDto> getAll() {
+	public static List<UserDto> getAll() {
 		List<UserDto> list = new ArrayList<UserDto>();
 		conn = JdbcUtil.getConnection();
 		try {
@@ -52,12 +53,36 @@ public class UserDao {
 		}
 		return list;
 	}
+	public static UserDto selectUser(String userID) {	//날아온 아이디값을 이용해 그 사람의 정보를 수집.
+		List<UserDto> list = new ArrayList<UserDto>();
+		conn = JdbcUtil.getConnection();
+		UserDto user = null;
+		try {
+			pstmt = conn.prepareStatement(SELECTID);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String id = rs.getString(1);
+				String pw = rs.getString(2);
+				String name = rs.getString(3);
+				String email = rs.getString(4);
+				
+				user = new UserDto(id,pw,name,email);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
+		}
+		return user;
+	}
 	
 	/**
 	 * 새 유저정보 넣기
 	 * @param dto
 	 */
-	public int insert(UserDto dto) {
+	public static int insert(UserDto dto) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(INSERT);
@@ -74,11 +99,10 @@ public class UserDao {
 		}
 	}
 	
-	public boolean loginCheck(String id, String pw) {
-		String selectID = "SELECT * FROM USER WHERE UserID=?";
+	public static boolean loginCheck(String id, String pw) {
 		conn = JdbcUtil.getConnection();
 		try {
-			pstmt = conn.prepareStatement(selectID);
+			pstmt = conn.prepareStatement(SELECTID);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -95,11 +119,10 @@ public class UserDao {
 		}
 	}
 	
-	public boolean confirmUser(String id, String name, String email) {
-		String selectID = "SELECT * FROM USER WHERE UserID=?";
+	public static boolean confirmUser(String id, String name, String email) {
 		conn = JdbcUtil.getConnection();
 		try {
-			pstmt = conn.prepareStatement(selectID);
+			pstmt = conn.prepareStatement(SELECTID);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -114,7 +137,7 @@ public class UserDao {
 		}
 	}
 	
-	public int updatePassword(String id, String pw) {
+	public static int updatePassword(String id, String pw) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(UPDATE);
@@ -128,7 +151,7 @@ public class UserDao {
 		}
 	}
 	
-	public void update(UserDto user) {
+	public static void update(UserDto user) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(UPDATE);
@@ -152,7 +175,7 @@ public class UserDao {
 		}
 	}
 	
-	public void delete(UserDto user) {
+	public static void delete(UserDto user) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(DELETE);

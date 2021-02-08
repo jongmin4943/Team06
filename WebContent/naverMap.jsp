@@ -15,22 +15,39 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <style>
+  	body {
+	background-color: darkgray;
+	}
+  </style>
+  
+	<script>
+	$(function(){
+		var location = $("#btn").val();	
+	});
+	</script>
+  
 </head>
 <body>
 <div class="container">
 	<div class="jumbotron">
 		<div id="map" class="form-group" style="width: 100%; height: 600px;"></div>
-		<input type="text" placeholder="검색" maxlength="30" />
-		<input id="btn" type="button" value="검색" />
+		<span class="float-sm-right">
+			<input type="text" placeholder="검색" maxlength="30" size="20" />
+			<input id="btn" type="button" value="검색" />
+		</span>
 	</div>
 </div>
-
-	<script>
-var mapOptions = {
-    center: new naver.maps.LatLng(37.3595704, 127.105399),
-    zoom: 10
-};
-
+<script>
+var map = new naver.maps.Map('map', {
+	center: new naver.maps.LatLng(37.3595704, 127.105399),
+    zoom: 17
+});
+var marker = new naver.maps.Marker({
+    position: new naver.maps.LatLng(37.3595704, 127.105399),
+    map: map
+});
 var map = new naver.maps.Map('map', mapOptions);
 </script>
 </body>

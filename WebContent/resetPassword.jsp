@@ -4,7 +4,6 @@
 <%
 request.setCharacterEncoding("utf-8");
 String userID = request.getParameter("userID");
-System.out.println(userID);
 %>
 <!DOCTYPE html>
 <html>

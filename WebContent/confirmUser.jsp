@@ -18,10 +18,9 @@ request.setCharacterEncoding("utf-8");
 </head>
 <body>
 	<%
-	UserDao dao = new UserDao();
 	PrintWriter pr = response.getWriter();
 	
-	boolean check = dao.confirmUser(user.getUserID(),user.getUserName(),user.getUserEmail());
+	boolean check = UserDao.confirmUser(user.getUserID(),user.getUserName(),user.getUserEmail());
 	if(check) {
 		String userID = request.getParameter("userID");
 		pr.println("<script>");

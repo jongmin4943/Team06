@@ -17,9 +17,8 @@ request.setCharacterEncoding("UTF-8");
 <body>
 	<%
 	String userID = request.getParameter("userID");
-	UserDao dao = new UserDao();
 	PrintWriter pr = response.getWriter();
-	int update = dao.updatePassword(userID,user.getUserPassword());
+	int update = UserDao.updatePassword(userID,user.getUserPassword());
 	if(update == -1) {
 		pr.println("<script>");
 		pr.println("alert('서버 연동 실패')");
