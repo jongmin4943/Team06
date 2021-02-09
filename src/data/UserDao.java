@@ -16,10 +16,10 @@ public class UserDao {
 	static final String INSERT = "INSERT INTO USER VALUES(?,?,?,?)";
 	static final String UPDATE = "UPDATE USER SET UserPassword=? WHERE userID=?";
 	static final String DELETE = "DELETE FROM USER WHERE UserEmail=?";
-	static private Connection conn = null;
-	static private PreparedStatement pstmt = null;
-	static private ResultSet rs = null;
-	static private Statement stmt = null;
+	private Connection conn = null;
+	private PreparedStatement pstmt = null;
+	private ResultSet rs = null;
+	private Statement stmt = null;
 	
 	/**
 	 * 유저 정보 전부 얻기

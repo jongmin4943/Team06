@@ -34,8 +34,15 @@
 body {
 	background-color: darkgray;
 }
-input {
-	margin-left : 25px;
+label {
+	display: inline-block;
+	width: 100px;
+}
+p {
+	margin: 5px 0;
+}
+fieldset {
+	width: 500px;
 }
 </style>
 <script src="http://code.jquery.com/jquery.js"></script>
@@ -89,31 +96,23 @@ function goSignOut() {	//로그아웃
 			<span></span>
 		</div>
 	</nav>
-	<br />
-	<br />
-	<br />
-	<br />
+	<br>
+	<br>
+	<br>	
+	<br>
 	
 	<div class="container">
 		<div class="jumbotron" style="padding-top: 20px;">
 		<form action="deleteAccount.jsp" method="post" name="userInfo" id="userInfo">
-			<h3 style="text-align: center;">My Account</h3>
-			<h4 style="text-align: center;"><%=userName%>님의 회원정보</h4>	<!-- 위에서 날아온 userID를 담아서 실시간으로 보여줌 -->
-			<div class="form-group">
-			<span>
-			아이디
-			</span>
-			<input readonly type="text" name="id" id="id"/>		<!-- readonly로 수정 불가 -->
-			</div>
-			<div class="form-group">
-			<span>
-			이메일
-			</span>  
-			<input readonly type="email" name="email" id="email" /> <!-- readonly로 수정 불가 -->
-			</div>
-			<input style="margin-left : 0" type="button" value="비밀번호 바꾸기" onclick="goResetPassword()"/>
-			<input style="margin-left : 5px" type="button" value="로그아웃" onclick="goSignOut()"/>
-			<input style="margin-left : 5px" type="submit" value="탈퇴하기"/>
+					<h3 style="text-align: center;">My Account</h3>
+			<fieldset>
+				<legend><%=userName%>님의 회원정보</legend><!-- 위에서 날아온 userID를 담아서 실시간으로 보여줌 -->
+					<p><label for="id">아이디</label><input readonly type="text" name="id" id="id"/></p><!-- readonly로 수정 불가 -->
+					<p><label for="email">이메일</label><input readonly type="email" name="email" id="email" /></p><!-- readonly로 수정 불가 -->
+					<input style="margin-left : 0" type="button" value="비밀번호 바꾸기" onclick="goResetPassword()"/>
+					<input style="margin-left : 5px" type="button" value="로그아웃" onclick="goSignOut()"/>
+					<input style="margin-left : 5px" type="submit" value="탈퇴하기"/>
+			</fieldset>
 		</form>
 			
 		</div>

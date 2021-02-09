@@ -65,6 +65,7 @@
 		date : "김세정"
 	} ];
 	// jQuery 진입점
+
 	var today = new Date();
 
 	var year = today.getFullYear(); // 년도
@@ -84,29 +85,40 @@
 		parseMemberList();
 
 		$('#saveBtn').click(function() {
-			var obj = {
-				no : $('#no').val(),
-				name : $('#name').val(),
-				email : $('#email').val(),
-				date : $('#date').val()
-			};
-			//생성된 객체를 Arrays에 저장하기
-			mem_list.push(obj);
+			if(document.querySelector('.init').value==""){
+				alert('내용을 입력해주세요');	
+			}else {
+				var obj = {
+						no : $('#no').val(),
+						name : $('#name').val(),
+						email : $('#email').val(),
+						date : $('#date').val()
+					};
+					//생성된 객체를 Arrays에 저장하기
+					mem_list.push(obj);
 
-			console.log(mem_list);
-			// 함수 호출
-			parseMemberList();
-
+					console.log(mem_list);
+					// 함수 호출
+					parseMemberList();
+					 $('#no').val(""),
+					 $('#name').val(""),
+					 $('#email').val(""),
+					 $('#date').val("")	
+			}
+			
 		});
 	});
 </script>
 <style>
+#changebtn{
+align:right;
+}
 p {
 	color: lightgray;
 }
 
 body {
-	width: 1500px;
+	width: 1300px;
 	padding: 100px;
 	background-color:rgb(238, 242, 242);
 }
@@ -116,40 +128,56 @@ width : 130px;
 .numth{
 width:40px;
 }
-
 </style>
 </head>
-<body>
-
+<body data-mode="day">
+<input type="image" src="img/nightbtn.png"  id="changebtn" align="right" onclick="
+	if(document.querySelector('body').dataset.mode ==='day'){
+		document.querySelector('body').style.backgroundColor = 'gray';
+		document.querySelector('body').style.color = 'white';	
+		document.querySelector('table').style.color = 'white';	
+		document.querySelector('body').dataset.mode = 'night'
+		this.src = 'img/daybtn.png'
+	}else{
+		document.querySelector('body').style.backgroundColor = 'rgb(238,242,242)';
+		document.querySelector('body').style.color = 'black';	
+		document.querySelector('table').style.color = 'black';	
+		document.querySelector('body').dataset.mode = 'day'
+		this.src = 'img/nightbtn.png'	
+	}
+">
 	<table>
 		<hr>
 
 		<h1>My Restaurant List</h1>
 		<p>기억에 남은 식당을 기록하는 곳.</p>
-		<br />
-		<br />
-		<br />
+		<br>
+		<br>
+		<br>
 		<div id="list_result_area">
 			<!-- template 결과가 들어오는 영역 -->
 		</div>
 		<tr>
 			<td>name</td>
-			<td><input type="text" id="name" value="식당" /></td>
+			<td><input type="text" id="name" value="식당" class="init"/></td>
 		</tr>
 		<tr>
 			<td>review</td>
-			<td><input type="text" id="email" value="내용" /></td>
+			<td><input type="text" id="email" value="내용" class="init"/></td>
 		</tr>
 		<tr>
 			<td>writer</td>
-			<td><input type="text" id="date" value="본인이름" /></td>
+			<td><input type="text" id="date" value="작성자" class="init"/></td>
 		</tr>
 		<tr>
 			<td align="right" colspan="2">
-				<button class= btn btn-primary" type="reset" value="Reset" id="saveBtn" >submit</button>
+				<button class= "btn btn-primary" type="reset" value="Reset" id="saveBtn" >submit</button>
 			</td>
 		</tr>
 	</table>
+	<script>
+
+	</script>
 
 
 </body>
