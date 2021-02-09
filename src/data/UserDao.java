@@ -53,6 +53,23 @@ public class UserDao {
 		}
 		return list;
 	}
+	
+	public List<String> selectAllID() {
+		List<String> list = new ArrayList<>();
+		conn = JdbcUtil.getConnection();
+		String SELECTALLID = "SELECT userID FROM USER";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SELECTALLID);
+			while(rs.next()) {
+				list.add(rs.getString("userID"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public UserDto selectUser(String userID) {	//날아온 아이디값을 이용해 그 사람의 정보를 수집.
 		conn = JdbcUtil.getConnection();
 		UserDto user = null;
