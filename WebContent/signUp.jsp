@@ -62,6 +62,24 @@
         function goSignInForm() {
             location.href="signIn.jsp";
         }
+$(function() {
+	$('#userID').keyup(function(){
+		userID= $('#userID').val();
+		var id = {
+				userID : $('#userID').val()
+		};
+		$.post("idcheck.jsp",id,function(data,status) {
+			var avail = data;
+			  if(avail.possible == "Yes") {
+				  $("#showResult").html("사용 가능한 아이디");
+				  $("#showResult").css('color','blue');
+			  } else {
+				  $("#showResult").html("사용 불가능한 아이디");
+				  $("#showResult").css('color','red');
+			  }
+		});
+	});
+});
 </script>
 <style type="text/css">
 body {
@@ -74,14 +92,6 @@ body {
 	border-color: gray;
 }
 </style>
-<script>
-$(function(){
-	$('#checkID').click(function(){
-		var checkingID = $('#userID').val();
-		
-	});
-});
-</script>
 </head>
 <body>
 <%
@@ -124,9 +134,8 @@ $(function(){
 					<div class="form-group">
 						<!-- 위에서 아래로 내려오는 폼 작성 -->
 						<input type="text" class="form-control" placeholder="ID"
-							name="userID" maxlength="20" id="userID"> <input type="button"
-							value="중복확인" name="checkID" id="checkID" style="margin-top: 10">
-							<div id="showResult" style="display: none"></div>
+							name="userID" maxlength="20" id="userID">
+							<div id="showResult"></div><!--아이디 중복체크 결과 넣기-->
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="Password"

@@ -1,16 +1,25 @@
+<%@page import="org.json.JSONObject"%>
 <%@page import="data.UserDao"%>
 <%@ page language="java" contentType="application/json; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%!
+%>
 <% 
+if("POST".equals(request.getMethod())) {
 	String userID = request.getParameter("userID");
 	UserDao dao = new UserDao();
 	List<String> list = dao.selectAllID();
-	for(String id : list) {
+		JSONObject jsObj = new JSONObject();
+	for(int i=0; i<list.size();i++) {
+		String id = list.get(i);
 		if(id.equals(userID)) {
-			out.print("사용불가능한 아이디");
-		} else {
-			out.print("사용 가능한 아이디");
+			jsObj.put("possible", "No");
+			break;
+		} else if(i == list.size()-1){
+			jsObj.put("possible", "Yes");
 		}
 	}
+	out.print(jsObj);
+}
 %>
