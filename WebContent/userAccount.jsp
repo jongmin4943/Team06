@@ -103,7 +103,7 @@ function goSignOut() {	//로그아웃
 	
 	<div class="container">
 		<div class="jumbotron" style="padding-top: 20px;">
-		<form action="deleteAccount.jsp" method="post" name="userInfo" id="userInfo">
+		<form action="deleteAccount.jsp" onsubmit="return confirm('정말 삭제하시겠습니까?')" method="post" name="userInfo" id="userInfo">
 					<h3 style="text-align: center;">My Account</h3>
 			<fieldset>
 				<legend><%=userName%>님의 회원정보</legend><!-- 위에서 날아온 userID를 담아서 실시간으로 보여줌 -->
@@ -140,7 +140,5 @@ function goSignOut() {	//로그아웃
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/main.js"></script>
-	
-
 </body>
 </html>

@@ -6,6 +6,9 @@ public class UserDto {
 	private String userName;
 	private String userEmail;
 
+	public UserDto(String userID) {
+		this(userID, "", "", "");
+	}
 	public UserDto() {
 		this("", "", "", "");
 	}
@@ -55,5 +58,35 @@ public class UserDto {
 		return "UserDto [userID=" + userID + ", userPassword=" + userPassword + ", userName=" + userName
 				+ ", userEmail=" + userEmail + "]";
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((userEmail == null) ? 0 : userEmail.hashCode());
+		result = prime * result + ((userID == null) ? 0 : userID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserDto other = (UserDto) obj;
+		if (userEmail == null) {
+			if (other.userEmail != null)
+				return false;
+		} else if (!userEmail.equals(other.userEmail))
+			return false;
+		if (userID == null) {
+			if (other.userID != null)
+				return false;
+		} else if (!userID.equals(other.userID))
+			return false;
+		return true;
+	}
 }

@@ -15,7 +15,7 @@ public class UserDao {
 	static final String SELECTID = "SELECT * FROM USER WHERE userID=?";
 	static final String INSERT = "INSERT INTO USER VALUES(?,?,?,?)";
 	static final String UPDATE = "UPDATE USER SET UserPassword=? WHERE userID=?";
-	static final String DELETE = "DELETE FROM USER WHERE UserEmail=?";
+	static final String DELETE = "DELETE FROM USER WHERE userID=?";
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -150,40 +150,16 @@ public class UserDao {
 		}
 	}
 	
-	public void update(UserDto user) {
-		conn = JdbcUtil.getConnection();
-		try {
-			pstmt = conn.prepareStatement(UPDATE);
-			
-			pstmt.setString(1, user.getUserID());
-			pstmt.setString(2, user.getUserPassword());
-			pstmt.setString(3, user.getUserName());
-			pstmt.setString(4, user.getUserEmail());
-			
-			int cnt = pstmt.executeUpdate();
-			if(cnt>0) {
-				System.out.println("수정 성공");
-			} else {
-				System.out.println("수정 실패 : email이 존재하지 않음");
-				conn.rollback();
-			} 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(rs, pstmt, conn);
-		}
-	}
-	
 	public void delete(UserDto user) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(DELETE);
-			pstmt.setString(1, user.getUserEmail());
+			pstmt.setString(1, user.getUserID());
 			int cnt = pstmt.executeUpdate();
 			if(cnt > 0) {
-				System.out.println("삭제 완료");
+//				System.out.println("삭제 완료");
 			} else {
-				System.out.println("삭제 실패 : 존재하지 않는 이메일");
+				System.out.println("삭제 실패 : 존재하지 않는 아이디");
 				conn.rollback();
 			}
 		} catch (SQLException e) {

@@ -1,3 +1,5 @@
+<%@page import="data.UserDto"%>
+<%@page import="data.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,6 +9,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>구현중</h1>
+<script type="text/javascript">
+<%
+String userID = request.getParameter("id");
+UserDao dao = new UserDao();
+UserDto user = dao.selectUser(userID);
+dao.delete(user);
+%>
+alert("삭제 되었습니다.");
+location.href="signOut.jsp";
+</script>
 </body>
 </html>
