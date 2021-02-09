@@ -55,7 +55,8 @@ input {
 		pr.println("location.href = 'signIn.jsp'");
 		pr.println("</script>");
 	}
-	UserDto dto = UserDao.selectUser(userID);	//세션에서 나온 아이디값으로 이 아이디의 정보를 데이터베이스에서 가져옴
+	UserDao dao = new UserDao();
+	UserDto dto = dao.selectUser(userID);	//세션에서 나온 아이디값으로 이 아이디의 정보를 데이터베이스에서 가져옴
 	if(dto != null){
 		userEmail = dto.getUserEmail(); // 이 공간에 뭐든 담아줄수있음.
 		userName = dto.getUserName(); 

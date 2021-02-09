@@ -25,7 +25,7 @@ public class UserDao {
 	 * 유저 정보 전부 얻기
 	 * @return 유저정보 ArrayList
 	 */
-	public static List<UserDto> getAll() {
+	public List<UserDto> getAll() {
 		List<UserDto> list = new ArrayList<UserDto>();
 		conn = JdbcUtil.getConnection();
 		try {
@@ -53,7 +53,7 @@ public class UserDao {
 		}
 		return list;
 	}
-	public static UserDto selectUser(String userID) {	//날아온 아이디값을 이용해 그 사람의 정보를 수집.
+	public UserDto selectUser(String userID) {	//날아온 아이디값을 이용해 그 사람의 정보를 수집.
 		conn = JdbcUtil.getConnection();
 		UserDto user = null;
 		try {
@@ -81,7 +81,7 @@ public class UserDao {
 	 * 새 유저정보 넣기
 	 * @param dto
 	 */
-	public static int insert(UserDto dto) {
+	public int insert(UserDto dto) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(INSERT);
@@ -98,7 +98,7 @@ public class UserDao {
 		}
 	}
 	
-	public static boolean loginCheck(String id, String pw) {
+	public boolean loginCheck(String id, String pw) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(SELECTID);
@@ -118,7 +118,7 @@ public class UserDao {
 		}
 	}
 	
-	public static boolean confirmUser(String id, String name, String email) {
+	public boolean confirmUser(String id, String name, String email) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(SELECTID);
@@ -136,7 +136,7 @@ public class UserDao {
 		}
 	}
 	
-	public static int updatePassword(String id, String pw) {
+	public int updatePassword(String id, String pw) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(UPDATE);
@@ -150,7 +150,7 @@ public class UserDao {
 		}
 	}
 	
-	public static void update(UserDto user) {
+	public void update(UserDto user) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(UPDATE);
@@ -174,7 +174,7 @@ public class UserDao {
 		}
 	}
 	
-	public static void delete(UserDto user) {
+	public void delete(UserDto user) {
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(DELETE);
@@ -197,10 +197,11 @@ public class UserDao {
 	
 	
 	public static void main(String[] args) {
+		UserDao dao = new UserDao();
 //		user.insert(new UserDto("min","2345","민종윤","bad"));
 //		user.update(new UserDto("Yoon","1357","민종윤","bad"));
 //		user.delete(new UserDto(null,null,null,"bad"));
-		List<UserDto> list = UserDao.getAll();
+		List<UserDto> list = dao.getAll();
 		for(UserDto users : list) {
 			System.out.println(users);
 		}

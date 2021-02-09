@@ -33,7 +33,8 @@ request.setCharacterEncoding("UTF-8");
 		pr.println("location.href = 'main.jsp'");
 		pr.println("</script>");
 	}
-	boolean check = UserDao.loginCheck(user.getUserID(), user.getUserPassword());
+	UserDao dao = new UserDao();
+	boolean check = dao.loginCheck(user.getUserID(), user.getUserPassword());
 	if(check) {
 		session.setAttribute("userID", user.getUserID());
 		pr.println("<script>");
