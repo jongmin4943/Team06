@@ -47,22 +47,6 @@ request.setCharacterEncoding("UTF-8");
 		pr.println("history.back();");
 		pr.println("</script>");
 	}
-	/* List<UserDto> a = dao.getAll();
-	 for(int i=0; i<a.size(); i++) {   모든 데이터를 불러와서 비교하는데 너무 비효율적인거같다. 좀 더 효율적인 방법을 생각해보자 
-		if(a.get(i).getUserID().equals(user.getUserID())) {
-			if(a.get(i).getUserPassword().equals(user.getUserPassword())) {
-				script.println("<script>");
-				script.println("alert('로그인 성공!')");
-				script.println("location.href = 'main.jsp'");
-				script.println("</script>");
-			}
-		} else if(i == a.size()-1) {
-			script.println("<script>");
-			script.println("alert('아이디나 패스워드가 틀렸습니다.')");
-			script.println("location.href = 'signIn.jsp'"); 틀릴시 다시 로그인 페이지로 전달. 뒤로가기로 만들면 좋을거같다.
-			script.println("</script>");
-		}
-	} */
 %>
 
 </body>

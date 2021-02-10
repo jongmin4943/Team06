@@ -13,8 +13,9 @@ import util.JdbcUtil;
 public class UserDao {
 	static final String SELECT = "SELECT * FROM USER";
 	static final String SELECTID = "SELECT * FROM USER WHERE userID=?";
-	static final String INSERT = "INSERT INTO USER VALUES(?,?,?,?)";
+	static final String INSERT = "INSERT INTO USER VALUES(?,?,?,?,?)";
 	static final String UPDATE = "UPDATE USER SET UserPassword=? WHERE userID=?";
+	static final String UPDATEIMG = "UPDATE USER SET PROFILEURL=? WHERE userID=?";
 	static final String DELETE = "DELETE FROM USER WHERE userID=?";
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -36,8 +37,9 @@ public class UserDao {
 				String pw = rs.getString(2);
 				String name = rs.getString(3);
 				String email = rs.getString(4);
+				String profile = rs.getString(5);
 				
-				UserDto user = new UserDto(id,pw,name,email);
+				UserDto user = new UserDto(id,pw,name,email,profile);
 				list.add(user);
 			}
 		} catch (SQLException e) {
@@ -52,6 +54,20 @@ public class UserDao {
 				}
 		}
 		return list;
+	}
+	
+	public int updateProfile(String userName, String origfilename1) {
+		conn = JdbcUtil.getConnection();
+		try {
+			pstmt = conn.prepareStatement(UPDATEIMG);
+			pstmt.setString(1, origfilename1);
+			pstmt.setString(2, userName);
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("업데이트 실패");
+			return -1;
+		}
 	}
 	
 	public List<String> selectAllID() {
@@ -82,8 +98,9 @@ public class UserDao {
 				String pw = rs.getString(2);
 				String name = rs.getString(3);
 				String email = rs.getString(4);
+				String profile = rs.getString(5);
 				
-				user = new UserDto(id,pw,name,email);
+				user = new UserDto(id,pw,name,email,profile);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -106,8 +123,10 @@ public class UserDao {
 			pstmt.setString(2, dto.getUserPassword());
 			pstmt.setString(3, dto.getUserName());
 			pstmt.setString(4, dto.getUserEmail());
+			pstmt.setString(5, dto.getProfileUrl());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			System.out.println("이미 존재하는 아이디");
 			return -1;
 		} finally {

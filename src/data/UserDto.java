@@ -5,22 +5,24 @@ public class UserDto {
 	private String userPassword;
 	private String userName;
 	private String userEmail;
+	private String profileUrl;
 
 	public UserDto(String userID) {
-		this(userID, "", "", "");
+		this(userID, "", "", "","");
 	}
 	public UserDto() {
-		this("", "", "", "");
+		this("", "", "", "","");
 	}
 
-	public UserDto(String userID, String userPassword, String userName, String userEmail) {
+
+	public UserDto(String userID, String userPassword, String userName, String userEmail, String profileUrl) {
 		super();
 		this.userID = userID;
 		this.userPassword = userPassword;
 		this.userName = userName;
 		this.userEmail = userEmail;
+		this.profileUrl = profileUrl;
 	}
-
 	public String getUserID() {
 		return userID;
 	}
@@ -53,12 +55,19 @@ public class UserDto {
 		this.userEmail = userEmail;
 	}
 
+	public String getProfileUrl() {
+		return profileUrl;
+	}
+	public void setProfileUrl(String profileUrl) {
+		this.profileUrl = profileUrl;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "UserDto [userID=" + userID + ", userPassword=" + userPassword + ", userName=" + userName
-				+ ", userEmail=" + userEmail + "]";
+				+ ", userEmail=" + userEmail + ", profileUrl=" + profileUrl + "]";
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
