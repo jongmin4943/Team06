@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="data.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.io.PrintWriter"%>
@@ -27,14 +29,9 @@
 	rel="stylesheet">
 
 <script src="./js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+<script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-        // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
-        function goCheck() {
-        	alert("아직 구현중..");
-        }
-        
-        function checkValue()
-        {
+        function checkValue(){
             if(!document.userInfo.userID.value){
                 alert("아이디를 입력하세요.");
                 return false;
@@ -65,7 +62,25 @@
         function goSignInForm() {
             location.href="signIn.jsp";
         }
-    </script>
+$(function() {
+	$('#userID').keyup(function(){
+		userID= $('#userID').val();
+		var id = {
+				userID : $('#userID').val()
+		};
+		$.post("idcheck.jsp",id,function(data,status) {
+			var avail = data;
+			  if(avail.possible == "Yes") {
+				  $("#showResult").html("사용 가능한 아이디");
+				  $("#showResult").css('color','blue');
+			  } else {
+				  $("#showResult").html("사용 불가능한 아이디");
+				  $("#showResult").css('color','red');
+			  }
+		});
+	});
+});
+</script>
 <style type="text/css">
 body {
 	background-color: darkgray;
@@ -77,7 +92,6 @@ body {
 	border-color: gray;
 }
 </style>
-
 </head>
 <body>
 <%
@@ -120,9 +134,8 @@ body {
 					<div class="form-group">
 						<!-- 위에서 아래로 내려오는 폼 작성 -->
 						<input type="text" class="form-control" placeholder="ID"
-							name="userID" maxlength="20"> <input type="button"
-							value="중복확인" name="checkID" style="margin-top: 10"
-							onclick="goCheck()">
+							name="userID" maxlength="20" id="userID">
+							<div id="showResult"></div><!--아이디 중복체크 결과 넣기-->
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="Password"
