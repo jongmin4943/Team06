@@ -56,7 +56,7 @@ iframe {
 					기억에 남는 맛집,관광지를<br /> 정리해보세요
 				</p>
 				<table id="tata">
-					<iframe src="List01.html"></iframe>
+					<iframe src="boardList.jsp"></iframe>
 				</table>
 			</div>
 		</div>
