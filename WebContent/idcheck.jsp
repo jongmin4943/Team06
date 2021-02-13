@@ -1,4 +1,5 @@
 <%@page import="org.json.JSONObject"%>
+<%@page import="java.util.regex.Pattern"%>
 <%@page import="data.UserDao"%>
 <%@ page language="java" contentType="application/json; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,7 +14,13 @@ if("POST".equals(request.getMethod())) {
 		JSONObject jsObj = new JSONObject();
 	for(int i=0; i<list.size();i++) {
 		String id = list.get(i);
-		if(id.equals(userID)) {
+		if(userID.length()<5) {
+			jsObj.put("possible", "Nolength");
+			break;
+		} else if(!(Pattern.matches("^[a-zA-Z0-9]*$", userID))){
+			jsObj.put("possible", "NoReg");
+			break;
+		} else if(id.equals(userID)){
 			jsObj.put("possible", "No");
 			break;
 		} else if(i == list.size()-1){

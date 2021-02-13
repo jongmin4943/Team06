@@ -28,18 +28,18 @@
 
 <script src="./js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 <script type="text/javascript">
-        function checkValue()
-        {
-            if(!document.userInfo.userID.value){
-                alert("아이디를 입력하세요.");
-                return false;
-            }
-            
-            if(!document.userInfo.userPassword.value){
-                alert("비밀번호를 입력하세요.");
-                return false;
-            }
-        }
+function checkValue(){
+	var emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+	var input = document.userInfo;
+    if(!input.userID.value){
+        alert("아이디를 입력하세요.");
+        return false;
+    }
+    if(!input.userPassword.value){
+        alert("비밀번호를 입력하세요.");
+        return false;
+    }
+}
         function goSignUpForm() {
             location.href="signUp.jsp";
         }

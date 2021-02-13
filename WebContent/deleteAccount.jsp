@@ -16,7 +16,7 @@ UserDao dao = new UserDao();
 UserDto user = dao.selectUser(userID);
 dao.delete(user);
 %>
-alert("삭제 되었습니다.");
+alert("탈퇴 되었습니다.");
 location.href="signOut.jsp";
 </script>
 </body>

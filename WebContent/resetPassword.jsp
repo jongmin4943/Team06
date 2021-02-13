@@ -36,16 +36,17 @@ String userID = request.getParameter("userID");
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function checkValue() {
-		if (!document.userInfo.userPassword.value) {
-			alert("비밀번호를 입력하세요.");
-			return false;
-		}
-		if (document.userInfo.userPassword.value != document.userInfo.userPasswordCheck.value) {
-			alert("비밀번호를 동일하게 입력하세요.");
-			return false;
-		}
-	}
+function checkValue(){
+	var input = document.userInfo;
+    if(!input.userPassword.value){
+        alert("비밀번호를 입력하세요.");
+        return false;
+    }
+    if(input.userPassword.value != input.userPasswordCheck.value ){
+        alert("비밀번호를 동일하게 입력하세요.");
+        return false;
+    }
+}
 
 	function goSignInForm() {
 		location.href = "signIn.jsp";

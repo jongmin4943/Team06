@@ -32,29 +32,36 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
         function checkValue(){
-            if(!document.userInfo.userID.value){
+        	var emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        	var input = document.userInfo;
+            if(!input.userID.value){
                 alert("아이디를 입력하세요.");
                 return false;
             }
             
-            if(!document.userInfo.userPassword.value){
+            if(!input.userPassword.value){
                 alert("비밀번호를 입력하세요.");
                 return false;
+            } else if (input.userPassword.value.length < 4) {
+            	alert("비밀번호가 너무 짧습니다.")
+            	return false;
             }
             
-            // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-            if(document.userInfo.userPassword.value != document.userInfo.userPasswordCheck.value ){
+            if(input.userPassword.value != input.userPasswordCheck.value ){
                 alert("비밀번호를 동일하게 입력하세요.");
                 return false;
             }
             
-            if(!document.userInfo.userName.value){
+            if(!input.userName.value){
                 alert("이름을 입력하세요.");
                 return false;
             }
-            if(!document.userInfo.userEmail.value){
+            if(!input.userEmail.value){
                 alert("이메일을 입력하세요.");
                 return false;
+            } else if(!(emailCheck.test(input.userEmail.value))){
+            	alert("이메일 형식이 틀렸습니다.")
+            	return false;
             }
         }
         
@@ -73,8 +80,14 @@ $(function() {
 			  if(avail.possible == "Yes") {
 				  $("#showResult").html("사용 가능한 아이디");
 				  $("#showResult").css('color','blue');
+			  } else if(avail.possible == "Nolength") {
+				  $("#showResult").html("5글자 이상 입력해주세요");
+				  $("#showResult").css('color','red');
+			  } else if(avail.possible == "NoReg"){
+				  $("#showResult").html("영문자와 숫자만 입력 가능합니다");
+				  $("#showResult").css('color','red');
 			  } else {
-				  $("#showResult").html("사용 불가능한 아이디");
+				  $("#showResult").html("중복된 아이디");
 				  $("#showResult").css('color','red');
 			  }
 		});
