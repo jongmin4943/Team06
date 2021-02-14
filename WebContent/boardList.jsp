@@ -21,23 +21,37 @@
 #changebtn {
 	align: right;
 }
-#name{
-width:200px;
+
+#name {
+	width: 200px;
 }
-#writer{
-width:200px;
+
+#writer {
+	width: 200px;
 }
+
 p {
 	color: lightgray;
 }
-#no{
-width:30px;
+
+#no {
+	width: 30px;
 }
 
 body {
 	width: 1300px;
 	padding: 100px;
 	background-color: rgb(238, 242, 242);
+}
+
+a:link {
+	text-decoration: none;
+	color: black;
+}
+
+a:visited {
+	text-decoration: none;
+		color: black;
 }
 </style>
 <body data-mode="day">
@@ -79,8 +93,8 @@ body {
 		%>
 		<tr>
 			<td><%=board.getNo()%></td>
-			<td><%=board.getName()%></td>
-			<td><%=board.getTitle()%></td>
+			<td><a href="boardView.jsp?no=<%=board.getNo()%>"><%=board.getName()%></a></td>
+			<td><a href="boardView.jsp?no=<%=board.getNo()%>"><%=board.getTitle()%></a></td>
 			<td><%=board.getWriter()%></td>
 		</tr>
 		<%

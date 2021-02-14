@@ -6,9 +6,6 @@ public class BoardDto {
 	private String writer;
 	private String title;
 	private String no;
-	public BoardDto() {
-		this("","","","","");
-	}
 	@Override
 	public String toString() {
 		return "BoardDto [name=" + name + ", textarea=" + textarea + ", writer=" + writer + ", title=" + title + "]";
@@ -51,6 +48,12 @@ public class BoardDto {
 		this.textarea = textarea;
 		this.writer = writer;
 		this.no = no;
+	}
+	public BoardDto() {
+		this("", "", "", "","");
+	}
+	public BoardDto(String no) {
+		this("", "", "", "",no);
 	}
 	
 }
