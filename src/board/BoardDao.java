@@ -164,7 +164,7 @@ public class BoardDao {
 				dto.setTitle(rs.getString("title"));
 				dto.setName(rs.getString("name"));
 				dto.setTextarea(rs.getString("textarea"));
-				dto.setWriter("writer");
+				dto.setWriter(rs.getString("writer"));
 				dto.SetNo(rs.getString("no"));
 				v.add(dto);
 			}

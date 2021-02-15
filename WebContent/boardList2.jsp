@@ -125,9 +125,10 @@ margin:0px;
 		}
 		%>
 	</table>
-	<a href="boardWrite.html" id="aa"> 새 게시글 작성 </a>
+	<a href="boardWrite.jsp" id="aa"> 새 게시글 작성 </a>
 	<div>
 		<%
+		
 		for (int i = 1; i <= count; i++) {
 		%>
 		<a href="boardList2.jsp?page=<%=i%>">[<%=i%>]

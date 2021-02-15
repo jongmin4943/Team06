@@ -1,3 +1,6 @@
+<%@page import="java.io.PrintWriter"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +84,18 @@ hr {
 	width: 100px;
 }
 </style>
+<%
+String userID=null;
+PrintWriter pr = response.getWriter();
+if(session.getAttribute("userID") != null) {		
+	userID = (String)session.getAttribute("userID");
+}
+if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
+	pr.println("<script>");
+	pr.println("alert('로그인 해주세요.')"); 
+	pr.println("location.href = 'signIn.jsp'");
+	pr.println("</script>");
+} %>
 </head>
 <body data-mode="day" align="center">
 	<input type="image" src="img/nightbtn.png" id="changebtn" align="right"
@@ -133,8 +148,8 @@ hr {
 			</tr>
 			<tr>
 				<td><label for="writer">writer</label></td>
-				<td align="left"><input type="text" name="writer" id="writer"
-					value="작성자" class="init" /> <input type="hidden" name="no" id="no" value="null"/>
+				<td align="left"><input readonly type="text" name="writer" id="writer"
+					value="<%=userID %>" class="init" /> <input type="hidden" name="no" id="no" value="null"/>
 				</td>
 			</tr>
 			<tr>
