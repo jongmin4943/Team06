@@ -1,3 +1,7 @@
+<%@page import="comment.CommentDto"%>
+<%@page import="java.util.List"%>
+<%@page import="comment.CommentDao"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="board.BoardDao"%>
 <%@page import="board.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,6 +11,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script>
+$(function() {
+	$('form').submit(function() {
+		<%
+		String userID=null;
+		PrintWriter pr = response.getWriter();
+		if(session.getAttribute("userID") != null) {		
+			userID = (String)session.getAttribute("userID");
+		}
+		if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
+			pr.println("<script>");
+			pr.println("alert('로그인 해주세요.')"); 
+			pr.println("location.href = 'signIn.jsp'");
+			pr.println("</script>");
+		} else {%>
+		event.preventDefault();
+		if(!this.textarea.value) {
+			alert("댓글을 입력해주세요.");
+			return;
+		}
+		this.action = "commentCheck.jsp";
+		this.method = "GET";
+		this.submit();
+	<%}%>
+	});
+});
+</script>
 </head>
 <!-- Bootstrap CSS -->
 <link
@@ -70,39 +102,58 @@ margin:2px;
 /* 	out.println("no => " + no); */
 	BoardDto board = BoardDao.selectOne(new BoardDto(no));
 /* 	out.println("board => " + board); */
+	CommentDao cDao = new CommentDao();
+	List<CommentDto> list = cDao.getComment(no);
 	if (board != null) {
 	%>
-	<table align="center">
-		<hr>
-
-		<h1>맛집보기</h1>
-		<p>기억에 남은 식당을 기록하는 곳.</p>
-		<br>
-		<br>
-		<br>
-
-
-		<tr>
-			<td class="menu">title</td>
-			<td class="menu2"><%=board.getTitle()%></td>
-		</tr>
-		<tr>
-			<td class="menu">restaurant</td>
-			<td class="menu2"><%=board.getName()%></td>
-		</tr>
-		<tr>
-			<td class="menu" id="comment">comment</td>
-			<td class="menu2"><%=board.getTextarea()%></td>
-		</tr>
-		<tr>
-			<td class="menu">writer</td>
-			<td class="menu2"><%=board.getWriter()%></td>
-		</tr>
-		<tr>
-			<th></th>
-			<td><a href="boardList2.jsp">목록</a><a href="boardDelete.jsp?no=<%=board.getNo()%>">삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></td>
-		</tr>
-	</table>
+	<form>
+		<table align="center">
+			<hr>
+			<h1>맛집보기</h1>
+			<p>기억에 남은 식당을 기록하는 곳.</p>
+			<br>
+			<br>
+			<br>
+			<tr>
+				<td class="menu">title</td>
+				<td class="menu2"><%=board.getTitle()%></td>
+			</tr>
+			<tr>
+				<td class="menu">restaurant</td>
+				<td class="menu2"><%=board.getName()%></td>
+			</tr>
+			<tr>
+				<td class="menu" id="comment">comment</td>
+				<td class="menu2"><%=board.getTextarea()%></td>
+			</tr>
+			<tr>
+				<td class="menu">writer</td>
+				<td class="menu2"><%=board.getWriter()%></td>
+			</tr>
+			<tr>
+				<td colspan="1"><h5>댓글목록</h5></td>
+			</tr>
+			<%for(int i=0; i<list.size(); i++){%>
+			<tr>
+				<td><%=list.get(i).getUserID()%></td>
+				<td><%=list.get(i).getContent()%></td>
+			</tr>
+			<%}%>
+			<tr>
+				<td>댓글달기</td>
+				<td>
+					<textarea class = "form-control" name="textarea" id="textarea" rows="3" cols="30"></textarea>
+				</td>
+				<td><input type="hidden" name="no" id="no" value=<%=no%>></td>
+				<td><input type="submit" value="댓글 등록" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><a href="boardList2.jsp">목록</a><a href="boardDelete.jsp?no=<%=board.getNo()%>">삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></td>
+			</tr>
+		</table>
+		</table>
+	</form>
 	<%
 	}
 	%>

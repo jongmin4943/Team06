@@ -117,7 +117,7 @@ margin:0px;
 		%>
 		<tr>
 			<td><%=v.get(i).getNo()%></td>
-			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getName()%></a></td>
+			<td><a href=" "><%=v.get(i).getName()%></a></td>
 			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getTitle()%></a></td>
 			<td><%=v.get(i).getWriter()%></td>
 		</tr>
@@ -135,8 +135,7 @@ margin:0px;
 		</a>
 
 		<%
-		}
-		;
+		};
 		%>
 	</div>
 
