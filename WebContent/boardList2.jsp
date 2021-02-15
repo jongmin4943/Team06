@@ -54,8 +54,16 @@ a:visited {
 	text-decoration: none;
 	color: black;
 }
-span{
+
+div {
 	text-align: center;
+	margin: 0px;
+}
+#aa{
+margin:0;
+}
+table{
+margin:0px;
 }
 </style>
 <body data-mode="day">
@@ -75,14 +83,13 @@ span{
 		this.src = 'img/nightbtn.png'	
 	}
 ">
-		<%
+	<%
 	BoardDao dao = new BoardDao();
 	int count = dao.selectCnt("board");
 	String tempStart = request.getParameter("page");
 	int startPage = 0;
 	int onePageCnt = 10;
-
-	count = (int)Math.ceil((double) count / (double) onePageCnt);
+	count = (int) Math.ceil((double) count / (double) onePageCnt);
 	//페이지 수 저장
 	if (tempStart != null) {
 		startPage = (Integer.parseInt(tempStart) - 1) * onePageCnt;
@@ -105,8 +112,6 @@ span{
 			<th>title</th>
 			<th id="writer">writer</th>
 		</tr>
-
-		</tr>
 		<%
 		for (int i = 0; i < v.size(); i++) {
 		%>
@@ -119,12 +124,21 @@ span{
 		<%
 		}
 		%>
-	</table><br />
-	<%
-		for(int i =1;i<=count; i++){ %>
-			<span  id="pages"><a href="boardList2.jsp?page=<%=i%>">[<%=i%>] </a></span>
-		<%}; %>
-	<a href="boardWrite.html"> 새 게시글 작성 </a>
+	</table>
+	<a href="boardWrite.html" id="aa"> 새 게시글 작성 </a>
+	<div>
+		<%
+		for (int i = 1; i <= count; i++) {
+		%>
+		<a href="boardList2.jsp?page=<%=i%>">[<%=i%>]
+		</a>
+
+		<%
+		}
+		;
+		%>
+	</div>
+
 </body>
 
 </html>
