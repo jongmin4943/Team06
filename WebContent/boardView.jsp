@@ -85,9 +85,6 @@ a {
 	/* 	out.println("board => " + board); */
 	if (board != null) {
 	%>
-	<script>
-	document.getElementById("#non").style.display="none";
-	</script>
 	<table align="center">
 		<hr>
 
@@ -99,26 +96,28 @@ a {
 
 
 		<tr>
-			<td class="menu">title</td>
+			<th class="menu">title</th>
 			<td class="menu2"><%=board.getTitle()%></td>
+
 		</tr>
 		<tr>
-			<td class="menu">restaurant</td>
+			<th class="menu">restaurant</th>
 			<td class="menu2"><%=board.getName()%></td>
 		</tr>
 		<tr>
-			<td class="menu" id="comment">comment</td>
+			<th class="menu" id="comment">comment</th>
 			<td class="menu2"><%=board.getTextarea()%></td>
 		</tr>
 		<tr>
-			<td class="menu">writer</td>
+			<th class="menu">writer</th>
 			<td class="menu2"><%=board.getWriter()%></td>
 		</tr>
 		<tr>
 			<th></th>
-			<td><a href="boardList2.jsp">목록</a><span id="non" style="display:<%=switching%>" ><a
-				href="boardDelete.jsp?no=<%=board.getNo()%>" >삭제</a><a
-				href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></td>
+			<td><a href="boardList2.jsp">목록</a><span id="non"
+				style="display:<%=switching%>"><a
+					href="boardDelete.jsp?no=<%=board.getNo()%>">삭제</a><a
+					href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></td>
 		</tr>
 	</table>
 	<%

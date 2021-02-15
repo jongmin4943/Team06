@@ -119,6 +119,7 @@ if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 		this.src = 'img/nightbtn.png'	
 	}
 ">
+
 	<form>
 		<table align="center">
 			<hr>
