@@ -9,7 +9,8 @@ import java.sql.Statement;
 public class JdbcUtil {
 	private static String url = "jdbc:mysql://localhost:3306/bbs";
 	private static String user = "root";
-	private static String password = "1234";
+	private static String password = "cksdn11";
+
 	
 	public void set(String url, String user, String password) {
 		JdbcUtil.url = url;
@@ -20,10 +21,12 @@ public class JdbcUtil {
 	public static Connection getConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("드라이버 검색 성공");
 			Connection conn = DriverManager.getConnection(url, user, password);
 			return conn;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			System.out.println("드이버 검색 실패");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
