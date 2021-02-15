@@ -67,9 +67,9 @@ margin:2px;
 ">
 	<%
 	String no = request.getParameter("no");
-	/* out.println("no => " + no); */
+	out.println("no => " + no);
 	BoardDto board = BoardDao.selectOne(new BoardDto(no));
-	/* out.println("board => " + board); */
+	out.println("board => " + board);
 	if (board != null) {
 	%>
 	<table align="center">
@@ -93,7 +93,6 @@ margin:2px;
 		<tr>
 			<td class="menu" id="comment">comment</td>
 			<td class="menu2"><%=board.getTextarea()%></td>
-			<!-- <input type="textarea" id="email" value="내용" class="init" /> -->
 		</tr>
 		<tr>
 			<td class="menu">writer</td>
@@ -101,7 +100,7 @@ margin:2px;
 		</tr>
 		<tr>
 			<th></th>
-			<td><a href="boardList.jsp">목록</a><a href="boardDelete.jsp?no=<%=board.getNo()%>">삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></td>
+			<td><a href="boardList2.jsp">목록</a><a href="boardDelete.jsp?no=<%=board.getNo()%>">삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></td>
 		</tr>
 	</table>
 	<%

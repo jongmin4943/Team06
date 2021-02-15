@@ -7,12 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import util.JdbcUtil;
 
 public class BoardDao {
 	private static Connection conn = null;
-	private static Statement stmt, rvs = null;
+	private static Statement stmt = null;
 	private static PreparedStatement pstmt = null;
 	private static ResultSet rs = null;
 	static final String SELECT = "SELECT * FROM BOARD ORDER BY no DESC";
@@ -48,28 +49,18 @@ public class BoardDao {
 		}
 	}
 
-	public static List<BoardDto> SelectAll() {
-		List<BoardDto> list = new ArrayList<BoardDto>();
-		conn = JdbcUtil.getConnection();
-		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(SELECT);
-			while (rs.next()) {
-				BoardDto board = new BoardDto();
-				board.setTitle(rs.getString(1));
-				board.setName(rs.getString(2));
-				board.setWriter(rs.getString(4));
-				board.SetNo(rs.getString(5));
-				list.add(board);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(rs, stmt, conn);
-		}
-		return list;
-
-	}
+	/*
+	 * public static List<BoardDto> SelectAll() { List<BoardDto> list = new
+	 * ArrayList<BoardDto>(); conn = JdbcUtil.getConnection(); try { stmt =
+	 * conn.createStatement(); rs = stmt.executeQuery(SELECT); while (rs.next()) {
+	 * BoardDto board = new BoardDto(); board.setTitle(rs.getString(1));
+	 * board.setName(rs.getString(2)); board.setWriter(rs.getString(4));
+	 * board.SetNo(rs.getString(5)); list.add(board); } } catch (SQLException e) {
+	 * e.printStackTrace(); } finally { JdbcUtil.close(rs, stmt, conn); } return
+	 * list;
+	 * 
+	 * }
+	 */
 
 	public static BoardDto selectOne(BoardDto dto) {
 		BoardDto otd = null;
@@ -98,7 +89,7 @@ public class BoardDao {
 	public static void delete(BoardDto dto) {
 		conn = JdbcUtil.getConnection();
 		try {
-			pstmt = conn.prepareCall(DELETE);
+			pstmt = conn.prepareStatement(DELETE);
 			pstmt.setString(1, dto.getNo());
 			int cnt = pstmt.executeUpdate();
 			if (cnt > 0) {
@@ -138,4 +129,67 @@ public class BoardDao {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
 	}
+	
+	public int selectCnt(String table) {
+		int result = 0;
+		ResultSet rs = null;
+		String sql = "select count(*) from "+table;
+		conn = JdbcUtil.getConnection();
+		try {
+			pstmt= conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JdbcUtil.close(rs, pstmt, conn);
+		}
+		return result;
+	}
+	public List<BoardDto> selectPage(String table, int start, int pageCnt){
+		ResultSet rs = null;
+		String SQL = "SELECT * FROM "+table+" ORDER BY no DESC limit ?, ?";
+		List<BoardDto> v = new ArrayList<BoardDto>();
+		conn = JdbcUtil.getConnection();
+		
+		try {
+			pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, pageCnt);
+			rs= pstmt.executeQuery();
+			while(rs.next()) {
+				BoardDto dto = new BoardDto();
+				dto.setTitle(rs.getString("title"));
+				dto.setName(rs.getString("name"));
+				dto.setTextarea(rs.getString("textarea"));
+				dto.setWriter("writer");
+				dto.SetNo(rs.getString("no"));
+				v.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+			if(rs !=null) {
+					rs.close();
+				} 
+			if(pstmt !=null) {
+				pstmt.close();
+			} 
+			if(conn !=null) {
+				conn.close();
+			} 
+			
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return v;
+	}
+
 }

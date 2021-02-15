@@ -14,5 +14,5 @@ String no = request.getParameter("no");
 BoardDto dto = new BoardDto(title,name,textarea,writer,no);
 BoardDao.insert(dto);
 
-response.sendRedirect("boardList.jsp");
+response.sendRedirect("boardList2.jsp");
 %>

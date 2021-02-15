@@ -7,5 +7,5 @@
 String no = request.getParameter("no");
 out.println("no = "+no);
 BoardDao.delete(new BoardDto(no));
-response.sendRedirect("boardList.jsp");
+response.sendRedirect("boardList2.jsp");
 %>

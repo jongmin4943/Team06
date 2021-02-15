@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class JdbcUtil {
 	private static String url = "jdbc:mysql://localhost:3306/jspdb";
 	private static String user = "root";
-	private static String password = "1234";
+	private static String password = "cksdn11";
 	
 	public void set(String url, String user, String password) {
 		JdbcUtil.url = url;
