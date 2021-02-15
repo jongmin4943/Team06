@@ -53,8 +53,8 @@ margin:2px;
 	if(document.querySelector('body').dataset.mode ==='day'){
 		document.querySelector('body').style.backgroundColor = 'gray';
 		document.querySelector('body').style.color = 'white';	
-		document.querySelector('.menu2').style.color = 'white';	
-		document.querySelector('.menu').style.color = 'black';	
+		document.querySelectorAll('.menu2').style.color = 'white';	
+		document.querySelectorAll('.menu').style.color = 'white';	
 		document.querySelector('body').dataset.mode = 'night'
 		this.src = 'img/daybtn.png'
 	}else{
@@ -67,9 +67,9 @@ margin:2px;
 ">
 	<%
 	String no = request.getParameter("no");
-	out.println("no => " + no);
+/* 	out.println("no => " + no); */
 	BoardDto board = BoardDao.selectOne(new BoardDto(no));
-	out.println("board => " + board);
+/* 	out.println("board => " + board); */
 	if (board != null) {
 	%>
 	<table align="center">
