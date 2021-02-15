@@ -71,7 +71,7 @@ fieldset {
 		profileUrl = dto.getProfileUrl(); 
 	} else {
 		pr.println("<script>");
-		pr.println("alert('잘못된 접근!')");
+		pr.println("alert('로그인을 해주세요')");
 		pr.println("location.href = 'signIn.jsp'");
 		pr.println("</script>");
 	}

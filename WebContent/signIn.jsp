@@ -29,7 +29,6 @@
 <script src="./js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 <script type="text/javascript">
 function checkValue(){
-	var emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 	var input = document.userInfo;
     if(!input.userID.value){
         alert("아이디를 입력하세요.");
