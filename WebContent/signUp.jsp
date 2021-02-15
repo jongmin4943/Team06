@@ -75,22 +75,28 @@ $(function() {
 		var id = {
 				userID : $('#userID').val()
 		};
-		$.post("idcheck.jsp",id,function(data,status) {
-			var avail = data;
-			  if(avail.possible == "Yes") {
-				  $("#showResult").html("사용 가능한 아이디");
-				  $("#showResult").css('color','blue');
-			  } else if(avail.possible == "Nolength") {
-				  $("#showResult").html("5글자 이상 입력해주세요");
-				  $("#showResult").css('color','red');
-			  } else if(avail.possible == "NoReg"){
-				  $("#showResult").html("영문자와 숫자만 입력 가능합니다");
-				  $("#showResult").css('color','red');
-			  } else {
-				  $("#showResult").html("중복된 아이디");
-				  $("#showResult").css('color','red');
-			  }
-		});
+		if(!userID) {
+			 $("#showResult").html("");
+		} else {
+			$.post("idcheck.jsp",id,function(data,status) {
+				var avail = data;
+				  if(avail.possible == "Yes") {
+					  $("#showResult").html("사용 가능한 아이디");
+					  $("#showResult").css('color','blue');
+				  } else if(avail.possible == "Nolength") {
+					  $("#showResult").html("5글자 이상 입력해주세요");
+					  $("#showResult").css('color','red');
+				  } else if(avail.possible == "NoReg"){
+					  $("#showResult").html("영문자와 숫자만 입력 가능합니다");
+					  $("#showResult").css('color','red');
+				  } else if(avail.possible == "No"){
+					  $("#showResult").html("중복된 아이디");
+					  $("#showResult").css('color','red');
+				  } else {
+					  $("#showResult").html("");
+				  }
+			});
+		}
 	});
 });
 </script>

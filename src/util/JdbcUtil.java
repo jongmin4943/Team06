@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JdbcUtil {
-	private static String url = "jdbc:mysql://localhost:3306/BBS";
+	private static String url = "jdbc:mysql://localhost:3306/bbs";
 	private static String user = "root";
-	private static String password = "comstudy21";
+	private static String password = "1234";
 	
 	public void set(String url, String user, String password) {
 		JdbcUtil.url = url;

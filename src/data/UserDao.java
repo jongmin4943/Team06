@@ -67,6 +67,8 @@ public class UserDao {
 			e.printStackTrace();
 			System.out.println("업데이트 실패");
 			return -1;
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
 		}
 	}
 	
@@ -82,6 +84,8 @@ public class UserDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
 		}
 		return list;
 	}
@@ -169,6 +173,8 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
 		}
 	}
 	
@@ -183,6 +189,8 @@ public class UserDao {
 			e.printStackTrace();
 			System.out.println("업데이트 실패");
 			return -1;
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
 		}
 	}
 	
