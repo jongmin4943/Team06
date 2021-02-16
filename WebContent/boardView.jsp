@@ -21,12 +21,10 @@ $(function() {
 		if(session.getAttribute("guestID") != null) {		
 			guestID = (String)session.getAttribute("guestID");
 		}
-		if(guestID == null) { //세션을 가지고 있지 않으면 접근 불가
-			pr.println("<script>");
-			pr.println("alert('로그인 해주세요.')"); 
-			pr.println("location.href = 'signIn.jsp'");
-			pr.println("</script>");
-		} else {%>
+		if(guestID == null) {%>
+			alert('로그인 해주세요.'); 
+			location.href="signIn.jsp";
+		<%} else {%>
 		event.preventDefault();
 		if(!this.textarea.value) {
 			alert("댓글을 입력해주세요.");
@@ -150,12 +148,13 @@ a {
 				<th colspan="4">내용</th>
 				<th style="text-align:left">작성날짜</th>
 			</tr>
+			
 			<%for(int i=0; i<list.size(); i++){%>
 			<tr>
 				<td><%=list.get(i).getUserID()%></td>
 				<td colspan="3"><%=list.get(i).getContent()%></td>
-				<%if(guestID.equals(list.get(i).getUserID())){%>
-					<td style="text-align:right"><a href="modifyComment.jsp">수정</a><a href="deleteComment.jsp">삭제</a></td>
+				<%if(guestID != null && guestID.equals(list.get(i).getUserID())){%>
+					<td style="text-align:right"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp">삭제</a></td>
 				<%} else {%>
 					<td style="text-align:right"></td>
 				<%};%>
