@@ -109,10 +109,10 @@ public class BoardDao {
 		
 		try {
 			pstmt= conn.prepareStatement(UPDATE);
-			pstmt.setString(1, dto.getNo());
-			pstmt.setString(2, dto.getTitle());
-			pstmt.setString(3, dto.getName());
-			pstmt.setString(4, dto.getTextarea());
+			pstmt.setString(4, dto.getNo());
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getName());
+			pstmt.setString(3, dto.getTextarea());
 			int cnt = pstmt.executeUpdate();
 			if(cnt>0) {
 				System.out.println("수정되었습니다.");
