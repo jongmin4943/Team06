@@ -22,7 +22,6 @@ public class BoardDao {
 	static final String UPDATE = "UPDATE BOARD SET title=?, name=?, textarea=? WHERE no=?"; // 나중에처리
 	static final String DELETE = "DELETE FROM BOARD WHERE no=?"; // 나중에 다시선정
 	static final String UPSTREAM = "SELECT * FROM BOARD ";
-
 	public static void insert(BoardDto dto) {
 		conn = JdbcUtil.getConnection();
 

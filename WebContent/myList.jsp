@@ -25,6 +25,9 @@
 <title>My List</title>
 </head>
 <style>
+a:link{
+	text-decoration: none;
+}
 iframe {
 	width: 100%;
 	height: 100%;
@@ -51,7 +54,7 @@ iframe {
 		<div class="video-overlay"></div>
 		<div class="video-content">
 			<div class="inner">
-				<h1>My List</h1>
+				<h1><a href="myList.jsp">My List</a></h1>
 				<p>
 					기억에 남는 맛집,관광지를<br /> 정리해보세요
 				</p>
