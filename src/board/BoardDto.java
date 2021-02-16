@@ -1,11 +1,11 @@
 package board;
 
 public class BoardDto {
+	private String no;
+	private String title;
 	private String name;
 	private String textarea;
 	private String writer;
-	private String title;
-	private String no;
 	@Override
 	public String toString() {
 		return "BoardDto [name=" + name + ", textarea=" + textarea + ", writer=" + writer + ", title=" + title + "]";
