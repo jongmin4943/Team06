@@ -11,31 +11,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%
+String guestID=null;
+PrintWriter pr = response.getWriter();
+if(session.getAttribute("guestID") != null) {		
+	guestID = (String)session.getAttribute("guestID");
+}%>
 <script src="https://code.jquery.com/jquery.js"></script>
 <script>
+var guestID = "<%=guestID%>";
 $(function() {
 	$('form').submit(function() {
-		<%
-		String userID=null;
-		PrintWriter pr = response.getWriter();
-		if(session.getAttribute("userID") != null) {		
-			userID = (String)session.getAttribute("userID");
-		}
-		if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
-			pr.println("<script>");
-			pr.println("alert('로그인 해주세요.')"); 
-			pr.println("location.href = 'signIn.jsp'");
-			pr.println("</script>");
-		} else {%>
-		event.preventDefault();
-		if(!this.textarea.value) {
-			alert("댓글을 입력해주세요.");
-			return;
+		console.log(guestID);	
+		if(guestID == 'null') {
+			var c = confirm('로그인 하시겠습니까?.');
+			if(c) {
+				this.action = 'signIn.jsp';
+				this.method = 'POST';
+				return this.submit();
+			} else {
+				return false;
+			}
+		} else {
+			event.preventDefault();
+			if(!this.textarea.value) {
+				alert("댓글을 입력해주세요.");
+				return false;
+			}
 		}
 		this.action = "commentCheck.jsp";
 		this.method = "GET";
 		this.submit();
-	<%}%>
 	});
 });
 </script>
@@ -67,16 +73,17 @@ table {
 }
 
 .menu2 {
-	padding:0px 10px;
-	border:1px solid gray;
-	width:1000px;
+	padding: 0px 10px;
+	border: 1px solid gray;
+	width: 1000px;
 }
 
 #comment {
 	height: 500px;
 }
-a{
-margin:2px;
+
+a {
+	margin: 2px;
 }
 </style>
 <body data-mode="day">
@@ -86,7 +93,7 @@ margin:2px;
 		document.querySelector('body').style.backgroundColor = 'gray';
 		document.querySelector('body').style.color = 'white';	
 		document.querySelectorAll('.menu2').style.color = 'white';	
-		document.querySelectorAll('.menu').style.color = 'white';	
+		document.querySelectorAll('.menu').style.color = 'black';	
 		document.querySelector('body').dataset.mode = 'night'
 		this.src = 'img/daybtn.png'
 	}else{
@@ -98,12 +105,23 @@ margin:2px;
 	}
 ">
 	<%
+	String userID = null;
+	String switching = "inline-block";
+	if (session.getAttribute("userID") != null) {
+		userID = (String) session.getAttribute("userID");
+	}
+	if (userID == null) { //세션을 가지고 있지 않으면 접근 불가
+		switching = "none";
+	}
+	%>
+	<%
 	String no = request.getParameter("no");
-/* 	out.println("no => " + no); */
+	/* 	out.println("no => " + no); */
 	BoardDto board = BoardDao.selectOne(new BoardDto(no));
 /* 	out.println("board => " + board); */
 	CommentDao cDao = new CommentDao();
 	List<CommentDto> list = cDao.getComment(no);
+
 	if (board != null) {
 	%>
 	<form>
@@ -116,42 +134,56 @@ margin:2px;
 			<br>
 			<tr>
 				<td class="menu">title</td>
-				<td class="menu2"><%=board.getTitle()%></td>
+				<td colspan="4" class="menu2"><%=board.getTitle()%></td>
 			</tr>
 			<tr>
-				<td class="menu">restaurant</td>
-				<td class="menu2"><%=board.getName()%></td>
+				<td class="menu">name</td>
+				<td colspan="4" class="menu2"><%=board.getName()%></td>
 			</tr>
 			<tr>
 				<td class="menu" id="comment">comment</td>
-				<td class="menu2"><%=board.getTextarea()%></td>
+				<td colspan="4" class="menu2"><%=board.getTextarea()%></td>
 			</tr>
 			<tr>
 				<td class="menu">writer</td>
-				<td class="menu2"><%=board.getWriter()%></td>
+				<td colspan="4" class="menu2"><%=board.getWriter()%></td>
 			</tr>
 			<tr>
-				<td colspan="1"><h5>댓글목록</h5></td>
+				<td style="text-align: center;" colspan="4"><h5>댓글목록</h5></td>
 			</tr>
+			<tr>
+				<th>아이디</th>
+				<th colspan="4">내용</th>
+				<th style="text-align:left">작성날짜</th>
+			</tr>
+			
 			<%for(int i=0; i<list.size(); i++){%>
 			<tr>
 				<td><%=list.get(i).getUserID()%></td>
-				<td><%=list.get(i).getContent()%></td>
+				<td colspan="3"><%=list.get(i).getContent()%></td>
+				<%if(guestID != null && guestID.equals(list.get(i).getUserID())){%>
+					<td style="text-align:right"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp?no=<%=no%>">삭제</a></td>
+				<%} else {%>
+					<td style="text-align:right"></td>
+				<%};%>
+					
+				<td style="text-align:left"><%=list.get(i).getDate().substring(0, 11)+list.get(i).getDate().substring(11, 19)%></td>
 			</tr>
-			<%}%>
+			<%};%>
 			<tr>
 				<td>댓글달기</td>
-				<td>
-					<textarea class = "form-control" name="textarea" id="textarea" rows="3" cols="30"></textarea>
+				<td colspan="4" >
+					<textarea class = "form-control" name="textarea" id="textarea" rows="3" cols="50"></textarea>
+					<input type="hidden" name="no" id="no" value=<%=no%>>
 				</td>
-				<td><input type="hidden" name="no" id="no" value=<%=no%>></td>
-				<td><input type="submit" value="댓글 등록" /></td>
+				<td>
+					<input type="submit" value="댓글 등록" />
+				</td>
 			</tr>
 			<tr>
 				<th></th>
-				<td><a href="boardList2.jsp">목록</a><a href="boardDelete.jsp?no=<%=board.getNo()%>">삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></td>
+				<td><a href="boardList2.jsp">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>">삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></td>
 			</tr>
-		</table>
 		</table>
 	</form>
 	<%

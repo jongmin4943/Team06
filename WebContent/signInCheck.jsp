@@ -37,6 +37,7 @@ request.setCharacterEncoding("UTF-8");
 	boolean check = dao.loginCheck(user.getUserID(), user.getUserPassword());
 	if(check) {
 		session.setAttribute("userID", user.getUserID());
+		session.setAttribute("guestID", user.getUserID());
 		pr.println("<script>");
 		pr.println("alert('로그인 성공!')");
 		pr.println("location.href = 'main.jsp'");
