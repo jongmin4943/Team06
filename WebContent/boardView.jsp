@@ -11,29 +11,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%
+String guestID=null;
+PrintWriter pr = response.getWriter();
+if(session.getAttribute("guestID") != null) {		
+	guestID = (String)session.getAttribute("guestID");
+}%>
 <script src="https://code.jquery.com/jquery.js"></script>
 <script>
+var guestID = "<%=guestID%>";
 $(function() {
 	$('form').submit(function() {
-		<%
-		String guestID=null;
-		PrintWriter pr = response.getWriter();
-		if(session.getAttribute("guestID") != null) {		
-			guestID = (String)session.getAttribute("guestID");
-		}
-		if(guestID == null) {%>
-			alert('로그인 해주세요.');
-			location.href="signIn.jsp";
-		<%} else {%>
-		event.preventDefault();
-		if(!this.textarea.value) {
-			alert("댓글을 입력해주세요.");
-			return;
+		console.log(guestID);	
+		if(guestID == 'null') {
+			var c = confirm('로그인 하시겠습니까?.');
+			if(c) {
+				this.action = 'signIn.jsp';
+				this.method = 'POST';
+				return this.submit();
+			} else {
+				return false;
+			}
+		} else {
+			event.preventDefault();
+			if(!this.textarea.value) {
+				alert("댓글을 입력해주세요.");
+				return false;
+			}
 		}
 		this.action = "commentCheck.jsp";
 		this.method = "GET";
 		this.submit();
-	<%}%>
 	});
 });
 </script>
@@ -154,7 +162,7 @@ a {
 				<td><%=list.get(i).getUserID()%></td>
 				<td colspan="3"><%=list.get(i).getContent()%></td>
 				<%if(guestID != null && guestID.equals(list.get(i).getUserID())){%>
-					<td style="text-align:right"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp">삭제</a></td>
+					<td style="text-align:right"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp?no=<%=no%>">삭제</a></td>
 				<%} else {%>
 					<td style="text-align:right"></td>
 				<%};%>

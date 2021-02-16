@@ -75,9 +75,45 @@ public class CommentDao {
 		return list;
 	}
 	
-	public CommentDto selectOne(CommentDto cDto) {
-		return null;
+	public CommentDto selectOne(String no) {
+		String select = "SELECT * FROM COMMENT WHERE boardNO=?";
+		conn = JdbcUtil.getConnection();
+		CommentDto cDto = null;
+		try {
+			pstmt = conn.prepareStatement(select);
+			pstmt.setString(1, no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				cDto = new CommentDto();
+				cDto.setNo(Integer.toString(rs.getInt(1)));
+				cDto.setUserID(rs.getString(2));
+				cDto.setBoardNo(rs.getString(3));
+				cDto.setContent(rs.getString(4));
+				cDto.setDate(rs.getString(5));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
+		}
+		return cDto;
 	}
 	public void delete(CommentDto cDto) {
+		conn = JdbcUtil.getConnection();
+		String delectOne = "DELETE FROM COMMENT WHERE NO=?";
+		try {
+			pstmt = conn.prepareStatement(delectOne);
+			pstmt.setString(1, cDto.getNo());
+			int cnt = pstmt.executeUpdate();
+			if(cnt > 0) {
+//				System.out.println("삭제성공");
+			} else {
+				System.out.println("삭제실패");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
+		}
 	}
 }
