@@ -23,7 +23,7 @@ String name = request.getParameter("name");
 String textarea = request.getParameter("textarea");
 String writer = request.getParameter("writer");
 String no = request.getParameter("no");
-BoardDto dto = new BoardDto(title,name,textarea,writer,no);
+BoardDto dto = new BoardDto(no,title,name,textarea,writer);
 BoardDao.insert(dto);
 
 response.sendRedirect("boardList2.jsp");

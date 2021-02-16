@@ -5,6 +5,7 @@ request.setCharacterEncoding("UTF-8");
 %>
 <!-- post방식으로 넘어온 자료 읽기 -->
 <%@ page import="data.UserDao"%><!-- import dao -->
+<%@ page import="data.UserDto"%><!-- import dto -->
 <%@ page import="java.io.PrintWriter"%><!-- json파일 읽기위해 가져옴 -->
 <jsp:useBean id="user" class="data.UserDto" scope="page" /><!--scope는 현재 페이지만 적용되게 함. -->
 <jsp:setProperty name="user" property="userID" />

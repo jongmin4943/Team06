@@ -119,7 +119,7 @@ margin:2px;
 				<td class="menu2"><%=board.getTitle()%></td>
 			</tr>
 			<tr>
-				<td class="menu">restaurant</td>
+				<td class="menu">name</td>
 				<td class="menu2"><%=board.getName()%></td>
 			</tr>
 			<tr>

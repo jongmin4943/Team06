@@ -15,7 +15,7 @@ public class CommentDao {
 	private ResultSet rs;
 	
 	public void insertComment(CommentDto cDto) {
-		String insert = "INSERT INTO COMMENT VALUES(?,?,?,?)";
+		String insert = "INSERT INTO COMMENT VALUES(null,?,?,?,?)";
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(insert);
@@ -37,20 +37,20 @@ public class CommentDao {
 		}
 	}
 	
-	public List<CommentDto> getComment(String no) {
+	public List<CommentDto> getComment(String boardno) {
 		String select = "SELECT * FROM COMMENT WHERE boardNO=?";
 		List<CommentDto> list = new ArrayList<CommentDto>();
 		conn = JdbcUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(select);
-			pstmt.setString(1, no);
+			pstmt.setString(1, boardno);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				CommentDto cDto = new CommentDto();
-				cDto.setUserID(rs.getString(1));
-				cDto.setBoardNo(rs.getString(2));
-				cDto.setContent(rs.getString(3));
-				cDto.setDate(rs.getString(4));
+				cDto.setUserID(rs.getString(2));
+				cDto.setBoardNo(rs.getString(3));
+				cDto.setContent(rs.getString(4));
+				cDto.setDate(rs.getString(5));
 				list.add(cDto);
 			}
 		} catch (SQLException e) {

@@ -1,15 +1,11 @@
 package board;
 
 public class BoardDto {
+	private String no;
+	private String title;
 	private String name;
 	private String textarea;
 	private String writer;
-	private String title;
-	private String no;
-	@Override
-	public String toString() {
-		return "BoardDto [name=" + name + ", textarea=" + textarea + ", writer=" + writer + ", title=" + title + "]";
-	}
 	public String getName() {
 		return name;
 	}
@@ -41,19 +37,22 @@ public class BoardDto {
 		this.no=no;
 	}
 
-
-	public BoardDto(String title, String name, String textarea, String writer, String no) {
+	public BoardDto(String no, String title, String name, String textarea, String writer) {
+		this.no = no;
 		this.title = title;
 		this.name = name;
 		this.textarea = textarea;
 		this.writer = writer;
-		this.no = no;
 	}
 	public BoardDto() {
 		this("", "", "", "","");
 	}
 	public BoardDto(String no) {
-		this("", "", "", "",no);
+		this(no, "", "", "","");
 	}
-	
+	@Override
+	public String toString() {
+		return "BoardDto [no=" + no + ", title=" + title + ", name=" + name + ", textarea=" + textarea + ", writer="
+				+ writer + "]";
+	}
 }

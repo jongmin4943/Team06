@@ -18,6 +18,6 @@ if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 String content = request.getParameter("textarea");
 String no = request.getParameter("no");
 CommentDao cDao = new CommentDao();
-cDao.insertComment(new CommentDto(userID,no,content,null));
+cDao.insertComment(new CommentDto(null,userID,no,content,null));
 response.sendRedirect("boardView.jsp?no="+no);
 %>
