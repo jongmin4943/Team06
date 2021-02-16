@@ -16,12 +16,12 @@
 $(function() {
 	$('form').submit(function() {
 		<%
-		String userID=null;
+		String guestID=null;
 		PrintWriter pr = response.getWriter();
-		if(session.getAttribute("userID") != null) {		
-			userID = (String)session.getAttribute("userID");
+		if(session.getAttribute("guestID") != null) {		
+			guestID = (String)session.getAttribute("guestID");
 		}
-		if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
+		if(guestID == null) { //세션을 가지고 있지 않으면 접근 불가
 			pr.println("<script>");
 			pr.println("alert('로그인 해주세요.')"); 
 			pr.println("location.href = 'signIn.jsp'");
@@ -116,36 +116,50 @@ margin:2px;
 			<br>
 			<tr>
 				<td class="menu">title</td>
-				<td class="menu2"><%=board.getTitle()%></td>
+				<td colspan="4" class="menu2"><%=board.getTitle()%></td>
 			</tr>
 			<tr>
 				<td class="menu">name</td>
-				<td class="menu2"><%=board.getName()%></td>
+				<td colspan="4" class="menu2"><%=board.getName()%></td>
 			</tr>
 			<tr>
 				<td class="menu" id="comment">comment</td>
-				<td class="menu2"><%=board.getTextarea()%></td>
+				<td colspan="4" class="menu2"><%=board.getTextarea()%></td>
 			</tr>
 			<tr>
 				<td class="menu">writer</td>
-				<td class="menu2"><%=board.getWriter()%></td>
+				<td colspan="4" class="menu2"><%=board.getWriter()%></td>
 			</tr>
 			<tr>
-				<td colspan="1"><h5>댓글목록</h5></td>
+				<td style="text-align: center;" colspan="4"><h5>댓글목록</h5></td>
+			</tr>
+			<tr>
+				<th>아이디</th>
+				<th colspan="4">내용</th>
+				<th style="text-align:left">작성날짜</th>
 			</tr>
 			<%for(int i=0; i<list.size(); i++){%>
 			<tr>
 				<td><%=list.get(i).getUserID()%></td>
-				<td><%=list.get(i).getContent()%></td>
+				<td colspan="3"><%=list.get(i).getContent()%></td>
+				<%if(guestID.equals(list.get(i).getUserID())){%>
+					<td style="text-align:right"><a href="modifyComment.jsp">수정</a><a href="deleteComment.jsp">삭제</a></td>
+				<%} else {%>
+					<td style="text-align:right"></td>
+				<%};%>
+					
+				<td style="text-align:left"><%=list.get(i).getDate().substring(0, 11)+list.get(i).getDate().substring(11, 19)%></td>
 			</tr>
-			<%}%>
+			<%};%>
 			<tr>
 				<td>댓글달기</td>
-				<td>
-					<textarea class = "form-control" name="textarea" id="textarea" rows="3" cols="30"></textarea>
+				<td colspan="4" >
+					<textarea class = "form-control" name="textarea" id="textarea" rows="3" cols="50"></textarea>
+					<input type="hidden" name="no" id="no" value=<%=no%>>
 				</td>
-				<td><input type="hidden" name="no" id="no" value=<%=no%>></td>
-				<td><input type="submit" value="댓글 등록" /></td>
+				<td>
+					<input type="submit" value="댓글 등록" />
+				</td>
 			</tr>
 			<tr>
 				<th></th>

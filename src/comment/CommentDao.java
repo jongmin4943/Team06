@@ -22,10 +22,10 @@ public class CommentDao {
 			pstmt.setString(1, cDto.getUserID());
 			pstmt.setString(2, cDto.getBoardNo());
 			pstmt.setString(3, cDto.getContent());
-			pstmt.setString(4, cDto.getDate());
+			pstmt.setString(4, getDate());
 			int cnt = pstmt.executeUpdate();
 			if(cnt>0) {
-				System.out.println("입력성공");
+//				System.out.println("입력성공");
 			} else {
 				System.out.println("입력실패");
 				conn.rollback();
@@ -37,6 +37,20 @@ public class CommentDao {
 		}
 	}
 	
+	private String getDate() {
+		String getDate = "SELECT NOW()";
+		try {
+			PreparedStatement ps = conn.prepareStatement(getDate);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public List<CommentDto> getComment(String boardno) {
 		String select = "SELECT * FROM COMMENT WHERE boardNO=?";
 		List<CommentDto> list = new ArrayList<CommentDto>();

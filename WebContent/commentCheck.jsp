@@ -4,20 +4,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-String userID=null;
+String guestID=null;
 PrintWriter pr = response.getWriter();
-if(session.getAttribute("userID") != null) {		
-	userID = (String)session.getAttribute("userID");
+if(session.getAttribute("guestID") != null) {		
+	guestID = (String)session.getAttribute("guestID");
 }
-if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
+if(guestID == null) { //세션을 가지고 있지 않으면 접근 불가
 	pr.println("<script>");
-	pr.println("alert('로그인 해주세요.')"); 
+	pr.println("alert('로그인 해주세요.')");	 
 	pr.println("location.href = 'signIn.jsp'");
 	pr.println("</script>");
 }
 String content = request.getParameter("textarea");
 String no = request.getParameter("no");
 CommentDao cDao = new CommentDao();
-cDao.insertComment(new CommentDto(null,userID,no,content,null));
+cDao.insertComment(new CommentDto(null,guestID,no,content,"NOW()"));
 response.sendRedirect("boardView.jsp?no="+no);
 %>
