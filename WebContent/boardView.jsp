@@ -143,7 +143,7 @@ margin:2px;
 				<td><%=list.get(i).getUserID()%></td>
 				<td colspan="3"><%=list.get(i).getContent()%></td>
 				<%if(guestID.equals(list.get(i).getUserID())){%>
-					<td style="text-align:right"><a href="modifyComment.jsp">수정</a><a href="deleteComment.jsp">삭제</a></td>
+					<td style="text-align:right"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp">삭제</a></td>
 				<%} else {%>
 					<td style="text-align:right"></td>
 				<%};%>

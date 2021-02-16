@@ -9,6 +9,9 @@ public class CommentDto {
 	public CommentDto() {
 		this(null,"", "", "", "");
 	}
+	public CommentDto(String no) {
+		this(no,"", "", "", "");
+	}
 
 	public CommentDto(String no, String userID, String boardNo, String content, String date) {
 		super();

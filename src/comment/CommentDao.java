@@ -74,4 +74,10 @@ public class CommentDao {
 		}
 		return list;
 	}
+	
+	public CommentDto selectOne(CommentDto cDto) {
+		return null;
+	}
+	public void delete(CommentDto cDto) {
+	}
 }
