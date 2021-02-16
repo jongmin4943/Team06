@@ -34,7 +34,7 @@ public class BoardDto {
 	public String getNo() {
 		return no;
 	}
-	public void SetNo(String no) {
+	public void setNo(String no) {
 		this.no=no;
 	}
 

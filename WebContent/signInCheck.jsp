@@ -40,7 +40,7 @@ request.setCharacterEncoding("UTF-8");
 		session.setAttribute("guestID", user.getUserID());
 		pr.println("<script>");
 		pr.println("alert('로그인 성공!')");
-		pr.println("location.href = 'main.jsp'");
+		pr.println("history.go(-2);");
 		pr.println("</script>");
 	} else {
 		pr.println("<script>");

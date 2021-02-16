@@ -9,6 +9,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('form').submit(function() {
+		if(!this.keyword.value) {
+			alert("검색어를 입력해주세요.");
+			return false;
+		}
+		this.method = "GET";
+		this.action = "boardSearch.jsp";
+		this.submit();
+	});
+});
+</script>
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -97,7 +111,6 @@ margin:0px;
 
 	List<BoardDto> v = dao.selectPage("board", startPage, onePageCnt);
 	%>
-	<table class="table table-striped table-hover">
 		<hr>
 
 		<h1>My Restaurant List</h1>
@@ -106,6 +119,7 @@ margin:0px;
 		<br>
 		<br>
 
+	<table class="table table-striped table-hover">
 		<tr>
 			<th id="no">No</th>
 			<th id="name">name</th>
@@ -131,7 +145,12 @@ margin:0px;
 		</div>
 		<div style="float:right">
 			<form>
-				<input type="text" placeholder="검색" />
+				<select name="cate">
+					<option value="name">Name</option>
+					<option value="title">Title</option>
+					<option value="writer">Writer</option>
+				</select>
+				<input type="text" placeholder="검색" name="keyword" id="keyword" maxlength="20" />
 				<input type="submit" value="검색" />
 			</form>
 		</div>

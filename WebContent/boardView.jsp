@@ -22,7 +22,6 @@ if(session.getAttribute("guestID") != null) {
 var guestID = "<%=guestID%>";
 $(function() {
 	$('form').submit(function() {
-		console.log(guestID);	
 		if(guestID == 'null') {
 			var c = confirm('로그인 하시겠습니까?.');
 			if(c) {
@@ -167,7 +166,7 @@ a {
 				<td><%=list.get(i).getUserID()%></td>
 				<td colspan="3"><%=list.get(i).getContent()%></td>
 				<%if(guestID != null && guestID.equals(list.get(i).getUserID())){%>
-					<td style="text-align:right"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp?no=<%=no%>">삭제</a></td>
+					<td style="text-align:right"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp?no=<%=no%>" onclick="return confirm('삭제 하시겠습니까?')">삭제</a></td>
 				<%} else {%>
 					<td style="text-align:right"></td>
 				<%};%>

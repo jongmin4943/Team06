@@ -48,18 +48,29 @@ public class BoardDao {
 		}
 	}
 
-	/*
-	 * public static List<BoardDto> SelectAll() { List<BoardDto> list = new
-	 * ArrayList<BoardDto>(); conn = JdbcUtil.getConnection(); try { stmt =
-	 * conn.createStatement(); rs = stmt.executeQuery(SELECT); while (rs.next()) {
-	 * BoardDto board = new BoardDto(); board.setTitle(rs.getString(1));
-	 * board.setName(rs.getString(2)); board.setWriter(rs.getString(4));
-	 * board.SetNo(rs.getString(5)); list.add(board); } } catch (SQLException e) {
-	 * e.printStackTrace(); } finally { JdbcUtil.close(rs, stmt, conn); } return
-	 * list;
-	 * 
-	 * }
-	 */
+	public List<BoardDto> selectAll() {
+		List<BoardDto> list = new ArrayList<BoardDto>();
+		conn = JdbcUtil.getConnection();
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SELECT);
+			while (rs.next()) {
+				BoardDto board = new BoardDto();
+				board.setNo(Integer.toString(rs.getInt(1)));
+				board.setTitle(rs.getString(2));
+				board.setName(rs.getString(3));
+				board.setTextarea(rs.getString(4));
+				board.setWriter(rs.getString(5));
+				list.add(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, stmt, conn);
+		}
+		return list;
+	}
+	 
 
 	public static BoardDto selectOne(BoardDto dto) {
 		BoardDto otd = null;
@@ -71,7 +82,7 @@ public class BoardDao {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				otd = new BoardDto();
-				otd.SetNo(rs.getString(1));
+				otd.setNo(rs.getString(1));
 				otd.setTitle(rs.getString(2));
 				otd.setName(rs.getString(3));
 				otd.setTextarea(rs.getString(4));
@@ -164,7 +175,7 @@ public class BoardDao {
 				dto.setName(rs.getString("name"));
 				dto.setTextarea(rs.getString("textarea"));
 				dto.setWriter(rs.getString("writer"));
-				dto.SetNo(rs.getString("no"));
+				dto.setNo(rs.getString("no"));
 				v.add(dto);
 			}
 			
@@ -190,5 +201,45 @@ public class BoardDao {
 		}
 		return v;
 	}
-
+	public List<BoardDto> search(String keyword,String cate,int start,int pageCnt) {
+		String search = "select * from board where "+cate+" like '%"+keyword+"%' ORDER BY no DESC limit ?, ?";
+		List<BoardDto> list = new ArrayList<BoardDto>();
+		conn = JdbcUtil.getConnection();
+		try {
+			pstmt = conn.prepareStatement(search);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, pageCnt);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardDto bDto = new BoardDto();
+				bDto.setNo(Integer.toString(rs.getInt(1)));
+				bDto.setTitle(rs.getString(2));
+				bDto.setName(rs.getString(3));
+				bDto.setTextarea(rs.getString(4));
+				bDto.setWriter(rs.getString(5));
+				list.add(bDto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	public int selectSearchCnt(String cate, String keyword) {
+		int result = 0;
+		ResultSet rs = null;
+		String sql = "select count(*) from board where "+cate+" like '%"+keyword+"%'";
+		conn = JdbcUtil.getConnection();
+		try {
+			pstmt= conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JdbcUtil.close(rs, pstmt, conn);
+		}
+		return result;
+	}
 }
