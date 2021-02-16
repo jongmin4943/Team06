@@ -25,9 +25,8 @@ $(function() {
 		if(guestID == 'null') {
 			var c = confirm('로그인 하시겠습니까?.');
 			if(c) {
-				this.action = 'signIn.jsp';
-				this.method = 'POST';
-				return this.submit();
+				top.location.href = 'signIn.jsp';
+				return false;
 			} else {
 				return false;
 			}
