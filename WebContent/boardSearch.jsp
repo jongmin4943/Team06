@@ -118,7 +118,7 @@ margin:0px;
 		<p>기억에 남은 식당을 기록하는 곳.</p>
 		<br>
 		<br>
-		<h4><%=keyword%> 의 검색결과 <%=v.size()%>건</h4>
+		<h4><%=cate%> 카테고리의 <%=keyword%> 의 검색결과 <%=v.size()%>건</h4>
 		<br>
 
 	<table class="table table-striped table-hover">
