@@ -78,7 +78,8 @@ $(function() {
 		if(!userID) {
 			 $("#showResult").html("");
 		} else {
-			$.post("idcheck.jsp",id,function(data,status) {
+			$.
+t("idcheck.jsp",id,function(data,status) {
 				var avail = data;
 				  if(avail.possible == "Yes") {
 					  $("#showResult").html("사용 가능한 아이디");

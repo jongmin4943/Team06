@@ -125,7 +125,17 @@ margin:0px;
 		}
 		%>
 	</table>
-	<a href="boardWrite.jsp" id="aa"> 새 게시글 작성 </a>
+	<div>
+		<div style="float:left">
+			<a href="boardWrite.jsp" id="aa"> 새 게시글 작성 </a>
+		</div>
+		<div style="float:right">
+			<form>
+				<input type="text" placeholder="검색" />
+				<input type="submit" value="검색" />
+			</form>
+		</div>
+	</div><br>
 	<div>
 		<%
 		

@@ -167,7 +167,7 @@ a {
 				<td><%=list.get(i).getUserID()%></td>
 				<td colspan="3"><%=list.get(i).getContent()%></td>
 				<%if(guestID != null && guestID.equals(list.get(i).getUserID())){%>
-					<td style="width:200px"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp">삭제</a></td>
+					<td style="text-align:right"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp?no=<%=no%>">삭제</a></td>
 				<%} else {%>
 					<td style="text-align:right"></td>
 				<%};%>

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>구현중</h1>
+<h1>나중에 에이젝스로 구현할 예정</h1>
 </body>
 </html>
