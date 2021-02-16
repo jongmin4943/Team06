@@ -45,7 +45,6 @@ $(function() {
 });
 </script>
 </head>
-​
 <!-- Bootstrap CSS -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
@@ -128,13 +127,13 @@ a {
 		
 	%>
 	<form>
-		<table align="center">
 			<hr>
 			<h1>맛집보기</h1>
 			<p>기억에 남은 식당을 기록하는 곳.</p>
 			<br>
 			<br>
 			<br>
+		<table align="center">
 			<tr>
 				<td class="menu">title</td>
 				<td class="menu2"><%=board.getTitle()%></td>

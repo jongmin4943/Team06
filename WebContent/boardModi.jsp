@@ -109,7 +109,6 @@ hr {
 	}
 ">
 	<form>
-		<table align="center">
 			<hr>
 
 			<h1>작성하기</h1>
@@ -122,6 +121,7 @@ String no= request.getParameter("no");
 BoardDto dto = BoardDao.selectOne(new BoardDto(no));
 %>
 
+		<table align="center">
 			<tr>
 				<td><label for="title">title</label></td>
 				<td><input type="text" name="title" id="title" value="<%=dto.getTitle()  %>"
