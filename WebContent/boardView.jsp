@@ -22,7 +22,7 @@ $(function() {
 			guestID = (String)session.getAttribute("guestID");
 		}
 		if(guestID == null) {%>
-			alert('로그인 해주세요.'); 
+			alert('로그인 해주세요.');
 			location.href="signIn.jsp";
 		<%} else {%>
 		event.preventDefault();
