@@ -146,7 +146,7 @@ a {
 				<td class="menu">writer</td>
 				<td class="menu2"><%=board.getWriter()%></td>
 				<td class="menu" >date</td>
-				<td class="menu2"><%=board.getDate()%></td>
+				<td class="menu2"><%=board.getDate().substring(0, 19)%></td>
 			</tr>
 			<tr>
 				<td class="menu" id="comment">comment</td>
@@ -179,13 +179,12 @@ a {
 			<%};%>
 			<tr>
 				
-				<td colspan="4" >
-					<textarea class = "form-control" name="textarea" id="textarea" rows="2" cols="50" style="width:900px"></textarea>
+				<td colspan="5" >
+					<textarea class = "form-control" name="textarea" id="textarea" rows="2" cols="50" style="width:1000px"></textarea>
 					<input type="hidden" name="no" id="no" value=<%=no%>>
 				</td>
-				<td></td>
-				<td>
-					<input type="submit" value="댓글 등록" />
+				<td colspan="2">
+					<input style="height:60px" type="submit" value="댓글 등록" />
 				</td>
 			</tr>
 		</table>

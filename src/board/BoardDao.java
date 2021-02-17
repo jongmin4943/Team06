@@ -40,7 +40,11 @@ public class BoardDao {
 				conn.rollback();
 			}
 		} catch (SQLException e) {
-
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
@@ -57,9 +61,14 @@ public class BoardDao {
 				return rs.getString(1);
 			}
 		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
-		System.out.println("널값줄거양");
+//		System.out.println("널값줄거양");
 		return null;
 	}
 	public List<BoardDto> selectAll() {
@@ -79,6 +88,11 @@ public class BoardDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			JdbcUtil.close(rs, stmt, conn);
 		}
@@ -105,6 +119,11 @@ public class BoardDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
@@ -118,7 +137,7 @@ public class BoardDao {
 			pstmt.setString(1, dto.getNo());
 			int cnt = pstmt.executeUpdate();
 			if (cnt > 0) {
-				System.out.println("삭제되었습니다.");
+//				System.out.println("삭제되었습니다.");
 				conn.commit();
 			} else {
 				System.out.println("삭제시키지 못했습니다.");
@@ -126,6 +145,11 @@ public class BoardDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}finally {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
@@ -141,13 +165,18 @@ public class BoardDao {
 			pstmt.setString(3, dto.getTextarea());
 			int cnt = pstmt.executeUpdate();
 			if(cnt>0) {
-				System.out.println("수정되었습니다.");
+//				System.out.println("수정되었습니다.");
 				conn.commit();
 			}else {
 				System.out.println("수정하지 못했습니다.");
 				conn.rollback();
 			}
 		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}finally {
 			JdbcUtil.close(rs, pstmt, conn);
@@ -167,6 +196,11 @@ public class BoardDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}finally {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
@@ -195,6 +229,11 @@ public class BoardDao {
 			}
 			
 		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}finally {
 			try {
@@ -234,6 +273,11 @@ public class BoardDao {
 				list.add(bDto);
 			}
 		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
 		return list;
@@ -250,11 +294,15 @@ public class BoardDao {
 				result = rs.getInt(1);
 			}
 		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}finally {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
 		return result;
 	}
-
 }
