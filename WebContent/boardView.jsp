@@ -40,11 +40,11 @@ $(function() {
 					start +="<span style='width:150px; margin-left:5px'>";
 				}
 				if(guestID != item.guestID) {
-					option = "";
+					option = "<p style='width: 70px;'></p>";
 				} else {
-					option = "<a href='commentModify.jsp'>수정</a><a href='commentDelete.jsp?no="+no+"' onclick='return confirm('삭제 하시겠습니까?')'>삭제</a>";
+					option = "<a href='commentModify.jsp'>수정</a><a href='commentDelete.jsp?no="+no+"' onclick='return confirm(\"삭제 하시겠습니까?\")'>삭제</a>";
 				}
-			start += item.guestID+"</span><span style='width:690px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
+			start += item.guestID+"</span><span style='width:670px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
 			}//end for
 		$("#reply").html(start);
 	});
@@ -81,11 +81,11 @@ $(function() {
 						start +="<span style='width:150px; margin-left:5px'>";
 					}
 					if(guestID != item.guestID) {
-						option = "";
+						option = "<p style='width: 70px;'></p>";
 					} else {
-						option = "<a href='commentModify.jsp'>수정</a><a href='commentDelete.jsp?no="+no+"' onclick='return confirm('삭제 하시겠습니까?')'>삭제</a>";
+						option = "<a href='commentModify.jsp'>수정</a><a href='commentDelete.jsp?no="+no+"' onclick='return confirm(\"삭제 하시겠습니까?\")'>삭제</a>";
 					}
-					start += item.guestID+"</span><span style='width:690px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
+					start += item.guestID+"</span><span style='width:670px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
 				}//end for
 				$("#reply").html(start);
 				$("#textarea").val("");

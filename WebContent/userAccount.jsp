@@ -41,9 +41,6 @@ label {
 p {
 	margin: 5px 0;
 }
-fieldset {
-	width: 500px;
-}
 </style>
 <script src="http://code.jquery.com/jquery.js"></script>
 </head>
@@ -110,13 +107,13 @@ function goSignOut() {	//로그아웃
 	<br>
 	
 	<div class="container">
-		<div class="jumbotron" style="padding-top: 20px;">
-		<form style="float:left" action="deleteAccount.jsp" onsubmit="return confirm('정말 삭제하시겠습니까?')" method="post" name="userInfo" id="userInfo">
-					<h3 style="text-align: center;">My Account</h3>
-			<fieldset>
+		<div class="jumbotron jumbotron-fluid" style="padding-top: 20px;">
+		<form action="deleteAccount.jsp" onsubmit="return confirm('정말 삭제하시겠습니까?')" method="post" name="userInfo" id="userInfo">
+			<fieldset class="form-group">
+					<h3 class="form-group" style="text-align: center;">My Account</h3>
 				<legend><%=userName%>님의 회원정보</legend><!-- 위에서 날아온 userID를 담아서 실시간으로 보여줌 -->
-					<p><label for="id">아이디</label><input readonly type="text" name="id" id="id"/></p><!-- readonly로 수정 불가 -->
-					<p><label for="email">이메일</label><input readonly type="email" name="email" id="email" /></p><!-- readonly로 수정 불가 -->
+					<p><label for="id">아이디</label><input class="form-control" style="margin-right : 20px" readonly type="text" name="id" id="id"/></p><!-- readonly로 수정 불가 -->
+					<p><label for="email">이메일</label><input class="form-control" readonly type="email" name="email" id="email" /></p><!-- readonly로 수정 불가 -->
 					<input style="margin-left : 0" type="button" value="비밀번호 바꾸기" onclick="goResetPassword()"/>
 					<input style="margin-left : 5px" type="button" value="로그아웃" onclick="goSignOut()"/>
 					<input style="margin-left : 5px" type="submit" value="탈퇴하기"/>
@@ -125,9 +122,9 @@ function goSignOut() {	//로그아웃
 		
 		
 		<form id="img" action="profileUpload.jsp" method="post" enctype="multipart/form-data" onsubmit="return confirm('수정하시겠습니까')">
-					<h3 style="text-align: center;">My Profile</h3>
-			<fieldset>
-				<legend><%=userName%>님의 프로필사진</legend><!-- 위에서 날아온 userID를 담아서 실시간으로 보여줌 -->
+			<fieldset class="form-group">
+					<h3 class="form-group" style="text-align: center;">My Profile</h3>
+				<legend>프로필</legend><!-- 위에서 날아온 userID를 담아서 실시간으로 보여줌 -->
 					<img id="profile" src="" style="width:200px;height:150px;margin-bottom:10px;">
 					<input id = "loca" type = "file" name = "partFile1" id = "partFile1"> <!-- preview 이미지 -->
 					<input style="margin-top: 10px"type = "submit" value = "사진수정"/>

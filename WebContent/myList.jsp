@@ -58,9 +58,7 @@ iframe {
 				<p>
 					기억에 남는 맛집,관광지를<br /> 정리해보세요
 				</p>
-				<table id="tata">
 					<iframe src="boardList2.jsp"></iframe>
-				</table>
 			</div>
 		</div>
 		<video autoplay loop muted>

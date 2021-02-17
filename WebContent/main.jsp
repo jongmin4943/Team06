@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +31,7 @@
 </head>
 
 <body>
-<%
+	<%
 	String userID = null;
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
@@ -72,59 +72,59 @@
 		<div class="container-fluid">
 			<div class="col-md-4 col-sm-6">
 				<div class="portfolio-item">
-					<a href="img/meal5.jpg" data-lightbox="image-1"><div
-							class="thumb">
-							<a href="myList.jsp">
-								<div class="hover-effect">
-									<div class="hover-content">
-										<h1>
-											내 맛집 <em>My restaurant</em>
-										</h1>
-										<p>내가 가본 맛집 List</p>
-									</div>
+					<div class="thumb">
+						<a href="myList.jsp">
+							<div class="hover-effect">
+								<div class="hover-content">
+									<h1>
+										내 맛집 <em>My restaurant</em>
+									</h1>
+									<p>내가 가본 맛집 List</p>
 								</div>
-								<div class="image">
-									<img src="img/meal5.jpg">
-								</div></a>
-						</div></a>
+							</div>
+							<div class="image">
+								<img src="img/meal5.jpg">
+							</div>
+						</a>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-6">
 				<div class="portfolio-item">
-					<a href="img/big_portfolio_item_2.jpg" data-lightbox="image-1"><div
-							class="thumb">
-							<a href="myList.jsp">
-								<div class="hover-effect">
-									<div class="hover-content">
-										<h1>
-											내 여행지 <em>My Trip</em>
-										</h1>
-										<p>내가 가본 여행지 List</p>
-									</div>
+					<div class="thumb">
+						<a href="myList.jsp">
+							<div class="hover-effect">
+								<div class="hover-content">
+									<h1>
+										내 여행지 <em>My Trip</em>
+									</h1>
+									<p>내가 가본 여행지 List</p>
 								</div>
-								<div class="image">
-									<img src="img/portfolio_item_2.jpg">
-								</div></a>
-						</div></a>
+							</div>
+							<div class="image">
+								<img src="img/portfolio_item_2.jpg">
+							</div>
+						</a>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-6">
 				<div class="portfolio-item">
-					<a href="img/big_portfolio_item_3.jpg" data-lightbox="image-1"><div
-							class="thumb">
-							<a href="naverMap.jsp">
-								<div class="hover-effect">
-									<div class="hover-content">
-										<h1>
-											검색 <em>Search Places</em>
-										</h1>
-										<p>관광지, 맛집 검색</p>
-									</div>
+					<div class="thumb">
+						<a href="naverMap.jsp">
+							<div class="hover-effect">
+								<div class="hover-content">
+									<h1>
+										검색 <em>Search Places</em>
+									</h1>
+									<p>관광지, 맛집 검색</p>
 								</div>
-								<div class="image">
-									<img src="img/portfolio_item_3.jpg">
-								</div></a>
-						</div></a>
+							</div>
+							<div class="image">
+								<img src="img/portfolio_item_3.jpg">
+							</div>
+						</a>
+					</div>
 				</div>
 			</div>
 
@@ -148,7 +148,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="main-menu">
-				<%
+					<%
 					if(userID == null) {
 				%>
 					<ul>
@@ -157,7 +157,7 @@
 						<li><a href="myList.jsp">My Trips</a></li>
 						<li><a href="aboutUs.jsp">About Us</a></li>
 					</ul>
-				<%
+					<%
 					} else { 
 				%>
 					<ul>
@@ -167,7 +167,7 @@
 						<li><a href="aboutUs.jsp">About Us</a></li>
 						<li><a href="signOut.jsp">Sign - Out</a></li>
 					</ul>
-				<%
+					<%
 					}
 				%>
 					<p>We create awesome lists for you.</p>
