@@ -108,6 +108,11 @@ public class UserDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			return null;
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
@@ -132,6 +137,11 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("이미 존재하는 아이디");
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			return -1;
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
@@ -152,6 +162,11 @@ public class UserDao {
 			return false;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			return false;
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
@@ -172,6 +187,11 @@ public class UserDao {
 			return false;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			return false;
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
@@ -187,6 +207,11 @@ public class UserDao {
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			System.out.println("업데이트 실패");
 			return -1;
 		} finally {
@@ -208,6 +233,11 @@ public class UserDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
