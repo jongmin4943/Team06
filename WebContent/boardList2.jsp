@@ -118,21 +118,23 @@ margin:0px;
 		<br>
 		<br>
 		<div style="float:right">
-			<form>
+			<form id="searching">
 				<select name="cate">
 					<option value="name">Name</option>
 					<option value="title">Title</option>
 					<option value="writer">Writer</option>
 				</select>
 				<input type="text" placeholder="검색" name="keyword" id="keyword" maxlength="20" />
-				<input type="submit" value="검색" />
+				<input type="submit" value="검색" id="gumsaek" />
 			</form>
+
 		</div>
 		<br>
 		<br>
 	<table class="table table-striped table-hover">
 		<tr>
 			<th id="no">No</th>
+			<th id="selector" style="width:45px"></th>
 			<th id="name">name</th>
 			<th>title</th>
 			<th id="writer" style="width:100px">writer</th>
@@ -143,7 +145,8 @@ margin:0px;
 		%>
 		<tr>
 			<td><%=v.get(i).getNo()%></td>
-			<td><a href=" "><%=v.get(i).getName()%></a></td>
+			<td style="font-size:10px">[<%=v.get(i).getSelector()%>]</td>
+			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getName()%></a></td>
 			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getTitle()%></a></td>
 			<td><%=v.get(i).getWriter()%></td>
 			<td><%=v.get(i).getDate().substring(0, 11)%></td>

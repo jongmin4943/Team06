@@ -42,6 +42,11 @@
 				this.writer.focus();
 				return;
 			}
+			if (this.selector.value == "") {
+				alert("분류를 선택해주세요");
+				this.selector.focus();
+				return;
+			}
 			this.action = "boardWrite_ok.jsp";
 			this.method = "GET";
 			this.submit();
@@ -82,6 +87,9 @@ hr {
 
 #writer {
 	width: 100px;
+}
+#name{
+	width:707px;
 }
 </style>
 <%
@@ -137,15 +145,18 @@ if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 					class="init" /></td>
 			</tr>
 			<tr>
-				<td><label for="name">restaurant name</label></td>
-				<td><input type="text" name="name" id="name" value="식당"
-					class="init" /></td>
+				<td><label for="name">name</label></td>
+				<td><input type="text" name="name" id="name" value="지역/식당"
+					class="init" /><input type="radio" id="restaurant" name="selector" value="식당" />
+					<label for="restaurant">식당</label>
+					<input type="radio" id="place" name="selector" value="지역" />
+					<label for="place">지역</label></td>
 			</tr>
 			<tr>
 				<td><label for="textarea">comment</label></td>
 				<td><textarea name="textarea" id="textarea" cols="30" rows="10"
 						class="init"></textarea></td>
-				<!-- <input type="textarea" id="email" value="내용" class="init" /> -->
+				<td></td>
 			</tr>
 			<tr>
 				<td><label for="writer">writer</label></td>

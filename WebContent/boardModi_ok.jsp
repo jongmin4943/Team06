@@ -8,8 +8,8 @@ String name= request.getParameter("name");
 String title= request.getParameter("title");
 String writer= request.getParameter("writer");
 String textarea= request.getParameter("textarea");
-
-BoardDao.modify(new BoardDto(no,title,name,textarea,writer,"NOW()"));
+String selector= request.getParameter("selector");
+BoardDao.modify(new BoardDto(no,title,name,textarea,writer,"NOW()",selector));
 
 response.sendRedirect("boardView.jsp?no="+no);
 %>

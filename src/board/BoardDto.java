@@ -7,8 +7,14 @@ public class BoardDto {
 	private String textarea;
 	private String writer;
 	private String date;
-
+	private String selector;
 	
+	public String getSelector() {
+		return selector;
+	}
+	public void setSelector(String selector) {
+		this.selector = selector;
+	}
 	public String getNo() {
 		return no;
 	}
@@ -45,24 +51,26 @@ public class BoardDto {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public BoardDto(String no, String title, String name, String textarea, String writer, String date) {
-		super();
+
+	public BoardDto(String no, String title, String name, String textarea, String writer, String date,
+			String selector) {
 		this.no = no;
 		this.title = title;
 		this.name = name;
 		this.textarea = textarea;
 		this.writer = writer;
 		this.date = date;
+		this.selector = selector;
 	}
 	public BoardDto(String no) {
-		this(no, "", "", "","","");
+		this(no, "", "", "","","","");
 	}
 	public BoardDto() {
 	}
 	@Override
 	public String toString() {
 		return "BoardDto [no=" + no + ", title=" + title + ", name=" + name + ", textarea=" + textarea + ", writer="
-				+ writer + ", date=" + date + "]";
+				+ writer + ", date=" + date + ", selector=" + selector + "]";
 	}
 
 }

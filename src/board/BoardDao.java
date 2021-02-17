@@ -17,8 +17,8 @@ public class BoardDao {
 	private static ResultSet rs = null;
 	static final String SELECT = "SELECT * FROM BOARD ORDER BY no DESC";
 	static final String SELECTBD = "SELECT * FROM BOARD WHERE no=?";
-	static final String INSERT = "INSERT INTO BOARD VALUES(null,?,?,?,?,?)";
-	static final String UPDATE = "UPDATE BOARD SET title=?, name=?, textarea=? WHERE no=?"; // 나중에처리
+	static final String INSERT = "INSERT INTO BOARD VALUES(null,?,?,?,?,?,?)";
+	static final String UPDATE = "UPDATE BOARD SET title=?, name=?, textarea=?, selector=? WHERE no=?"; // 나중에처리
 	static final String DELETE = "DELETE FROM BOARD WHERE no=?"; // 나중에 다시선정
 	static final String UPSTREAM = "SELECT * FROM BOARD ";
 	public static void insert(BoardDto dto) {
@@ -31,6 +31,7 @@ public class BoardDao {
 			pstmt.setString(3, dto.getTextarea());
 			pstmt.setString(4, dto.getWriter());
 			pstmt.setString(5, getDate());
+			pstmt.setString(6, dto.getSelector());
 			int cnt = pstmt.executeUpdate();
 			if (cnt > 0) {
 				System.out.println("저장 완료!");
@@ -116,6 +117,7 @@ public class BoardDao {
 				otd.setTextarea(rs.getString(4));
 				otd.setWriter(rs.getString(5));
 				otd.setDate(rs.getString(6));
+				otd.setSelector(rs.getString(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -159,10 +161,11 @@ public class BoardDao {
 		
 		try {
 			pstmt= conn.prepareStatement(UPDATE);
-			pstmt.setString(4, dto.getNo());
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getName());
 			pstmt.setString(3, dto.getTextarea());
+			pstmt.setString(4, dto.getSelector());
+			pstmt.setString(5, dto.getNo());
 			int cnt = pstmt.executeUpdate();
 			if(cnt>0) {
 //				System.out.println("수정되었습니다.");
@@ -225,6 +228,7 @@ public class BoardDao {
 				dto.setWriter(rs.getString("writer"));
 				dto.setNo(rs.getString("no"));
 				dto.setDate(rs.getString("date"));
+				dto.setSelector(rs.getString("selector"));
 				v.add(dto);
 			}
 			

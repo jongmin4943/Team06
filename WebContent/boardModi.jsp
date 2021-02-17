@@ -42,6 +42,12 @@
 				alert("작성자를 입력해주세요");
 				this.writer.focus();
 				return;
+				
+			}
+			if (this.selector.value == "") {
+				alert("분류를 선택해주세요");
+				this.selector.focus();
+				return;
 			}
 			this.action = "boardModi_ok.jsp";
 			this.method = "GET";
@@ -80,7 +86,9 @@ hr {
 	width: 800px;
 	margin: 10px;
 }
-
+#name{
+	width:707px;
+}
 #writer {
 	width: 100px;
 }
@@ -128,9 +136,12 @@ BoardDto dto = BoardDao.selectOne(new BoardDto(no));
 					class="init" /></td>
 			</tr>
 			<tr>
-				<td><label for="name">restaurant name</label></td>
+				<td><label for="name">name</label></td>
 				<td><input type="text" name="name" id="name" value="<%=dto.getName() %>"
-					class="init" /></td>
+					class="init" /><input type="radio" id="restaurant" name="selector" value="식당" />
+					<label for="restaurant">식당</label>
+					<input type="radio" id="place" name="selector" value="지역" />
+					<label for="place">지역</label></td>
 			</tr>
 			<tr>
 				<td><label for="textarea">comment</label></td>
