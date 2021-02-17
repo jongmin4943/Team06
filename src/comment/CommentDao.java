@@ -32,6 +32,11 @@ public class CommentDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
@@ -47,6 +52,11 @@ public class CommentDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 		return null;
 	}
@@ -69,6 +79,11 @@ public class CommentDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
@@ -93,6 +108,11 @@ public class CommentDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
@@ -112,6 +132,11 @@ public class CommentDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
