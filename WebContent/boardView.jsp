@@ -12,6 +12,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%
+String userID = null;
+String switching = "inline-block";
+String no = request.getParameter("no");
+//System.out.println("no => " + no);
+BoardDto board = BoardDao.selectOne(new BoardDto(no));
+//	System.out.println(board);
+CommentDao cDao = new CommentDao();
+List<CommentDto> list = cDao.getComment(no);
+
 String guestID=null;
 PrintWriter pr = response.getWriter();
 if(session.getAttribute("guestID") != null) {		
@@ -20,8 +29,26 @@ if(session.getAttribute("guestID") != null) {
 <script src="https://code.jquery.com/jquery.js"></script>
 <script>
 var guestID = "<%=guestID%>";
+var no = "<%=no%>";
 $(function() {
-	$('form').submit(function() {
+	$.get("commentCheckAjax.jsp?boardNo="+no,function(data,status) {
+			var commentList = JSON.parse(data.trim()).sent;
+			var start = "<span style='width:150px; margin-left:5px'>";
+			for(var i = 0; i<commentList.length; i++){
+				item = commentList[i];
+				if(i>0) {
+					start +="<span style='width:150px; margin-left:5px'>";
+				}
+				if(guestID != item.guestID) {
+					option = "";
+				} else {
+					option = "<a href='commentModify.jsp'>수정</a><a href='commentDelete.jsp?no="+no+"' onclick='return confirm('삭제 하시겠습니까?')'>삭제</a>";
+				}
+			start += item.guestID+"</span><span style='width:690px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
+			}//end for
+		$("#reply").html(start);
+	});
+	$('#cBtn').click(function() {
 		if(guestID == 'null') {
 			var c = confirm('로그인 하시겠습니까?.');
 			if(c) {
@@ -32,14 +59,42 @@ $(function() {
 			}
 		} else {
 			event.preventDefault();
-			if(!this.textarea.value) {
+			if($("#textarea").value == "") {
 				alert("댓글을 입력해주세요.");
 				return false;
 			}
-		}
-		this.action = "commentCheck.jsp";
-		this.method = "GET";
-		this.submit();
+		} //end if
+		
+		var textarea = $("#textarea").val();
+		$.ajax({
+			type: "POST",
+			url: "commentCheckAjax.jsp",
+			data: {comment : textarea,
+					boardNo : no		
+			},  
+			success: function(data) {
+				var commentList = JSON.parse(data.trim()).sent;
+					var start = "<span style='width:150px; margin-left:5px'>";
+				for(var i = 0; i<commentList.length; i++){
+					item = commentList[i];
+					if(i>0) {
+						start +="<span style='width:150px; margin-left:5px'>";
+					}
+					if(guestID != item.guestID) {
+						option = "";
+					} else {
+						option = "<a href='commentModify.jsp'>수정</a><a href='commentDelete.jsp?no="+no+"' onclick='return confirm('삭제 하시겠습니까?')'>삭제</a>";
+					}
+					start += item.guestID+"</span><span style='width:690px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
+				}//end for
+				$("#reply").html(start);
+				$("#textarea").val("");
+				
+			},
+			error: function(jqxhr, textStatus, errorThrown) {
+				alert("ERROR, STATUS : "+textStatus +", Error thrown : "+errorThrown);
+			}
+		});
 	});
 });
 </script>
@@ -82,6 +137,13 @@ table {
 a {
 	margin: 2px;
 }
+
+span {
+	display: inline-block;
+	margin : 7px 0px;
+	word-break:break-all;
+}
+
 .reply{
 	border-bottom:1px solid lightgray; 
 }
@@ -106,15 +168,6 @@ a {
 ">
 
 	<%
-	String userID = null;
-	String switching = "inline-block";
-	String no = request.getParameter("no");
-	/* 	out.println("no => " + no); */
-	BoardDto board = BoardDao.selectOne(new BoardDto(no));
-/* 	out.println("board => " + board); */
-	CommentDao cDao = new CommentDao();
-	List<CommentDto> list = cDao.getComment(no);
-	
 	if (session.getAttribute("userID") != null) {
 		userID = (String) session.getAttribute("userID");
 	}
@@ -122,9 +175,7 @@ a {
 		switching = "none";
 	}
 	if (board != null) {
-		
 	%>
-	<form>
 			<hr>
 			<h1>맛집보기</h1>
 			<p>기억에 남은 식당을 기록하는 곳.</p>
@@ -157,34 +208,26 @@ a {
 				<td></td>
 			</tr>
 		</table>
-		<table style="backgroundColor=lightgray; margin:10px; width:1080px;">
+		<div style="backgroundColor=lightgray; margin:10px; width:1080px; border: 1px solid lightgray;">
+			<div style="margin-left:7px;">
+				<span style="width:150px;">ID</span>
+				<span style="width:730px;">comment</span>
+				<span style="text-align:left; width:150px;">date</span>
+			</div>
+		</div>
+		<div style="backgroundColor=lightgray; margin:10px; width:1080px; border: 1px solid lightgray;">
+			<div class="reply" id="reply"><!-- 받은것 넣는곳 -->
+			</div>
+		</div>
+	<form>
+		<table>
 			<tr>
-				<th style="width:100px">ID</th>
-				<th colspan="3">comment</th>
-				<th style="width:700px"></th>
-				<th style="text-align:left; width:150px; ">date</th>
-			</tr>
-			<%for(int i=0; i<list.size(); i++){%>
-			<tr class="reply">
-				<td><%=list.get(i).getUserID()%></td>
-				<td colspan="3"><%=list.get(i).getContent()%></td>
-				<%if(guestID != null && guestID.equals(list.get(i).getUserID())){%>
-					<td style="text-align:right"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp?no=<%=no%>" onclick="return confirm('삭제 하시겠습니까?')">삭제</a></td>
-				<%} else {%>
-					<td style="text-align:right"></td>
-				<%};%>
-					
-				<td style="text-align:left"><%=list.get(i).getDate().substring(0, 11)+list.get(i).getDate().substring(11, 19)%></td>
-			</tr>
-			<%};%>
-			<tr>
-				
 				<td colspan="5" >
 					<textarea class = "form-control" name="textarea" id="textarea" rows="2" cols="50" style="width:1000px"></textarea>
 					<input type="hidden" name="no" id="no" value=<%=no%>>
 				</td>
 				<td colspan="2">
-					<input style="height:60px" type="submit" value="댓글 등록" />
+					<input style="height:60px" type="button" id="cBtn" value="댓글 등록" />
 				</td>
 			</tr>
 		</table>
