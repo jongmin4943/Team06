@@ -119,6 +119,18 @@ margin:0px;
 		<br>
 		<br>
 		<h4><%=cate%> 카테고리의 <%=keyword%> 의 검색결과 <%=v.size()%>건</h4>
+		<div style="float:right">
+			<form>
+				<select name="cate">
+					<option value="name">Name</option>
+					<option value="title">Title</option>
+					<option value="writer">Writer</option>
+				</select>
+				<input type="text" placeholder="검색" name="keyword" id="keyword" maxlength="20" />
+				<input type="submit" value="검색" />
+			</form>
+		</div>
+		<br>
 		<br>
 
 	<table class="table table-striped table-hover">
@@ -144,17 +156,6 @@ margin:0px;
 	<div>
 		<div style="float:left">
 			<a href="boardWrite.jsp" id="aa"> 새 게시글 작성 </a>
-		</div>
-		<div style="float:right">
-			<form>
-				<select name="cate">
-					<option value="name">Name</option>
-					<option value="title">Title</option>
-					<option value="writer">Writer</option>
-				</select>
-				<input type="text" placeholder="검색" name="keyword" id="keyword" maxlength="20" />
-				<input type="submit" value="검색" />
-			</form>
 		</div>
 	</div><br>
 	<div>
