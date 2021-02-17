@@ -121,7 +121,6 @@ if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 ">
 
 	<form>
-		<table align="center">
 			<hr>
 
 			<h1>작성하기</h1>
@@ -131,6 +130,7 @@ if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 			<br>
 
 
+		<table align="center">
 			<tr>
 				<td><label for="title">title</label></td>
 				<td><input type="text" name="title" id="title" value="제목"

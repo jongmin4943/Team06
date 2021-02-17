@@ -15,7 +15,7 @@ if(session.getAttribute("userID") != null) {
 if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 	pr.println("<script>");
 	pr.println("alert('로그인 해주세요.')"); 
-	pr.println("location.href = 'signIn.jsp'");
+	pr.println("top.location.href = 'signIn.jsp'");
 	pr.println("</script>");
 }
 String title = request.getParameter("title");

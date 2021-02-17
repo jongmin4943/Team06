@@ -6,6 +6,7 @@ public class BoardDto {
 	private String name;
 	private String textarea;
 	private String writer;
+
 	public String getName() {
 		return name;
 	}
@@ -33,7 +34,7 @@ public class BoardDto {
 	public String getNo() {
 		return no;
 	}
-	public void SetNo(String no) {
+	public void setNo(String no) {
 		this.no=no;
 	}
 

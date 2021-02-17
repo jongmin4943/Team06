@@ -22,13 +22,11 @@ if(session.getAttribute("guestID") != null) {
 var guestID = "<%=guestID%>";
 $(function() {
 	$('form').submit(function() {
-		console.log(guestID);	
 		if(guestID == 'null') {
 			var c = confirm('로그인 하시겠습니까?.');
 			if(c) {
-				this.action = 'signIn.jsp';
-				this.method = 'POST';
-				return this.submit();
+				top.location.href = 'signIn.jsp';
+				return false;
 			} else {
 				return false;
 			}
@@ -46,7 +44,6 @@ $(function() {
 });
 </script>
 </head>
-​
 <!-- Bootstrap CSS -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
@@ -129,13 +126,13 @@ a {
 		
 	%>
 	<form>
-		<table align="center">
 			<hr>
 			<h1>맛집보기</h1>
 			<p>기억에 남은 식당을 기록하는 곳.</p>
 			<br>
 			<br>
 			<br>
+		<table align="center">
 			<tr>
 				<td class="menu">title</td>
 				<td class="menu2"><%=board.getTitle()%></td>
@@ -167,7 +164,7 @@ a {
 				<td><%=list.get(i).getUserID()%></td>
 				<td colspan="3"><%=list.get(i).getContent()%></td>
 				<%if(guestID != null && guestID.equals(list.get(i).getUserID())){%>
-					<td style="text-align:right"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp?no=<%=no%>">삭제</a></td>
+					<td style="text-align:right"><a href="commentModify.jsp">수정</a><a href="commentDelete.jsp?no=<%=no%>" onclick="return confirm('삭제 하시겠습니까?')">삭제</a></td>
 				<%} else {%>
 					<td style="text-align:right"></td>
 				<%};%>

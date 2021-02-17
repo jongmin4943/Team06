@@ -9,6 +9,5 @@ CommentDao dao = new CommentDao();
 CommentDto member = dao.selectOne(no);
 dao.delete(member);
 %>
-alert("삭제 되었습니다.");
 location.href="boardView.jsp?no=<%=no%>";
 </script>
