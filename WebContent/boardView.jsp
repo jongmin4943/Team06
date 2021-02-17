@@ -145,7 +145,7 @@ a {
 				<td class="menu2"><%=board.getName()%></td>
 				<td class="menu">writer</td>
 				<td class="menu2"><%=board.getWriter()%></td>
-				<td class="menu">date</td>
+				<td class="menu" >date</td>
 				<td class="menu2"><%=board.getDate()%></td>
 			</tr>
 			<tr>

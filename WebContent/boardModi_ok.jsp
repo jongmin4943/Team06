@@ -9,7 +9,7 @@ String title= request.getParameter("title");
 String writer= request.getParameter("writer");
 String textarea= request.getParameter("textarea");
 
-BoardDao.modify(new BoardDto(no,title,name,textarea,writer));
+BoardDao.modify(new BoardDto(no,title,name,textarea,writer,"NOW()"));
 
 response.sendRedirect("boardView.jsp?no="+no);
 %>
