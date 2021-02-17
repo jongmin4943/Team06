@@ -258,6 +258,36 @@ public class BoardDao {
 		}
 		return v;
 	}
+	public List<BoardDto> boardfilter(String table,String filter,int start,int pageCnt) {
+		String SQL = "SELECT * FROM "+table+" WHERE selector="+filter+" ORDER BY no DESC limit ?, ?";
+		List<BoardDto> list = new ArrayList<BoardDto>();
+		conn = JdbcUtil.getConnection();
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, pageCnt);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardDto bDto = new BoardDto();
+				bDto.setNo(Integer.toString(rs.getInt(1)));
+				bDto.setTitle(rs.getString(2));
+				bDto.setName(rs.getString(3));
+				bDto.setTextarea(rs.getString(4));
+				bDto.setWriter(rs.getString(5));
+				bDto.setDate(rs.getString(6));
+				bDto.setSelector(rs.getString(7));
+				list.add(bDto);
+			}
+		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		return list;
+	}
 	public List<BoardDto> search(String keyword,String cate,int start,int pageCnt) {
 		String search = "select * from board where "+cate+" like '%"+keyword+"%' ORDER BY no DESC limit ?, ?";
 		List<BoardDto> list = new ArrayList<BoardDto>();

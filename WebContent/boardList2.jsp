@@ -79,6 +79,42 @@ margin:0;
 table{
 margin:0px;
 }
+#keyword, #sel, #gumsaek{
+	font-size:13px;
+}
+.dropbtn {
+  background-color: #ea2129;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>
 <body data-mode="day">
 	<input type="image" src="img/nightbtn.png" id="changebtn" align="right"
@@ -119,7 +155,7 @@ margin:0px;
 		<br>
 		<div style="float:right">
 			<form id="searching">
-				<select name="cate">
+				<select name="cate" id="sel">
 					<option value="name">Name</option>
 					<option value="title">Title</option>
 					<option value="writer">Writer</option>
@@ -127,14 +163,20 @@ margin:0px;
 				<input type="text" placeholder="검색" name="keyword" id="keyword" maxlength="20" />
 				<input type="submit" value="검색" id="gumsaek" />
 			</form>
-
 		</div>
 		<br>
 		<br>
 	<table class="table table-striped table-hover">
 		<tr>
 			<th id="no">No</th>
-			<th id="selector" style="width:45px"></th>
+			<th id="selector" style="width:45px"><span class="dropdown" style="font-size:13px">필터
+					<span class="dropdown-content">
+					<a href="boardList2.jsp">모두보기</a>
+					<a href="boardLocation.jsp">지역</a>
+					<a href="boardRestaurant.jsp">식당</a>
+					</span>
+				</span>
+			</th>
 			<th id="name">name</th>
 			<th>title</th>
 			<th id="writer" style="width:100px">writer</th>
