@@ -59,7 +59,6 @@ body {
 
 table {
 	width: 1100px;
-	board: 1px;
 }
 
 .menu {
@@ -72,7 +71,7 @@ table {
 
 .menu2 {
 	padding: 0px 10px;
-	border: 1px solid gray;
+	border: 1px solid rgb(186, 186, 186);
 	width: 1000px;
 }
 
@@ -132,22 +131,28 @@ a {
 			<br>
 			<br>
 			<br>
-		<table align="center">
+		<table>
 			<tr>
 				<td class="menu">title</td>
-				<td class="menu2"><%=board.getTitle()%></td>
-				<td class="menu">writer</td>
-				<td class="menu2"><%=board.getWriter()%></td>
+				<td class="menu2" colspan="5"><%=board.getTitle()%></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td class="menu">name</td>
-				<td colspan="3" class="menu2"><%=board.getName()%></td>
-				<td></td>
-				<td></td>
+				<td class="menu2"><%=board.getName()%></td>
+				<td class="menu">writer</td>
+				<td class="menu2"><%=board.getWriter()%></td>
+				<td class="menu" >date</td>
+				<td class="menu2"><%=board.getDate()%></td>
 			</tr>
 			<tr>
 				<td class="menu" id="comment">comment</td>
-				<td colspan="3" class="menu2"><%=board.getTextarea()%></td>
+				<td colspan="5" class="menu2"><%=board.getTextarea()%></td>
+				<td></td>
+				<td></td>
 				<td></td>
 				<td></td>
 			</tr>

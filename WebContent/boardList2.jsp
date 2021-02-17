@@ -135,7 +135,8 @@ margin:0px;
 			<th id="no">No</th>
 			<th id="name">name</th>
 			<th>title</th>
-			<th id="writer">writer</th>
+			<th id="writer" style="width:100px">writer</th>
+			<th id="date" style="width:100px">date</th>
 		</tr>
 		<%
 		for (int i = 0; i < v.size(); i++) {
@@ -145,6 +146,7 @@ margin:0px;
 			<td><a href=" "><%=v.get(i).getName()%></a></td>
 			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getTitle()%></a></td>
 			<td><%=v.get(i).getWriter()%></td>
+			<td><%=v.get(i).getDate().substring(0, 11)%></td>
 		</tr>
 		<%
 		}

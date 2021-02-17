@@ -17,7 +17,7 @@ public class BoardDao {
 	private static ResultSet rs = null;
 	static final String SELECT = "SELECT * FROM BOARD ORDER BY no DESC";
 	static final String SELECTBD = "SELECT * FROM BOARD WHERE no=?";
-	static final String INSERT = "INSERT INTO BOARD VALUES(null,?,?,?,?)";
+	static final String INSERT = "INSERT INTO BOARD VALUES(null,?,?,?,?,?)";
 	static final String UPDATE = "UPDATE BOARD SET title=?, name=?, textarea=? WHERE no=?"; // 나중에처리
 	static final String DELETE = "DELETE FROM BOARD WHERE no=?"; // 나중에 다시선정
 	static final String UPSTREAM = "SELECT * FROM BOARD ";
@@ -30,6 +30,7 @@ public class BoardDao {
 			pstmt.setString(2, dto.getName());
 			pstmt.setString(3, dto.getTextarea());
 			pstmt.setString(4, dto.getWriter());
+			pstmt.setString(5, getDate());
 			int cnt = pstmt.executeUpdate();
 			if (cnt > 0) {
 				System.out.println("저장 완료!");
@@ -46,7 +47,21 @@ public class BoardDao {
 			JdbcUtil.close(stmt);
 		}
 	}
-
+	private static String getDate() {
+		String getDate = "SELECT NOW()";
+		conn = JdbcUtil.getConnection();
+		try {
+			PreparedStatement ps = conn.prepareStatement(getDate);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("널값줄거양");
+		return null;
+	}
 	public List<BoardDto> selectAll() {
 		List<BoardDto> list = new ArrayList<BoardDto>();
 		conn = JdbcUtil.getConnection();
@@ -86,6 +101,7 @@ public class BoardDao {
 				otd.setName(rs.getString(3));
 				otd.setTextarea(rs.getString(4));
 				otd.setWriter(rs.getString(5));
+				otd.setDate(rs.getString(6));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -174,6 +190,7 @@ public class BoardDao {
 				dto.setTextarea(rs.getString("textarea"));
 				dto.setWriter(rs.getString("writer"));
 				dto.setNo(rs.getString("no"));
+				dto.setDate(rs.getString("date"));
 				v.add(dto);
 			}
 			
@@ -239,4 +256,5 @@ public class BoardDao {
 		}
 		return result;
 	}
+
 }
