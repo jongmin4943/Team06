@@ -222,7 +222,7 @@ span {
 		<table>
 			<tr>
 				<td colspan="5" >
-					<textarea class = "form-control" name="textarea" id="textarea" rows="2" cols="50" style="width:1000px"></textarea>
+					<textarea class = "form-control" name="textarea" id="textarea" placeholder="댓글을 남겨보세요." rows="2" cols="50" style="width:1000px"></textarea>
 					<input type="hidden" name="no" id="no" value=<%=no%>>
 				</td>
 				<td colspan="2">
