@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import comment.CommentDao;
 import util.JdbcUtil;
 
 public class BoardDao {
@@ -34,8 +35,7 @@ public class BoardDao {
 			pstmt.setString(6, dto.getSelector());
 			int cnt = pstmt.executeUpdate();
 			if (cnt > 0) {
-				System.out.println("저장 완료!");
-				conn.commit();
+//				System.out.println("저장 완료!");
 			} else {
 				System.out.println("저장 실패!");
 				conn.rollback();
@@ -134,13 +134,14 @@ public class BoardDao {
 
 	public static void delete(BoardDto dto) {
 		conn = JdbcUtil.getConnection();
+		CommentDao cDao = new CommentDao();
+		cDao.deletedBoard(dto);
 		try {
 			pstmt = conn.prepareStatement(DELETE);
 			pstmt.setString(1, dto.getNo());
 			int cnt = pstmt.executeUpdate();
 			if (cnt > 0) {
 //				System.out.println("삭제되었습니다.");
-				conn.commit();
 			} else {
 				System.out.println("삭제시키지 못했습니다.");
 				conn.rollback();
@@ -169,7 +170,6 @@ public class BoardDao {
 			int cnt = pstmt.executeUpdate();
 			if(cnt>0) {
 //				System.out.println("수정되었습니다.");
-				conn.commit();
 			}else {
 				System.out.println("수정하지 못했습니다.");
 				conn.rollback();

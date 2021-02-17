@@ -231,7 +231,7 @@ span {
 			</tr>
 		</table>
 	</form>
-	<span style="align:right"><a href="boardList2.jsp">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>">삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+	<span style="align:right"><a href="boardList2.jsp">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
 	<%
 	}
 	%>

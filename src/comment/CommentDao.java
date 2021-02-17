@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import board.BoardDto;
 import util.JdbcUtil;
 
 public class CommentDao {
@@ -128,7 +129,30 @@ public class CommentDao {
 			if(cnt > 0) {
 //				System.out.println("삭제성공");
 			} else {
-				System.out.println("삭제실패");
+				System.out.println("삭제할 댓글이 없음");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
+		}
+	}
+	public void deletedBoard(BoardDto bDto) {
+		conn = JdbcUtil.getConnection();
+		String delectFromBoard = "DELETE FROM COMMENT WHERE boardNO=?";
+		try {
+			pstmt = conn.prepareStatement(delectFromBoard);
+			pstmt.setString(1, bDto.getNo());
+			int cnt = pstmt.executeUpdate();
+			if(cnt > 0) {
+//				System.out.println("삭제성공");
+			} else {
+				System.out.println("삭제할 댓글이 없음");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
