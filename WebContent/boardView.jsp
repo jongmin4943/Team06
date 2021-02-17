@@ -89,7 +89,6 @@ $(function() {
 				}//end for
 				$("#reply").html(start);
 				$("#textarea").val("");
-				
 			},
 			error: function(jqxhr, textStatus, errorThrown) {
 				alert("ERROR, STATUS : "+textStatus +", Error thrown : "+errorThrown);
