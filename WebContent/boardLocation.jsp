@@ -170,7 +170,7 @@ margin:0px;
 	<table class="table table-striped table-hover">
 		<tr>
 			<th id="no">No</th>
-			<th id="selector" style="width:45px"><span class="dropdown" style="font-size:13px">필터
+			<th id="selector" style="width:55px"><span class="dropdown" style="font-size:13px; color:#00996b">필터▾
 					<span class="dropdown-content">
 					<a href="boardList2.jsp">모두보기</a>
 					<a href="boardLocation.jsp">지역</a>
