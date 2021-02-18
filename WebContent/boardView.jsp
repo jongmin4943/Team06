@@ -62,7 +62,7 @@ $(function() {
 					flag = true;
 				    event.preventDefault();
 				    var commentNo = $(this).attr("data-comment-no");
-				    var where = $('span[data-comment-no^='+commentNo+']');
+				    var where = $('span[data-comment-no^='+commentNo+']'); // content와 option 둘다 해당되지만 content가 먼저 나오는걸 이용, 선택한다.
 					var modi = "<textarea class = 'form-control' name='modiarea' id='modiarea' rows='2' cols='50' style='width:670px'>"+where.text()+"</textarea><input type='button' id='modiBtn' value='댓글 수정' />";
 					where.html(modi);
 					$('#modiBtn').click(function() {

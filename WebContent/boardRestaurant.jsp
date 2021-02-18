@@ -47,7 +47,7 @@ $(function() {
 }
 
 p {
-	color: lightgray;
+	color: gray;
 }
 
 #no {

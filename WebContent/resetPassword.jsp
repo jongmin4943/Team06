@@ -110,7 +110,7 @@ body {
 					<ul>
 						<li><a href="main.jsp">Home</a></li>
 						<li><a href="signIn.jsp">Sign - In</a></li>
-						<li><a href="myList.jsp">My Trips</a></li>
+						<li><a href="myList.jsp?where=mixed">My Trips</a></li>
 						<li><a href="aboutUs.jsp">About Us</a></li>
 					</ul>
 					<p>We create awesome lists for you.</p>

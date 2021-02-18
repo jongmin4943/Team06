@@ -73,7 +73,7 @@
 			<div class="col-md-4 col-sm-6">
 				<div class="portfolio-item">
 					<div class="thumb">
-						<a href="myList.jsp">
+						<a href="myList.jsp?where=restaurant">
 							<div class="hover-effect">
 								<div class="hover-content">
 									<h1>
@@ -92,7 +92,7 @@
 			<div class="col-md-4 col-sm-6">
 				<div class="portfolio-item">
 					<div class="thumb">
-						<a href="myList.jsp">
+						<a href="myList.jsp?where=location">
 							<div class="hover-effect">
 								<div class="hover-content">
 									<h1>
@@ -154,7 +154,7 @@
 					<ul>
 						<li><a href="main.jsp">Home</a></li>
 						<li><a href="signIn.jsp">Sign - In</a></li>
-						<li><a href="myList.jsp">My Trips</a></li>
+						<li><a href="myList.jsp?where=mixed">My Trips</a></li>
 						<li><a href="aboutUs.jsp">About Us</a></li>
 					</ul>
 					<%
@@ -163,7 +163,7 @@
 					<ul>
 						<li><a href="main.jsp">Home</a></li>
 						<li><a href="userAccount.jsp">My Account</a></li>
-						<li><a href="myList.jsp">My Trips</a></li>
+						<li><a href="myList.jsp?where=mixed">My Trips</a></li>
 						<li><a href="aboutUs.jsp">About Us</a></li>
 						<li><a href="signOut.jsp">Sign - Out</a></li>
 					</ul>
