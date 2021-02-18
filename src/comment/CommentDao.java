@@ -123,7 +123,7 @@ public class CommentDao {
 		}
 		return cDto;
 	}
-	public void delete(String cNo) {
+	public void delete(String cNo,String bNo) {
 		conn = JdbcUtil.getConnection();
 		String delectOne = "DELETE FROM COMMENT WHERE NO=?";
 		try {
@@ -131,6 +131,8 @@ public class CommentDao {
 			pstmt.setString(1, cNo);
 			int cnt = pstmt.executeUpdate();
 			if(cnt > 0) {
+				BoardDao dao = new BoardDao();
+				dao.decreseCountCom(bNo);
 //				System.out.println("삭제성공");
 			} else {
 				System.out.println("삭제할 댓글이 없음");
