@@ -30,6 +30,7 @@ if(session.getAttribute("guestID") != null) {
 <script>
 var guestID = "<%=guestID%>";
 var no = "<%=no%>";
+var flag = false;
 $(function() {
 	function getComment() {	//댓글 불러오기 함수
 		$.get("commentCheckAjax.jsp?boardNo="+no,function(data,status) {
@@ -57,20 +58,25 @@ $(function() {
 			});//end Del
 			
 			$('.commentModi').click(function(event) { 	//수정 링크 클릭
-			    event.preventDefault();
-			    var commentNo = $(this).attr("data-comment-no");
-			    var where = $('span[data-comment-no^='+commentNo+']');
-				var modi = "<textarea class = 'form-control' name='modiarea' id='modiarea' rows='2' cols='50' style='width:670px'>"+where.text()+"</textarea><input type='button' id='modiBtn' value='댓글 수정' />";
-				where.html(modi);
-				$('#modiBtn').click(function() {
-					event.preventDefault();
-					if($("#modiarea").value == "") {
-					alert("수정할 댓글을 입력해주세요.");
-						return false;
-					}
-					var modiTxt = $("#modiarea").val();
-				    modifyComment(commentNo,modiTxt);	//해당 코멘트 수정
-				});
+				if(!flag) {
+					flag = true;
+				    event.preventDefault();
+				    var commentNo = $(this).attr("data-comment-no");
+				    var where = $('span[data-comment-no^='+commentNo+']');
+					var modi = "<textarea class = 'form-control' name='modiarea' id='modiarea' rows='2' cols='50' style='width:670px'>"+where.text()+"</textarea><input type='button' id='modiBtn' value='댓글 수정' />";
+					where.html(modi);
+					$('#modiBtn').click(function() {
+						event.preventDefault();
+						if($("#modiarea").val() == "") {
+						alert("수정할 댓글을 입력해주세요.");
+							return false;
+						}
+						var modiTxt = $("#modiarea").val();
+					    modifyComment(commentNo,modiTxt);	//해당 코멘트 수정
+					});
+				} else {
+					alert("수정은 한번에 하나만 가능합니다.");
+				}
 			    return false;
 			}); //end Modi
 		});
@@ -130,20 +136,25 @@ $(function() {
 				});//end Del
 				
 				$('.commentModi').click(function(event) { 	//수정 링크 클릭
-				    event.preventDefault();
-				    var commentNo = $(this).attr("data-comment-no");
-				    var where = $('span[data-comment-no^='+commentNo+']');
-					var modi = "<textarea class = 'form-control' name='modiarea' id='modiarea' rows='2' cols='50' style='width:670px'>"+where.text()+"</textarea><input type='button' id='modiBtn' value='댓글 수정' />";
-					where.html(modi);
-					$('#modiBtn').click(function() {
-						event.preventDefault();
-						if($("#modiarea").value == "") {
-						alert("수정할 댓글을 입력해주세요.");
-							return false;
-						}
-						var modiTxt = $("#modiarea").val();
-					    modifyComment(commentNo,modiTxt);	//해당 코멘트 수정
-					});
+					if(!flag) {
+						flag = true;
+					    event.preventDefault();
+					    var commentNo = $(this).attr("data-comment-no");
+					    var where = $('span[data-comment-no^='+commentNo+']');
+						var modi = "<textarea class = 'form-control' name='modiarea' id='modiarea' rows='2' cols='50' style='width:670px'>"+where.text()+"</textarea><input type='button' id='modiBtn' value='댓글 수정' />";
+						where.html(modi);
+						$('#modiBtn').click(function() {
+							event.preventDefault();
+							if($("#modiarea").val() == "") {
+							alert("수정할 댓글을 입력해주세요.");
+								return false;
+							}
+							var modiTxt = $("#modiarea").val();
+						    modifyComment(commentNo,modiTxt);	//해당 코멘트 수정
+						});
+					} else {
+						alert("수정은 한번에 하나만 가능합니다.");
+					}
 				    return false;
 				}); //end Modi
 			},
@@ -186,6 +197,7 @@ $(function() {
 			success: function(data) {
 				var suc = data.trim();
 				console.log(suc);
+				flag = false;
 				getComment();	//수정 후 댓글 리스트 호출
 			},
 			error: function(jqxhr, textStatus, errorThrown) {

@@ -175,7 +175,7 @@ public class CommentDao {
 			pstmt.setString(2, no);
 			int cnt = pstmt.executeUpdate();
 			if(cnt>0) {
-				System.out.println("수정완료");
+//				System.out.println("수정완료");
 			} else {
 				System.out.println("댓글 수정 실패");
 			}
