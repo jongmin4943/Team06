@@ -33,7 +33,7 @@
 <script src="./js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 
-<body>
+<body style="background-color:lightgray;">
 	<%
 	String userID = null;
 	if(session.getAttribute("userID") != null){
@@ -41,7 +41,6 @@
 	}
 	BoardDao bDao = new BoardDao();
 	List<BoardDto> list = bDao.selectLatelyHotboard();
-	System.out.println(list);
 %>
 
 	<nav>
@@ -102,7 +101,7 @@
 							<div class="hover-effect">
 								<div class="hover-content">
 									<h1>
-										모든 기록들<em>People's Journey</em>
+										모든 기록들 <em>People's Journey</em>
 									</h1>
 									<p>다른 사람들 기록 둘러보기</p>
 								</div>
@@ -118,19 +117,15 @@
 				<div class="portfolio-item">
 					<div class="thumb">
 						<div class="hover-effect">
-							<div class="hover-content">
-								<h1>
-									이 주의 기록 <em>HOT LIST</em>
-								</h1>
-								<p>이 주의 hot한 기록들</p>
+							<div class="hover-content" style="background-color:lightgray;" >
 							</div>
 						</div>
 					</div>
 				</div>
-			<div style="height:416px; background-color:lightgray;">
+			<div class='image' style="background-color:lightgray;">
 				<h2>이 주의 기록 <em>HOT LIST</em></h2>
 				<%for(int i = 0; i<list.size(); i++) { %>
-					<div><a href = boardView.jsp?no=<%=list.get(i).getNo() %>>[<%=i+1%>] <%=list.get(i).getTitle() %></a></div>
+					<div><a href = 'myList.jsp?no=<%=list.get(i).getNo() %>&where=viewBoard'>[<%=i+1%>] <%=list.get(i).getTitle() %> [<%=list.get(i).getCountCom() %>]</a></div>
 				<%}%>
 			</div>
 			</div>
