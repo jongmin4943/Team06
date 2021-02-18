@@ -97,7 +97,7 @@ $(function() {
 			}
 		} else {
 			event.preventDefault();
-			if($("#textarea").value == "") {
+			if($("#textarea").val() == "") {
 				alert("댓글을 입력해주세요.");
 				return false;
 			}
