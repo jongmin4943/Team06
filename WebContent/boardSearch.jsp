@@ -47,7 +47,7 @@ $(function() {
 }
 
 p {
-	color: lightgray;
+	color: gray;
 }
 
 #no {
@@ -114,8 +114,8 @@ margin:0px;
 	%>
 		<hr>
 
-		<h1>My Restaurant List</h1>
-		<p>기억에 남은 식당을 기록하는 곳.</p>
+		<h1>Explore List</h1>
+		<p>원하는 것을 찾는 곳.</p>
 		<br>
 		<br>
 		<h4><%=cate%> 카테고리의 <%=keyword%> 의 검색결과 <%=v.size()%>건</h4>

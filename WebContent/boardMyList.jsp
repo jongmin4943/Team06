@@ -1,4 +1,4 @@
-<%@page import="board.BtnDto"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Vector"%>
 <%@page import="board.BoardDao"%>
@@ -6,6 +6,19 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+PrintWriter pr = response.getWriter();
+String userID = null;
+if(session.getAttribute("userID") != null) {		
+	userID = (String)session.getAttribute("userID");
+}
+if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
+	pr.println("<script>");
+	pr.println("alert('로그인 해주세요.')"); 
+	pr.println("location.href = 'signIn.jsp'");
+	pr.println("</script>");
+}   
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,28 +131,23 @@ margin:0px;
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>
-
 <body data-mode="day">
-
-
 	<input type="image" src="img/nightbtn.png" id="changebtn" align="right"
 		onclick="
-			if(document.querySelector('body').dataset.mode ==='day'){
-				document.querySelector('body').style.backgroundColor = 'gray';
-				document.querySelector('body').style.color = 'white';	
-				document.querySelector('table').style.color = 'white';
-				document.querySelector('body').dataset.mode = 'night'
-				this.src = 'img/daybtn.png'
-				document.getElementById('aa').src='img/nightwrite.png'
-			}else{
-				document.querySelector('body').style.backgroundColor = 'rgb(238,242,242)';
-				document.querySelector('body').style.color = 'black';	
-				document.querySelector('table').style.color = 'black';	
-				document.querySelector('body').dataset.mode = 'day'
-				this.src = 'img/nightbtn.png'
-				document.getElementById('aa').src='img/write.png'
-			}
-		">
+	if(document.querySelector('body').dataset.mode ==='day'){
+		document.querySelector('body').style.backgroundColor = 'gray';
+		document.querySelector('body').style.color = 'white';	
+		document.querySelector('table').style.color = 'white';	
+		document.querySelector('body').dataset.mode = 'night'
+		this.src = 'img/daybtn.png'
+	}else{
+		document.querySelector('body').style.backgroundColor = 'rgb(238,242,242)';
+		document.querySelector('body').style.color = 'black';	
+		document.querySelector('table').style.color = 'black';	
+		document.querySelector('body').dataset.mode = 'day'
+		this.src = 'img/nightbtn.png'	
+	}
+">
 	<%
 	String cate = request.getParameter("cate");
 	String keyword = request.getParameter("keyword");
@@ -152,12 +160,12 @@ margin:0px;
 	if (tempStart != null) {
 		startPage = (Integer.parseInt(tempStart) - 1) * onePageCnt;
 	}
-	List<BoardDto> v = dao.boardfilter("board","'지역'",startPage, onePageCnt);
+	List<BoardDto> v = dao.search(userID,"writer",startPage, onePageCnt);
 	%>
 <hr>
 
-		<h1>Trip List</h1>
-		<p>인상 깊었던 관광지들이 기록 된 곳.</p>
+		<h1>My Travels</h1>
+		<p>나의 기록들.</p>
 		<br>
 		<br>
 		<div style="float:right">
@@ -187,7 +195,7 @@ margin:0px;
 			<th id="name">name</th>
 			<th>title</th>
 			<th id="writer" style="width:100px">writer</th>
-			<th id="date" style="width:130px">date</th>
+			<th id="date" style="width:100px">date</th>
 		</tr>
 		<%
 		for (int i = 0; i < v.size(); i++) {
@@ -195,8 +203,8 @@ margin:0px;
 		<tr>
 			<td><%=v.get(i).getNo()%></td>
 			<td style="font-size:10px">[<%=v.get(i).getSelector()%>]</td>
-			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getName()%></a></td>
-			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getTitle()%></a></td>
+			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&who=<%=v.get(i).getWriter()%>"><%=v.get(i).getName()%></a></td>
+			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&who=<%=v.get(i).getWriter()%>"><%=v.get(i).getTitle()%></a></td>
 			<td><%=v.get(i).getWriter()%></td>
 			<td><%=v.get(i).getDate().substring(0, 11)%></td>
 		</tr>
@@ -206,7 +214,7 @@ margin:0px;
 	</table>
 	<div>
 		<div style="float:left">
-			<a href="boardWrite.jsp" ><input type="image" src="img/write.png" id="aa" style="box-shadow:2px 2px 5px gray"/></a>
+			<a href="boardWrite.jsp" id="aa"> 새 게시글 작성 </a>
 		</div>
 	</div><br>
 	<div>

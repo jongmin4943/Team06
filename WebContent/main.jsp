@@ -73,13 +73,13 @@
 			<div class="col-md-4 col-sm-6">
 				<div class="portfolio-item">
 					<div class="thumb">
-						<a href="myList.jsp?where=restaurant">
+						<a href="myList.jsp?where=myList">
 							<div class="hover-effect">
 								<div class="hover-content">
 									<h1>
-										내 맛집 <em>My restaurant</em>
+										나의 기록들 <em>My Trips</em>
 									</h1>
-									<p>내가 가본 맛집 List</p>
+									<p>내가 기록한 맛집,관광지들 보기</p>
 								</div>
 							</div>
 							<div class="image">
@@ -92,13 +92,13 @@
 			<div class="col-md-4 col-sm-6">
 				<div class="portfolio-item">
 					<div class="thumb">
-						<a href="myList.jsp?where=location">
+						<a href="myList.jsp?where=mixed">
 							<div class="hover-effect">
 								<div class="hover-content">
 									<h1>
-										내 여행지 <em>My Trip</em>
+										모든 기록들<em>People's Journey</em>
 									</h1>
-									<p>내가 가본 여행지 List</p>
+									<p>다른 사람들 기록 둘러보기</p>
 								</div>
 							</div>
 							<div class="image">

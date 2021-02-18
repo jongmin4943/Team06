@@ -153,7 +153,7 @@ margin:0px;
 	%>
 		<hr>
 
-		<h1>My Journey List</h1>
+		<h1>Journey List</h1>
 		<p>맛집과 관광지가 기록된 곳.</p>
 		<br>
 		<br>
