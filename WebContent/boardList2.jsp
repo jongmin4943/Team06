@@ -185,7 +185,7 @@ margin:0px;
 			<th id="name">name</th>
 			<th>title</th>
 			<th id="writer" style="width:100px">writer</th>
-			<th id="date" style="width:100px">date</th>
+			<th id="date" style="width:130px">date</th>
 		</tr>
 		<%
 		for (int i = 0; i < v.size(); i++) {
