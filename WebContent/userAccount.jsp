@@ -140,7 +140,7 @@ function goSignOut() {	//로그아웃
 					<ul>
 						<li><a href="main.jsp">Home</a></li>
 						<li><a href="signOut.jsp">Sign - Out</a></li> <!-- 이 페이지는 세션정보를 가진사람만 접근가능하므로 Sign-In은 필요없음 -->
-						<li><a href="myList.jsp">My Trips</a></li>
+						<li><a href="myList.jsp?where=mixed">My Trips</a></li>
 						<li><a href="aboutUs.jsp">About Us</a></li>
 					</ul>
 					<p>We create awesome lists for you.</p>

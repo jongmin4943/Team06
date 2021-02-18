@@ -47,7 +47,7 @@ $(function() {
 }
 
 p {
-	color: lightgray;
+	color: gray;
 }
 
 #no {
@@ -150,8 +150,8 @@ margin:0px;
 	%>
 <hr>
 
-		<h1>My Restaurant List</h1>
-		<p>기억에 남은 식당을 기록하는 곳.</p>
+		<h1>My Trip List</h1>
+		<p>인상 깊었던 관광지를 기록하는 곳.</p>
 		<br>
 		<br>
 		<div style="float:right">

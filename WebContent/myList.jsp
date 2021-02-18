@@ -40,6 +40,7 @@ iframe {
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
+	String loca = request.getParameter("where");
 %>
 	<nav>
 		<div class="logo">
@@ -54,11 +55,17 @@ iframe {
 		<div class="video-overlay"></div>
 		<div class="video-content">
 			<div class="inner">
-				<h1><a href="myList.jsp">My List</a></h1>
+				<h1><a href="myList.jsp?where=mixed">My List</a></h1>
 				<p>
 					기억에 남는 맛집,관광지를<br /> 정리해보세요
 				</p>
+				<%if(loca.equals("restaurant")) {%>
+					<iframe src="boardRestaurant.jsp"></iframe>
+				<%} else if(loca.equals("location")){%>
+					<iframe src="boardLocation.jsp"></iframe>
+				<%} else {%>
 					<iframe src="boardList2.jsp"></iframe>
+				<%}%>
 			</div>
 		</div>
 		<video autoplay loop muted>
@@ -76,7 +83,7 @@ iframe {
 					<ul>
 						<li><a href="main.jsp">Home</a></li>
 						<li><a href="signIn.jsp">Sign - In</a></li>
-						<li><a href="myList.jsp">My Trips</a></li>
+						<li><a href="myList.jsp?where=mixed">My Trips</a></li>
 						<li><a href="aboutUs.jsp">About Us</a></li>
 					</ul>
 				<%
@@ -85,7 +92,7 @@ iframe {
 					<ul>
 						<li><a href="main.jsp">Home</a></li>
 						<li><a href="userAccount.jsp">My Account</a></li>
-						<li><a href="myList.jsp">My Trips</a></li>
+						<li><a href="myList.jsp?where=mixed">My Trips</a></li>
 						<li><a href="aboutUs.jsp">About Us</a></li>
 						<li><a href="signOut.jsp">Sign - Out</a></li>
 					</ul>
