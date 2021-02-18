@@ -32,6 +32,10 @@ iframe {
 	width: 100%;
 	height: 100%;
 	padding-top: 80px;
+
+}
+.inner a:link{
+	text-decoration:none;
 }
 </style>
 <body>
@@ -55,16 +59,18 @@ iframe {
 		<div class="video-overlay"></div>
 		<div class="video-content">
 			<div class="inner">
-				<h1><a href="myList.jsp?where=mixed">List</a></h1>
-				<p>
-					기억에 남는 맛집,관광지를<br /> 정리해보세요
-				</p>
+				<h1><a href="myList.jsp?where=mixed" style="text-decoration:none">전체보기</a></h1>
+				<br />
+				<br />
+				<br />
+				<h2><a href="boardMyList.jsp?userID="<%=userID%> target="myList" style="text-decoration:none">내 목록</a></h2>
+
 				<%if(loca.equals("mixed")) {%>
-					<iframe src="boardList2.jsp"></iframe>
+					<iframe src="boardList2.jsp" name="myList"></iframe>
 				<%} else if(loca.equals("myList")){%>
-					<iframe src="boardMyList.jsp?userID="<%=userID%>></iframe>
+					<iframe src="boardMyList.jsp?userID="<%=userID%> name="myList" ></iframe>
 				<%} else {%>
-					<iframe src="boardList2.jsp"></iframe>
+					<iframe src="boardList2.jsp" name="myList"></iframe>
 				<%}%>
 			</div>
 		</div>
