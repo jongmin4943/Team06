@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import board.BoardDao;
 import board.BoardDto;
 import util.JdbcUtil;
 
@@ -26,6 +27,8 @@ public class CommentDao {
 			pstmt.setString(4, getDate());
 			int cnt = pstmt.executeUpdate();
 			if(cnt>0) {
+				BoardDao dao = new BoardDao();
+				dao.increseCountCom(cDto.getBoardNo());
 //				System.out.println("입력성공");
 			} else {
 				System.out.println("입력실패");
