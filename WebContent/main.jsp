@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="board.BoardDto"%>
+<%@page import="board.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
@@ -36,6 +39,9 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
+	BoardDao bDao = new BoardDao();
+	List<BoardDto> list = bDao.selectLatelyHotboard();
+	System.out.println(list);
 %>
 
 	<nav>
@@ -69,7 +75,7 @@
 
 
 	<div class="full-screen-portfolio" id="portfolio">
-		<div class="container-fluid">
+		<div class="container-fluid" style="background-color:lightgray">
 			<div class="col-md-4 col-sm-6">
 				<div class="portfolio-item">
 					<div class="thumb">
@@ -83,7 +89,7 @@
 								</div>
 							</div>
 							<div class="image">
-								<img src="img/meal5.jpg">
+								<img src="img/meal5.jpg" style="height: 492px ">
 							</div>
 						</a>
 					</div>
@@ -111,21 +117,22 @@
 			<div class="col-md-4 col-sm-6">
 				<div class="portfolio-item">
 					<div class="thumb">
-						<a href="naverMap.jsp">
-							<div class="hover-effect">
-								<div class="hover-content">
-									<h1>
-										검색 <em>Search Places</em>
-									</h1>
-									<p>관광지, 맛집 검색</p>
-								</div>
+						<div class="hover-effect">
+							<div class="hover-content">
+								<h1>
+									이 주의 기록 <em>HOT LIST</em>
+								</h1>
+								<p>이 주의 hot한 기록들</p>
 							</div>
-							<div class="image">
-								<img src="img/portfolio_item_3.jpg">
-							</div>
-						</a>
+						</div>
 					</div>
 				</div>
+			<div style="height:450px; background-color:lightgray;">
+				<h2>이 주의 기록 <em>HOT LIST</em></h2>
+				<%for(int i = 0; i<list.size(); i++) { %>
+					<div><a href = boardView.jsp?no=<%=list.get(i).getNo() %>>[<%=i+1%>] <%=list.get(i).getTitle() %></a></div>
+				<%}%>
+			</div>
 			</div>
 
 		</div>
@@ -135,7 +142,7 @@
 	<footer>
 		<div class="container-fluid">
 			<div class="col-md-12">
-				<p>Copyright &copy; Team06 | Designed by TemplateMo</p>
+				<p>Copyright &copy; Team06 | Created by 박찬우, 윤종민</p>
 			</div>
 		</div>
 	</footer>

@@ -24,7 +24,7 @@ String textarea = request.getParameter("textarea");
 String writer = request.getParameter("writer");
 String no = request.getParameter("no");
 String selector = request.getParameter("selector");
-BoardDto dto = new BoardDto(no,title,name,textarea,writer,"NOW()",selector);
+BoardDto dto = new BoardDto(no,title,name,textarea,writer,"NOW()",selector,BoardDao.getCommentCount(no));
 BoardDao.insert(dto);
 
 response.sendRedirect("boardList2.jsp");

@@ -18,7 +18,7 @@ public class BoardDao {
 	private static ResultSet rs = null;
 	static final String SELECT = "SELECT * FROM BOARD ORDER BY no DESC";
 	static final String SELECTBD = "SELECT * FROM BOARD WHERE no=?";
-	static final String INSERT = "INSERT INTO BOARD VALUES(null,?,?,?,?,?,?)";
+	static final String INSERT = "INSERT INTO BOARD VALUES(null,?,?,?,?,?,?,?)";
 	static final String UPDATE = "UPDATE BOARD SET title=?, name=?, textarea=?, selector=? WHERE no=?"; // 나중에처리
 	static final String DELETE = "DELETE FROM BOARD WHERE no=?"; // 나중에 다시선정
 	static final String UPSTREAM = "SELECT * FROM BOARD ";
@@ -33,6 +33,7 @@ public class BoardDao {
 			pstmt.setString(4, dto.getWriter());
 			pstmt.setString(5, getDate());
 			pstmt.setString(6, dto.getSelector());
+			pstmt.setString(7, dto.getCountCom());
 			int cnt = pstmt.executeUpdate();
 			if (cnt > 0) {
 //				System.out.println("저장 완료!");
@@ -51,6 +52,27 @@ public class BoardDao {
 			JdbcUtil.close(rs, pstmt, conn);
 			JdbcUtil.close(stmt);
 		}
+	}
+	public static String getCommentCount(String boardNo) {
+		String selectTop = "SELECT COUNT(BOARDNO) AS best FROM comment where boardNo = ?"; 
+		Connection conn = JdbcUtil.getConnection();
+		String result = "0";
+		try {
+			pstmt = conn.prepareStatement(selectTop);
+			pstmt.setString(1, boardNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		return result;
 	}
 	private static String getDate() {
 		String getDate = "SELECT NOW()";
@@ -85,6 +107,9 @@ public class BoardDao {
 				board.setName(rs.getString(3));
 				board.setTextarea(rs.getString(4));
 				board.setWriter(rs.getString(5));
+				board.setDate(rs.getString(6));
+				board.setSelector(rs.getString(7));
+				board.setCountCom(rs.getString(8));
 				list.add(board);
 			}
 		} catch (SQLException e) {
@@ -118,6 +143,7 @@ public class BoardDao {
 				otd.setWriter(rs.getString(5));
 				otd.setDate(rs.getString(6));
 				otd.setSelector(rs.getString(7));
+				otd.setCountCom(rs.getString(8));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -229,6 +255,7 @@ public class BoardDao {
 				dto.setNo(rs.getString("no"));
 				dto.setDate(rs.getString("date"));
 				dto.setSelector(rs.getString("selector"));
+				dto.setCountCom(rs.getString("countCom"));
 				v.add(dto);
 			}
 			
@@ -276,6 +303,7 @@ public class BoardDao {
 				bDto.setWriter(rs.getString(5));
 				bDto.setDate(rs.getString(6));
 				bDto.setSelector(rs.getString(7));
+				bDto.setCountCom(rs.getString(8));
 				list.add(bDto);
 			}
 		} catch (SQLException e) {
@@ -306,6 +334,7 @@ public class BoardDao {
 				bDto.setWriter(rs.getString(5));
 				bDto.setDate(rs.getString(6));
 				bDto.setSelector(rs.getString(7));
+				bDto.setCountCom(rs.getString(8));
 				list.add(bDto);
 			}
 		} catch (SQLException e) {
@@ -340,5 +369,57 @@ public class BoardDao {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
 		return result;
+	}
+	public void increseCountCom(String boardNo) {
+		String increaseCountCom = "select * from board where no=? ";
+		String execute = "UPDATE board SET countCom = ? where no = ?";
+		Connection connec = JdbcUtil.getConnection();
+		int cntCom = 0;
+		try {
+			pstmt = connec.prepareStatement(increaseCountCom);
+			pstmt.setString(1, boardNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cntCom = (rs.getInt("countCom"));
+			}
+			cntCom++;
+			pstmt = connec.prepareStatement(execute);
+			pstmt.setInt(1, cntCom);
+			pstmt.setString(2, boardNo);
+			int cnt = pstmt.executeUpdate();
+			if(cnt>0) {
+				System.out.println("수정성공");
+			} else {
+				System.out.println("수정실패");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public List<BoardDto> selectLatelyHotboard() {
+		List<BoardDto> list = new ArrayList<BoardDto>();
+		String selectBest = "select * from (SELECT * FROM Board WHERE DATE BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW()) sub ORDER BY countCom DESC LIMIT 5";
+		conn = JdbcUtil.getConnection();
+		try {
+			pstmt = conn.prepareStatement(selectBest);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardDto dto = new BoardDto();
+				dto.setNo(rs.getString(1));
+				dto.setTitle(rs.getString(2));
+				dto.setName(rs.getString(3));
+				dto.setTextarea(rs.getString(4));
+				dto.setWriter(rs.getString(5));
+				dto.setDate(rs.getString(6));
+				dto.setSelector(rs.getString(7));
+				dto.setCountCom(rs.getString(8));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
+		}
+		return list;
 	}
 }
