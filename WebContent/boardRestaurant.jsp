@@ -120,20 +120,22 @@ margin:0px;
 <body data-mode="day">
 	<input type="image" src="img/nightbtn.png" id="changebtn" align="right"
 		onclick="
-	if(document.querySelector('body').dataset.mode ==='day'){
-		document.querySelector('body').style.backgroundColor = 'gray';
-		document.querySelector('body').style.color = 'white';	
-		document.querySelector('table').style.color = 'white';	
-		document.querySelector('body').dataset.mode = 'night'
-		this.src = 'img/daybtn.png'
-	}else{
-		document.querySelector('body').style.backgroundColor = 'rgb(238,242,242)';
-		document.querySelector('body').style.color = 'black';	
-		document.querySelector('table').style.color = 'black';	
-		document.querySelector('body').dataset.mode = 'day'
-		this.src = 'img/nightbtn.png'	
-	}
-">
+			if(document.querySelector('body').dataset.mode ==='day'){
+				document.querySelector('body').style.backgroundColor = 'gray';
+				document.querySelector('body').style.color = 'white';	
+				document.querySelector('table').style.color = 'white';
+				document.querySelector('body').dataset.mode = 'night'
+				this.src = 'img/daybtn.png'
+				document.getElementById('aa').src='img/nightwrite.png'
+			}else{
+				document.querySelector('body').style.backgroundColor = 'rgb(238,242,242)';
+				document.querySelector('body').style.color = 'black';	
+				document.querySelector('table').style.color = 'black';	
+				document.querySelector('body').dataset.mode = 'day'
+				this.src = 'img/nightbtn.png'
+				document.getElementById('aa').src='img/write.png'
+			}
+		">
 	<%
 	String cate = request.getParameter("cate");
 	String keyword = request.getParameter("keyword");
@@ -200,7 +202,7 @@ margin:0px;
 	</table>
 	<div>
 		<div style="float:left">
-			<a href="boardWrite.jsp" id="aa"> 새 게시글 작성 </a>
+			<a href="boardWrite.jsp" ><input type="image" src="img/write.png" id="aa" style="box-shadow:2px 2px 5px gray"/></a>
 		</div>
 	</div><br>
 	<div>

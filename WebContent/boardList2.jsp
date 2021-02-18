@@ -117,7 +117,6 @@ margin:0px;
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>
-
 <body data-mode="day">
 
 	<input type="image" src="img/nightbtn.png" id="changebtn" align="right"
@@ -125,7 +124,7 @@ margin:0px;
 	if(document.querySelector('body').dataset.mode ==='day'){
 		document.querySelector('body').style.backgroundColor = 'gray';
 		document.querySelector('body').style.color = 'white';	
-		document.querySelector('table').style.color = 'white';	
+		document.querySelector('table').style.color = 'white';
 		document.querySelector('body').dataset.mode = 'night'
 		this.src = 'img/daybtn.png'
 		document.getElementById('aa').src='img/nightwrite.png'
@@ -204,7 +203,7 @@ margin:0px;
 	</table>
 	<div>
 		<div style="float:left">
-			<a href="boardWrite.jsp" ><input type="image" src="img/write.png" id="aa"/></a>
+			<a href="boardWrite.jsp" ><input type="image" src="img/write.png" id="aa" style="box-shadow:2px 2px 5px gray"/></a>
 		</div>
 	</div><br>
 	<div>

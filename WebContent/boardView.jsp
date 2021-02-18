@@ -150,21 +150,20 @@ span {
 <body data-mode="day">
 	<input type="image" src="img/nightbtn.png" id="changebtn" align="right"
 		onclick="
-	if(document.querySelector('body').dataset.mode ==='day'){
-		document.querySelector('body').style.backgroundColor = 'gray';
-		document.querySelector('body').style.color = 'white';	
-		document.querySelectorAll('.menu2').style.color = 'white';	
-		document.querySelectorAll('.menu').style.color = 'black';	
-		document.querySelector('body').dataset.mode = 'night'
-		this.src = 'img/daybtn.png'
-	}else{
-		document.querySelector('body').style.backgroundColor = 'rgb(238,242,242)';
-		document.querySelector('body').style.color = 'black';	
-		document.querySelector('.menu2').style.color = 'black';			
-		document.querySelector('body').dataset.mode = 'day'
-		this.src = 'img/nightbtn.png'	
-	}
-">
+			if(document.querySelector('body').dataset.mode ==='day'){
+				document.querySelector('body').style.backgroundColor = 'gray';
+				document.querySelector('body').style.color = 'white';	
+				document.querySelector('table').style.color = 'white';
+				document.querySelector('body').dataset.mode = 'night'
+				this.src = 'img/daybtn.png'
+			}else{
+				document.querySelector('body').style.backgroundColor = 'rgb(238,242,242)';
+				document.querySelector('body').style.color = 'black';	
+				document.querySelector('table').style.color = 'black';	
+				document.querySelector('body').dataset.mode = 'day'
+				this.src = 'img/nightbtn.png'
+			}
+		">
 
 	<%
 	if (session.getAttribute("userID") != null) {
