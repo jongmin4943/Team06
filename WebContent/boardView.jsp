@@ -43,12 +43,12 @@ $(function() {
 					if(guestID != item.guestID) {
 						option = "<p style='width: 70px;'></p>";
 					} else {
-						option = "<a href='commentModify.jsp'>수정</a><a class='ac' data-app-id='"+item.commentNo+"' href=''>삭제</a>";
+						option = "<a href='commentModify.jsp'>수정</a><a class='commentDel' data-app-id='"+item.commentNo+"' href=''>삭제</a>";
 					}
 				start += item.guestID+"</span><span style='width:670px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
 				}//end for
 			$("#reply").html(start);
-			$('.ac').click(function(event) { 
+			$('.commentDel').click(function(event) { 
 			    event.preventDefault(); 
 			    var commentNo = $(this).attr("data-app-id");
 			    $.ajax({
@@ -60,7 +60,11 @@ $(function() {
 			});
 		});
 	}
+	
+	
 	getComment();// 게시글과 동시에 댓글 호출
+	
+	
 	$('#cBtn').click(function() {
 		if(guestID == 'null') {
 			var c = confirm('로그인 하시겠습니까?.');
@@ -96,13 +100,13 @@ $(function() {
 					if(guestID != item.guestID) {
 						option = "<p style='width: 70px;'></p>";
 					} else {
-						option = "<a href='commentModify.jsp'>수정</a><a class='ac' data-app-id='"+item.commentNo+"' href=''>삭제</a>";
+						option = "<a href='commentModify.jsp'>수정</a><a class='commentDel' data-app-id='"+item.commentNo+"' href=''>삭제</a>";
 					}
 					start += item.guestID+"</span><span style='width:670px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
 				}//end for
 				$("#reply").html(start);
 				$("#textarea").val("");
-				$('.ac').click(function(event) { 
+				$('.commentDel').click(function(event) { 
 				    event.preventDefault(); 
 				    var commentNo = $(this).attr("data-app-id");
 				    $.ajax({
@@ -118,6 +122,8 @@ $(function() {
 			}
 		});
 	});
+	
+	
 	function deleteComment(commentNo) {
 		var check = confirm("삭제 하시겠습니까?");
 		if(check == false) {
