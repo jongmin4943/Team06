@@ -166,4 +166,29 @@ public class CommentDao {
 			JdbcUtil.close(rs, pstmt, conn);
 		}
 	}
+	public void updateComment(String no, String txt) {
+		conn = JdbcUtil.getConnection();
+		String modify = "UPDATE COMMENT SET CONTENT = ? WHERE NO = ?";
+		try {
+			pstmt = conn.prepareStatement(modify);
+			pstmt.setString(1, txt);
+			pstmt.setString(2, no);
+			int cnt = pstmt.executeUpdate();
+			if(cnt>0) {
+				System.out.println("수정완료");
+			} else {
+				System.out.println("댓글 수정 실패");
+			}
+		} catch (SQLException e) {
+			System.out.println("댓글 수정실패");
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
+		}
+	}
 }

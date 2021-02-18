@@ -31,7 +31,7 @@ if(session.getAttribute("guestID") != null) {
 var guestID = "<%=guestID%>";
 var no = "<%=no%>";
 $(function() {
-	function getComment() {
+	function getComment() {	//댓글 불러오기 함수
 		$.get("commentCheckAjax.jsp?boardNo="+no,function(data,status) {
 				var commentList = JSON.parse(data.trim()).sent;
 				var start = "<span style='width:150px; margin-left:5px'>";
@@ -43,26 +43,41 @@ $(function() {
 					if(guestID != item.guestID) {
 						option = "<p style='width: 70px;'></p>";
 					} else {
-						option = "<a href='commentModify.jsp'>수정</a><a class='commentDel' data-app-id='"+item.commentNo+"' href=''>삭제</a>";
+						option = "<a class='commentModi' data-comment-no='"+item.commentNo+"' href=''>수정</a><a class='commentDel' data-comment-no='"+item.commentNo+"' href=''>삭제</a>";
 					}
-				start += item.guestID+"</span><span style='width:670px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
+					start += item.guestID+"</span><span class='modifying' data-comment-no='"+item.commentNo+"' style='width:670px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
 				}//end for
 			$("#reply").html(start);
-			$('.commentDel').click(function(event) { 
+				
+			$('.commentDel').click(function(event) { 	//삭제 링크 클릭
 			    event.preventDefault(); 
-			    var commentNo = $(this).attr("data-app-id");
-			    $.ajax({
-			        success: function(response) {
-			        	deleteComment(commentNo);
-			        }
-			    });
-			    return false; // for good measure
-			});
+			    var commentNo = $(this).attr("data-comment-no");
+			    deleteComment(commentNo);	//해당 코멘트 삭제
+			    return false;
+			});//end Del
+			
+			$('.commentModi').click(function(event) { 	//수정 링크 클릭
+			    event.preventDefault();
+			    var commentNo = $(this).attr("data-comment-no");
+			    var where = $('span[data-comment-no^='+commentNo+']');
+				var modi = "<textarea class = 'form-control' name='modiarea' id='modiarea' rows='2' cols='50' style='width:670px'>"+where.text()+"</textarea><input type='button' id='modiBtn' value='댓글 수정' />";
+				where.html(modi);
+				$('#modiBtn').click(function() {
+					event.preventDefault();
+					if($("#modiarea").value == "") {
+					alert("수정할 댓글을 입력해주세요.");
+						return false;
+					}
+					var modiTxt = $("#modiarea").val();
+				    modifyComment(commentNo,modiTxt);	//해당 코멘트 수정
+				});
+			    return false;
+			}); //end Modi
 		});
 	}
 	
 	
-	getComment();// 게시글과 동시에 댓글 호출
+	getComment();// 시작과 동시에 댓글 호출
 	
 	
 	$('#cBtn').click(function() {
@@ -83,7 +98,7 @@ $(function() {
 		} //end if
 		
 		var textarea = $("#textarea").val();
-		$.ajax({
+		$.ajax({ //댓글 작성 ajax
 			type: "POST",
 			url: "commentCheckAjax.jsp",
 			data: {comment : textarea,
@@ -100,22 +115,37 @@ $(function() {
 					if(guestID != item.guestID) {
 						option = "<p style='width: 70px;'></p>";
 					} else {
-						option = "<a href='commentModify.jsp'>수정</a><a class='commentDel' data-app-id='"+item.commentNo+"' href=''>삭제</a>";
+						option = "<a class='commentModi' data-comment-no='"+item.commentNo+"' href=''>수정</a><a class='commentDel' data-comment-no='"+item.commentNo+"' href=''>삭제</a>";
 					}
-					start += item.guestID+"</span><span style='width:670px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
+					start += item.guestID+"</span><span class='modifying' data-comment-no='"+item.commentNo+"' style='width:670px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
 				}//end for
 				$("#reply").html(start);
 				$("#textarea").val("");
-				$('.commentDel').click(function(event) { 
+				
+				$('.commentDel').click(function(event) { 	//삭제 링크 클릭
 				    event.preventDefault(); 
-				    var commentNo = $(this).attr("data-app-id");
-				    $.ajax({
-				        success: function(response) {
-				        	deleteComment(commentNo);
-				        }
-				    });
-				    return false; // for good measure
-				});
+				    var commentNo = $(this).attr("data-comment-no");
+				    deleteComment(commentNo);	//해당 코멘트 삭제
+				    return false;
+				});//end Del
+				
+				$('.commentModi').click(function(event) { 	//수정 링크 클릭
+				    event.preventDefault();
+				    var commentNo = $(this).attr("data-comment-no");
+				    var where = $('span[data-comment-no^='+commentNo+']');
+					var modi = "<textarea class = 'form-control' name='modiarea' id='modiarea' rows='2' cols='50' style='width:670px'>"+where.text()+"</textarea><input type='button' id='modiBtn' value='댓글 수정' />";
+					where.html(modi);
+					$('#modiBtn').click(function() {
+						event.preventDefault();
+						if($("#modiarea").value == "") {
+						alert("수정할 댓글을 입력해주세요.");
+							return false;
+						}
+						var modiTxt = $("#modiarea").val();
+					    modifyComment(commentNo,modiTxt);	//해당 코멘트 수정
+					});
+				    return false;
+				}); //end Modi
 			},
 			error: function(jqxhr, textStatus, errorThrown) {
 				alert("ERROR, STATUS : "+textStatus +", Error thrown : "+errorThrown);
@@ -124,7 +154,7 @@ $(function() {
 	});
 	
 	
-	function deleteComment(commentNo) {
+	function deleteComment(commentNo) {	//댓글 삭제 함수
 		var check = confirm("삭제 하시겠습니까?");
 		if(check == false) {
 			return false;
@@ -137,14 +167,31 @@ $(function() {
 					},  
 				success: function(data) {
 					var suc = data.trim();
-					console.log(suc);
-					getComment();
+					getComment();	//삭제 후 댓글 리스트 호출
 				},
 				error: function(jqxhr, textStatus, errorThrown) {
 					alert("ERROR, STATUS : "+textStatus +", Error thrown : "+errorThrown);
 				}
 			});
 		}
+	}
+	function modifyComment(commentNo,modiTxt) {	//댓글 수정 함수
+		$.ajax({
+			type: "POST",
+			url: "commentModifyAjax.jsp",//수정 페이지로 이동
+			data: {
+				commentNo : commentNo,
+				modiText : modiTxt
+				},  
+			success: function(data) {
+				var suc = data.trim();
+				console.log(suc);
+				getComment();	//수정 후 댓글 리스트 호출
+			},
+			error: function(jqxhr, textStatus, errorThrown) {
+				alert("ERROR, STATUS : "+textStatus +", Error thrown : "+errorThrown);
+			}
+		});
 	}
 });
 </script>
@@ -266,8 +313,7 @@ span {
 			</div>
 		</div>
 		<div style="backgroundColor=lightgray; margin:10px; width:1080px; border: 1px solid lightgray;">
-			<div class="reply" id="reply"><!-- 받은것 넣는곳 -->
-			</div>
+			<div class="reply" id="reply"><!-- 받은것 넣는곳 --></div>
 		</div>
 	<form>
 		<table>
