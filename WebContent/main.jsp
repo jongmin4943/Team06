@@ -75,7 +75,7 @@
 
 
 	<div class="full-screen-portfolio" id="portfolio">
-		<div class="container-fluid" style="background-color:lightgray">
+		<div class="container-fluid" style="background-color:lightgray; height : 430px;">
 			<div class="col-md-4 col-sm-6">
 				<div class="portfolio-item">
 					<div class="thumb">
@@ -89,7 +89,7 @@
 								</div>
 							</div>
 							<div class="image">
-								<img src="img/meal5.jpg" style="height: 492px ">
+								<img src="img/meal5.jpg" style="height: 430 ">
 							</div>
 						</a>
 					</div>
@@ -108,7 +108,7 @@
 								</div>
 							</div>
 							<div class="image">
-								<img src="img/portfolio_item_2.jpg">
+								<img src="img/portfolio_item_2.jpg"  style="height: 430 ">
 							</div>
 						</a>
 					</div>
@@ -127,7 +127,7 @@
 						</div>
 					</div>
 				</div>
-			<div style="height:450px; background-color:lightgray;">
+			<div style="height:416px; background-color:lightgray;">
 				<h2>이 주의 기록 <em>HOT LIST</em></h2>
 				<%for(int i = 0; i<list.size(); i++) { %>
 					<div><a href = boardView.jsp?no=<%=list.get(i).getNo() %>>[<%=i+1%>] <%=list.get(i).getTitle() %></a></div>
