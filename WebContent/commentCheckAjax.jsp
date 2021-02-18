@@ -35,6 +35,7 @@ for(int i = 0; i < list.size() ; i++) {
 	jsObj.put("guestID",list.get(i).getUserID());
 	jsObj.put("content",list.get(i).getContent());
 	jsObj.put("date",list.get(i).getDate());
+	jsObj.put("commentNo",list.get(i).getNo());
 	jsArr.put(jsObj);
 }
 JSONObject sendObj = new JSONObject();

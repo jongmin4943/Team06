@@ -72,6 +72,7 @@ public class CommentDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				CommentDto cDto = new CommentDto();
+				cDto.setNo(rs.getString(1));
 				cDto.setUserID(rs.getString(2));
 				cDto.setBoardNo(rs.getString(3));
 				cDto.setContent(rs.getString(4));
@@ -119,12 +120,12 @@ public class CommentDao {
 		}
 		return cDto;
 	}
-	public void delete(CommentDto cDto) {
+	public void delete(String cNo) {
 		conn = JdbcUtil.getConnection();
 		String delectOne = "DELETE FROM COMMENT WHERE NO=?";
 		try {
 			pstmt = conn.prepareStatement(delectOne);
-			pstmt.setString(1, cDto.getNo());
+			pstmt.setString(1, cNo);
 			int cnt = pstmt.executeUpdate();
 			if(cnt > 0) {
 //				System.out.println("삭제성공");

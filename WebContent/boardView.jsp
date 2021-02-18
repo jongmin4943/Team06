@@ -31,23 +31,40 @@ if(session.getAttribute("guestID") != null) {
 var guestID = "<%=guestID%>";
 var no = "<%=no%>";
 $(function() {
-	$.get("commentCheckAjax.jsp?boardNo="+no,function(data,status) {
-			var commentList = JSON.parse(data.trim()).sent;
-			var start = "<span style='width:150px; margin-left:5px'>";
-			for(var i = 0; i<commentList.length; i++){
-				item = commentList[i];
-				if(i>0) {
-					start +="<span style='width:150px; margin-left:5px'>";
-				}
-				if(guestID != item.guestID) {
-					option = "<p style='width: 70px;'></p>";
-				} else {
-					option = "<a href='commentModify.jsp'>수정</a><a href='commentDelete.jsp?no="+no+"' onclick='return confirm(\"삭제 하시겠습니까?\")'>삭제</a>";
-				}
-			start += item.guestID+"</span><span style='width:670px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
-			}//end for
-		$("#reply").html(start);
-	});
+	function getComment() {
+		$.get("commentCheckAjax.jsp?boardNo="+no,function(data,status) {
+				var commentList = JSON.parse(data.trim()).sent;
+				var start = "<span style='width:150px; margin-left:5px'>";
+				for(var i = 0; i<commentList.length; i++){
+					item = commentList[i];
+					if(i>0) {
+						start +="<span style='width:150px; margin-left:5px'>";
+					}
+					if(guestID != item.guestID) {
+						option = "<p style='width: 70px;'></p>";
+					} else {
+						option = "<a href='commentModify.jsp'>수정</a><a class='commentDel' data-app-id='"+item.commentNo+"' href=''>삭제</a>";
+					}
+				start += item.guestID+"</span><span style='width:670px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
+				}//end for
+			$("#reply").html(start);
+			$('.commentDel').click(function(event) { 
+			    event.preventDefault(); 
+			    var commentNo = $(this).attr("data-app-id");
+			    $.ajax({
+			        success: function(response) {
+			        	deleteComment(commentNo);
+			        }
+			    });
+			    return false; // for good measure
+			});
+		});
+	}
+	
+	
+	getComment();// 게시글과 동시에 댓글 호출
+	
+	
 	$('#cBtn').click(function() {
 		if(guestID == 'null') {
 			var c = confirm('로그인 하시겠습니까?.');
@@ -74,7 +91,7 @@ $(function() {
 			},  
 			success: function(data) {
 				var commentList = JSON.parse(data.trim()).sent;
-					var start = "<span style='width:150px; margin-left:5px'>";
+				var start = "<span style='width:150px; margin-left:5px'>";
 				for(var i = 0; i<commentList.length; i++){
 					item = commentList[i];
 					if(i>0) {
@@ -83,18 +100,52 @@ $(function() {
 					if(guestID != item.guestID) {
 						option = "<p style='width: 70px;'></p>";
 					} else {
-						option = "<a href='commentModify.jsp'>수정</a><a href='commentDelete.jsp?no="+no+"' onclick='return confirm(\"삭제 하시겠습니까?\")'>삭제</a>";
+						option = "<a href='commentModify.jsp'>수정</a><a class='commentDel' data-app-id='"+item.commentNo+"' href=''>삭제</a>";
 					}
 					start += item.guestID+"</span><span style='width:670px'>"+item.content+"</span><span style='text-align:right'>"+option+"</span><span style='text-align:left; width:150px;'>"+item.date.substring(0,19)+"</span>";
 				}//end for
 				$("#reply").html(start);
 				$("#textarea").val("");
+				$('.commentDel').click(function(event) { 
+				    event.preventDefault(); 
+				    var commentNo = $(this).attr("data-app-id");
+				    $.ajax({
+				        success: function(response) {
+				        	deleteComment(commentNo);
+				        }
+				    });
+				    return false; // for good measure
+				});
 			},
 			error: function(jqxhr, textStatus, errorThrown) {
 				alert("ERROR, STATUS : "+textStatus +", Error thrown : "+errorThrown);
 			}
 		});
 	});
+	
+	
+	function deleteComment(commentNo) {
+		var check = confirm("삭제 하시겠습니까?");
+		if(check == false) {
+			return false;
+		} else {
+			$.ajax({
+				type: "POST",
+				url: "commentDeleteAjax.jsp",//삭제 페이지로 이동
+				data: {
+					commentNo : commentNo		
+					},  
+				success: function(data) {
+					var suc = data.trim();
+					console.log(suc);
+					getComment();
+				},
+				error: function(jqxhr, textStatus, errorThrown) {
+					alert("ERROR, STATUS : "+textStatus +", Error thrown : "+errorThrown);
+				}
+			});
+		}
+	}
 });
 </script>
 </head>
