@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Vector"%>
 <%@page import="board.BoardDao"%>
@@ -5,6 +6,19 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+PrintWriter pr = response.getWriter();
+String userID = null;
+if(session.getAttribute("userID") != null) {		
+	userID = (String)session.getAttribute("userID");
+}
+if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
+	pr.println("<script>");
+	pr.println("alert('로그인 해주세요.')"); 
+	pr.println("location.href = 'signIn.jsp'");
+	pr.println("</script>");
+}   
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,12 +160,12 @@ margin:0px;
 	if (tempStart != null) {
 		startPage = (Integer.parseInt(tempStart) - 1) * onePageCnt;
 	}
-	List<BoardDto> v = dao.boardfilter("board","'식당'",startPage, onePageCnt);
+	List<BoardDto> v = dao.search(userID,"writer",startPage, onePageCnt);
 	%>
 <hr>
 
-		<h1>Restaurant List</h1>
-		<p>인상 깊었던 맛집들이 기록 된 곳.</p>
+		<h1>My Travels</h1>
+		<p>나의 기록들.</p>
 		<br>
 		<br>
 		<div style="float:right">
@@ -189,8 +203,8 @@ margin:0px;
 		<tr>
 			<td><%=v.get(i).getNo()%></td>
 			<td style="font-size:10px">[<%=v.get(i).getSelector()%>]</td>
-			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getName()%></a></td>
-			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getTitle()%></a></td>
+			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&who=<%=v.get(i).getWriter()%>"><%=v.get(i).getName()%></a></td>
+			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&who=<%=v.get(i).getWriter()%>"><%=v.get(i).getTitle()%></a></td>
 			<td><%=v.get(i).getWriter()%></td>
 			<td><%=v.get(i).getDate().substring(0, 11)%></td>
 		</tr>

@@ -304,6 +304,8 @@ public class BoardDao {
 				bDto.setName(rs.getString(3));
 				bDto.setTextarea(rs.getString(4));
 				bDto.setWriter(rs.getString(5));
+				bDto.setDate(rs.getString(6));
+				bDto.setSelector(rs.getString(7));
 				list.add(bDto);
 			}
 		} catch (SQLException e) {

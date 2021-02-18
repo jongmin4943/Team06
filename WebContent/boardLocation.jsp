@@ -150,8 +150,8 @@ margin:0px;
 	%>
 <hr>
 
-		<h1>My Trip List</h1>
-		<p>인상 깊었던 관광지를 기록하는 곳.</p>
+		<h1>Trip List</h1>
+		<p>인상 깊었던 관광지들이 기록 된 곳.</p>
 		<br>
 		<br>
 		<div style="float:right">

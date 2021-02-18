@@ -55,14 +55,14 @@ iframe {
 		<div class="video-overlay"></div>
 		<div class="video-content">
 			<div class="inner">
-				<h1><a href="myList.jsp?where=mixed">My List</a></h1>
+				<h1><a href="myList.jsp?where=mixed">List</a></h1>
 				<p>
 					기억에 남는 맛집,관광지를<br /> 정리해보세요
 				</p>
-				<%if(loca.equals("restaurant")) {%>
-					<iframe src="boardRestaurant.jsp"></iframe>
-				<%} else if(loca.equals("location")){%>
-					<iframe src="boardLocation.jsp"></iframe>
+				<%if(loca.equals("mixed")) {%>
+					<iframe src="boardList2.jsp"></iframe>
+				<%} else if(loca.equals("myList")){%>
+					<iframe src="boardMyList.jsp?userID="<%=userID%>></iframe>
 				<%} else {%>
 					<iframe src="boardList2.jsp"></iframe>
 				<%}%>
