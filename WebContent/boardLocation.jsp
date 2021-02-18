@@ -1,3 +1,4 @@
+<%@page import="board.BtnDto"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Vector"%>
 <%@page import="board.BoardDao"%>
@@ -117,7 +118,10 @@ margin:0px;
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>
+
 <body data-mode="day">
+
+
 	<input type="image" src="img/nightbtn.png" id="changebtn" align="right"
 		onclick="
 	if(document.querySelector('body').dataset.mode ==='day'){

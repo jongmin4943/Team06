@@ -1,3 +1,4 @@
+<%@page import="board.BtnDto"%>
 <%@page import="java.util.Vector"%>
 <%@page import="board.BoardDao"%>
 <%@page import="board.BoardDto"%>
@@ -116,7 +117,9 @@ margin:0px;
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>
+
 <body data-mode="day">
+
 	<input type="image" src="img/nightbtn.png" id="changebtn" align="right"
 		onclick="
 	if(document.querySelector('body').dataset.mode ==='day'){
@@ -125,12 +128,14 @@ margin:0px;
 		document.querySelector('table').style.color = 'white';	
 		document.querySelector('body').dataset.mode = 'night'
 		this.src = 'img/daybtn.png'
+		document.getElementById('aa').src='img/nightwrite.png'
 	}else{
 		document.querySelector('body').style.backgroundColor = 'rgb(238,242,242)';
 		document.querySelector('body').style.color = 'black';	
 		document.querySelector('table').style.color = 'black';	
 		document.querySelector('body').dataset.mode = 'day'
-		this.src = 'img/nightbtn.png'	
+		this.src = 'img/nightbtn.png'
+		document.getElementById('aa').src='img/write.png'
 	}
 ">
 	<%
@@ -199,7 +204,7 @@ margin:0px;
 	</table>
 	<div>
 		<div style="float:left">
-			<a href="boardWrite.jsp" id="aa"> 새 게시글 작성 </a>
+			<a href="boardWrite.jsp" ><input type="image" src="img/write.png" id="aa"/></a>
 		</div>
 	</div><br>
 	<div>
