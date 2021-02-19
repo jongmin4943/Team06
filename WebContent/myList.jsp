@@ -60,7 +60,7 @@ iframe {
 		<div class="video-overlay"></div>
 		<div class="video-content">
 			<div class="inner">
-				<h1><a href="myList.jsp?where=mixed" style="text-decoration:none">전체보기</a></h1>
+				<h2><a href="myList.jsp?where=mixed" style="text-decoration:none">전체 목록</a></h2>
 				<br />
 				<br />
 				<br />
