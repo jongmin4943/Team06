@@ -33,7 +33,7 @@
 <script src="./js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 
-<body style="background-color:lightgray;">
+<body style="background-color:#333;">
 	<%
 	String userID = null;
 	if(session.getAttribute("userID") != null){
@@ -122,7 +122,7 @@
 						</div>
 					</div>
 				</div>
-			<div class='image' style="background-color:lightgray;">
+			<div class='image' style="background-color:lightgray; height:470px;">
 				<h2>이 주의 기록 <em>HOT LIST</em></h2>
 				<%for(int i = 0; i<list.size(); i++) { %>
 					<div><a href = 'myList.jsp?no=<%=list.get(i).getNo() %>&where=viewBoard'>[<%=i+1%>] <%=list.get(i).getTitle() %> [<%=list.get(i).getCountCom() %>]</a></div>
@@ -134,7 +134,7 @@
 	</div>
 
 
-	<footer>
+	<footer style="background-color:#333;">
 		<div class="container-fluid">
 			<div class="col-md-12">
 				<p>Copyright &copy; Team06 | Created by 박찬우, 윤종민</p>
