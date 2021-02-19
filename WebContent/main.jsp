@@ -35,6 +35,12 @@
 .hoyList {
 	font-size : 20px;
 }
+a:link{
+	color:black;
+}
+a:visited{
+	color:black;
+}
 </style>
 </head>
 
@@ -118,19 +124,29 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4 col-sm-6" style="height: 100%">
-				<div class='image' style="background-color:lightgray; height:100%; width: 100%; overflow: hidden;">
-					<h2>이 주의 인기 기록 <em style = "color:black;">- TOP 5 - </em><em style = "color:red;">HOT LIST</em></h2>
-					<%for(int i = 0; i<list.size(); i++) { %>
-						<div class="col-sm-2">
-						<p style = "color:black; font-size:14px; float:left;">[<%=i+1%>] </p>
-						<a style = "font-size:25px; float:left;" href = 'myList.jsp?no=<%=list.get(i).getNo() %>&where=viewBoard'><%=list.get(i).getTitle() %></a>
-						<p style = "color:red; font-size:18px;"> [<%=list.get(i).getCountCom() %>]</p>
+			<div class="col-md-4 col-sm-6" >
+				<div class="portfolio-item">
+					<div class="thumb">
+						<div class="hover-effect">
+							<div class="hover-content" style="padding-bottom:50px; padding-left:40px">
+								<h2 style="color:black; text-shadow:#ccc 1px 0px 10px; ">
+									<b>이 주의 인기글 </b>
+								</h2>
+								<p>&nbsp;</p>
+									<%for(int i = 0; i<list.size(); i++) { %>
+									<em style = "color:red; font-size:19px; float:left; padding-right:3px;">[<%=i+1%>] </em>
+									<a style = "font-size:20px; float:left;" href = 'myList.jsp?no=<%=list.get(i).getNo() %>&where=viewBoard'><%=list.get(i).getTitle() %></a>
+									<p style = "color:blue; font-size:18px;"> [<%=list.get(i).getCountCom() %>]</p>
+									<br />
+									<%}%>
+							</div>
 						</div>
-					<%}%>
+						<div class="image">
+								<img src="img/gaesi.png">
+							</div>
+					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 
