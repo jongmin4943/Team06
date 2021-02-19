@@ -163,7 +163,7 @@ margin:0px;
 		
 		for (int i = 1; i <= count; i++) {
 		%>
-		<a href="boardSearch.jsp?page=<%=i%>">[<%=i%>]
+		<a href="boardSearch.jsp?page=<%=i%>&cate=<%=cate%>&keyword=<%=keyword%>">[<%=i%>]
 		</a>
 
 		<%
