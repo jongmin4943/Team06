@@ -17,7 +17,10 @@ String switching = "inline-block";
 String no = request.getParameter("no");
 String who = request.getParameter("who");
 String currPage = request.getParameter("currPage");
-//System.out.println("no => " + no);
+String cate = request.getParameter("cate");
+String keyword = request.getParameter("keyword");
+System.out.println("cate => " + cate);
+System.out.println("keyword => " + keyword);
 BoardDto board = BoardDao.selectOne(new BoardDto(no));
 //	System.out.println(board);
 CommentDao cDao = new CommentDao();
@@ -359,13 +362,15 @@ span {
 			</tr>
 		</table>
 	</form>
-	<%if(who == null) {%>
-		<span style="align:right"><a href="boardList2.jsp?page=<%=currPage%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
-	<%} else {%>
-		<span style="align:right"><a href="boardMyList.jsp?page=<%=currPage%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
-	<%}%>
-	<%
-	}
-	%>
+		<%if(who == null && (cate == null && keyword == null)) {%><!--전체목록에서 그냥 들어옴  -->
+			<span style="align:right"><a href="boardList2.jsp?page=<%=currPage%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+		<%} else if(who == null && cate != null && keyword != null) {%><!--전체목록에서 검색 후 들어옴  -->
+			<span style="align:right"><a href="boardSearch.jsp?page=<%=currPage%>&cate=<%=cate%>&keyword=<%=keyword%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+		<%} else if(who != null && cate != null && keyword != null){%><!--내 목록에서 검색 후 들어옴-->
+			<span style="align:right"><a href="boardSearch.jsp?page=<%=currPage%>&cate=<%=cate%>&keyword=<%=keyword%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+		<%} else {%><!--내 목록에서 그냥 들어옴-->
+			<span style="align:right"><a href="boardMyList.jsp?page=<%=currPage%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+		<%} %>
+	<%} %>
 </body>
 </html>

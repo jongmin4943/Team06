@@ -143,7 +143,7 @@ margin:0px;
 	int startPage = 0;
 	int onePageCnt = 10;
 	count = (int) Math.ceil((double) count / (double) onePageCnt);
-	if (tempStart != null) {
+	if (tempStart != null && !(tempStart.equals("null"))) {
 		startPage = (Integer.parseInt(tempStart) - 1) * onePageCnt;
 	}
 	List<BoardDto> v = dao.search(keyword,cate,startPage, onePageCnt);
@@ -154,7 +154,7 @@ margin:0px;
 		<p>원하는 것을 찾는 곳.</p>
 		<br>
 		<br>
-		<h4><%=cate%> 카테고리의 <%=keyword%> 의 검색결과 <%=v.size()%>건</h4>
+		<h4><%=cate%> 카테고리의 <%=keyword%> 의 검색결과</h4>
 		<div style="float:right">
 			<form id="searching">
 				<select name="cate" id="sel">
@@ -191,8 +191,8 @@ margin:0px;
 		<tr>
 			<td><%=v.get(i).getNo()%></td>
 			<td style="font-size:10px">[<%=v.get(i).getSelector()%>]</td>
-			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getName()%></a></td>
-			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getTitle()%></a></td>
+			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&currPage=<%=tempStart%>&cate=<%=cate%>&keyword=<%=keyword%>"><%=v.get(i).getName()%></a></td>
+			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&currPage=<%=tempStart%>&cate=<%=cate%>&keyword=<%=keyword%>"><%=v.get(i).getTitle()%></a></td>
 			<td><%=v.get(i).getWriter()%></td>
 			<td><%=v.get(i).getDate().substring(0, 11)%></td>
 		</tr>
