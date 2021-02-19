@@ -235,6 +235,31 @@ public class BoardDao {
 		}
 		return result;
 	}
+	public int selectFilterCnt(String filter) {
+		int result = 0;
+		ResultSet rs = null;
+		String sql = "select count(*) from board WHERE selector=?";
+		conn = JdbcUtil.getConnection();
+		try {
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, filter);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}finally {
+			JdbcUtil.close(rs, pstmt, conn);
+		}
+		return result;
+	}
+	
 	public List<BoardDto> selectPage(String table, int start, int pageCnt){
 		ResultSet rs = null;
 		String SQL = "SELECT * FROM "+table+" ORDER BY no DESC limit ?, ?";
