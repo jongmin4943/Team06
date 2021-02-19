@@ -80,6 +80,42 @@ margin:0;
 table{
 margin:0px;
 }
+#keyword, #sel, #gumsaek{
+	font-size:13px;
+}
+.dropbtn {
+  background-color: #ea2129;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>
 <body data-mode="day">
 	<input type="image" src="img/nightbtn.png" id="changebtn" align="right"
@@ -120,34 +156,45 @@ margin:0px;
 		<br>
 		<h4><%=cate%> 카테고리의 <%=keyword%> 의 검색결과 <%=v.size()%>건</h4>
 		<div style="float:right">
-			<form>
-				<select name="cate">
+			<form id="searching">
+				<select name="cate" id="sel">
 					<option value="name">Name</option>
 					<option value="title" selected>Title</option>
 					<option value="writer">Writer</option>
 				</select>
 				<input type="text" placeholder="검색" name="keyword" id="keyword" maxlength="20" />
-				<input type="submit" value="검색" />
+				<input type="submit" value="검색" id="gumsaek" />
 			</form>
 		</div>
 		<br>
 		<br>
 
 	<table class="table table-striped table-hover">
-		<tr>
+				<tr>
 			<th id="no">No</th>
+			<th id="selector" style="width:55px"><span class="dropdown" style="font-size:13px; color:#00996b">필터▾
+					<span class="dropdown-content">
+					<a href="boardList2.jsp">모두보기</a>
+					<a href="boardLocation.jsp">지역</a>
+					<a href="boardRestaurant.jsp">식당</a>
+					</span>
+				</span>
+			</th>
 			<th id="name">name</th>
 			<th>title</th>
-			<th id="writer">writer</th>
+			<th id="writer" style="width:100px">writer</th>
+			<th id="date" style="width:130px">date</th>
 		</tr>
 		<%
 		for (int i = 0; i < v.size(); i++) {
 		%>
 		<tr>
 			<td><%=v.get(i).getNo()%></td>
-			<td><a href=" "><%=v.get(i).getName()%></a></td>
+			<td style="font-size:10px">[<%=v.get(i).getSelector()%>]</td>
+			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getName()%></a></td>
 			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>"><%=v.get(i).getTitle()%></a></td>
 			<td><%=v.get(i).getWriter()%></td>
+			<td><%=v.get(i).getDate().substring(0, 11)%></td>
 		</tr>
 		<%
 		}
