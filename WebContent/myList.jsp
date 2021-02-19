@@ -60,18 +60,18 @@ iframe {
 		<div class="video-overlay"></div>
 		<div class="video-content">
 			<div class="inner">
-				<h2><a href="myList.jsp?where=mixed" style="text-decoration:none">: : : 전체 목록 : : : </a></h2>
+				<h2 style="padding:0px 20px; font-size:40px;"><a href="myList.jsp?where=mixed" style="text-decoration:none">▸Total list</a></h2>
 				<br />
 				<br />
 				<br />
-				<h2><a href="boardMyList.jsp?userID="<%=userID%> target="myList" style="text-decoration:none">: : :   내 목록 : : :</a></h2>
+				<h2 style="font-size:40px;"><a href="myList.jsp?where=myList" target="myList" style="text-decoration:none">▸ My list </a></h2>
 
 				<%if(loca.equals("mixed")) {%>
 					<iframe src="boardList2.jsp" name="myList"></iframe>
 				<%} else if(loca.equals("myList")){%>
 					<iframe src="boardMyList.jsp?userID="<%=userID%> name="myList" ></iframe>
 				<%} else if(loca.equals("viewBoard")) {%>
-					<iframe src="boardView.jsp?no=<%=no%>"></iframe>
+					<iframe src="boardView.jsp?no=<%=no%>" name="myList"></iframe>
 				<%} else {%>
 					<iframe src="boardList2.jsp" name="myList"></iframe>
 				<%}%>

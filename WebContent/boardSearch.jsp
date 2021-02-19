@@ -202,7 +202,7 @@ margin:0px;
 	</table>
 	<div>
 		<div style="float:left">
-			<a href="boardWrite.jsp" id="aa"> 새 게시글 작성 </a>
+			<a href="boardWrite.jsp" ><input type="image" src="img/write.png" id="aa" style="box-shadow:2px 2px 5px gray"/></a>
 		</div>
 	</div><br>
 	<div>
