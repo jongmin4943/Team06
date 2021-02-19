@@ -85,6 +85,7 @@ $(function() {
 	
 	
 	getComment();// 시작과 동시에 댓글 호출
+	getAroundBoard();
 	
 	
 	$('#cBtn').click(function() {
@@ -207,6 +208,22 @@ $(function() {
 			}
 		});
 	}
+	
+	function getAroundBoard() {
+		$.ajax({
+			type: "POST",
+			url: "boardPreNextAjax.jsp",
+			data: {
+				currentNo : no
+			},
+			success: function(data) {
+				var suc = JSON.parse(data.trim());
+				console.log(suc);
+			}
+ 		});
+	}
+	
+	
 });
 </script>
 </head>

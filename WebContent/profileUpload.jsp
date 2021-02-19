@@ -5,7 +5,9 @@
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%@ page import="java.util.*" %>
 <%
-	String uploadPath = application.getRealPath("/img");	
+	String uploadPath = request.getServletContext().getRealPath("/img");	
+	String uploadPath2 = application.getRealPath("/img");	
+	System.out.println(uploadPath);
 	String userName = (String)session.getAttribute("userID");
 	int size = 10*1024*1024;
 	String name="";
