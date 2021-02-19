@@ -19,8 +19,8 @@ String who = request.getParameter("who");
 String currPage = request.getParameter("currPage");
 String cate = request.getParameter("cate");
 String keyword = request.getParameter("keyword");
-System.out.println("cate => " + cate);
-System.out.println("keyword => " + keyword);
+/* System.out.println("cate => " + cate);
+System.out.println("keyword => " + keyword); */
 BoardDto board = BoardDao.selectOne(new BoardDto(no));
 //	System.out.println(board);
 CommentDao cDao = new CommentDao();
@@ -87,9 +87,8 @@ $(function() {
 		});
 	}
 	
-	
 	getComment();// 시작과 동시에 댓글 호출
-	getAroundBoard();
+	getAroundBoard();//현재 게시글의 전 , 현 , 후 글 불러오기
 	
 	
 	$('#cBtn').click(function() {
@@ -212,7 +211,9 @@ $(function() {
 			}
 		});
 	}
-	
+	var currNo = null;
+	var preNo = null;
+	var nextNo = null;
 	function getAroundBoard() {
 		$.ajax({
 			type: "POST",
@@ -221,11 +222,54 @@ $(function() {
 				currentNo : no
 			},
 			success: function(data) {
-				var suc = JSON.parse(data.trim());
-				console.log(suc);
+				sentJsObj = JSON.parse(data.trim());
+				var suc = null;
+				if(sentJsObj.preNextBoard != null) {
+					suc = sentJsObj.preNextBoard;
+					$("#previous").attr("disabled", false);
+					$("#next").attr("disabled", false);
+					$("#boardTitle").html(suc[1].title);
+					$("#boardName").html(suc[1].name);
+					$("#boardWriter").html(suc[1].writer);
+					$("#boardDate").html(suc[1].date);
+					$("#boardContent").html(suc[1].textarea);
+					currNo = suc[1].no;
+					preNo = suc[0].no;
+					nextNo = suc[2].no;
+				} else if (sentJsObj.nextBoard != null) {
+					suc = sentJsObj.nextBoard;
+					$("#previous").attr("disabled", true);
+					$("#next").attr("disabled", false);
+					$("#boardTitle").html(suc[0].title);
+					$("#boardName").html(suc[0].name);
+					$("#boardWriter").html(suc[0].writer);
+					$("#boardDate").html(suc[0].date);
+					$("#boardContent").html(suc[0].textarea);
+					currNo = suc[0].no;
+					nextNo = suc[1].no;
+				} else if (sentJsObj.preBoard != null) {
+					suc = sentJsObj.preBoard;
+					$("#previous").attr("disabled", false);
+					$("#next").attr("disabled", true);
+					$("#boardTitle").html(suc[1].title);
+					$("#boardName").html(suc[1].name);
+					$("#boardWriter").html(suc[1].writer);
+					$("#boardDate").html(suc[1].date);
+					$("#boardContent").html(suc[1].textarea);
+					currNo = suc[1].no;
+					preNo = suc[0].no;
+				}
 			}
  		});
 	}
+	$("#previous").click(function() {
+		no = preNo;
+		getAroundBoard();
+	});
+	$("#next").click(function() {
+		no = nextNo;
+		getAroundBoard();
+	});
 	
 	
 });
@@ -312,11 +356,14 @@ span {
 			<p>기억에 남은 식당을 기록하는 곳.</p>
 			<br>
 			<br>
+			<h4 style="float:left; margin-left: 500px; padding-right: 50px;">
+			<button id="previous" disabled="disabled">◀</button></h4>
+			<h4><button id="next" disabled="disabled">▶</button></h4>
 			<br>
 		<table>
 			<tr>
 				<td class="menu">title</td>
-				<td class="menu2" colspan="5"><%=board.getTitle()%></td>
+				<td class="menu2" colspan="5" id="boardTitle"></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -324,15 +371,15 @@ span {
 			</tr>
 			<tr>
 				<td class="menu">name</td>
-				<td class="menu2"><%=board.getName()%></td>
+				<td class="menu2" id="boardName"></td>
 				<td class="menu">writer</td>
-				<td class="menu2"><%=board.getWriter()%></td>
+				<td class="menu2" id="boardWriter"></td>
 				<td class="menu" >date</td>
-				<td class="menu2"><%=board.getDate().substring(0, 19)%></td>
+				<td class="menu2" id="boardDate"></td>
 			</tr>
 			<tr>
 				<td class="menu" id="comment">comment</td>
-				<td colspan="5" class="menu2"><%=board.getTextarea()%></td>
+				<td colspan="5" class="menu2" id="boardContent"></td>
 				<td></td>
 				<td></td>
 				<td></td>
