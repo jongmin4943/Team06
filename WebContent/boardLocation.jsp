@@ -117,7 +117,23 @@ margin:0px;
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+a {
+    color: #0000ee;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #121212;
+        color: #bbb;
+    }
+
+    a {
+        color: #3ea6ff;
+    }
+}
+
 </style>
+
 
 <body data-mode="day">
 
@@ -221,7 +237,7 @@ margin:0px;
 		};
 		%>
 	</div>
-
+	<button id="toggleTheme"></button>
 </body>
 
 </html>
