@@ -44,6 +44,7 @@ iframe {
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
+	String no = request.getParameter("no");
 	String loca = request.getParameter("where");
 %>
 	<nav>
@@ -69,6 +70,8 @@ iframe {
 					<iframe src="boardList2.jsp" name="myList"></iframe>
 				<%} else if(loca.equals("myList")){%>
 					<iframe src="boardMyList.jsp?userID="<%=userID%> name="myList" ></iframe>
+				<%} else if(loca.equals("viewBoard")) {%>
+					<iframe src="boardView.jsp?no=<%=no%>"></iframe>
 				<%} else {%>
 					<iframe src="boardList2.jsp" name="myList"></iframe>
 				<%}%>

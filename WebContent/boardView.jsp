@@ -175,7 +175,8 @@ $(function() {
 				type: "POST",
 				url: "commentDeleteAjax.jsp",//삭제 페이지로 이동
 				data: {
-					commentNo : commentNo		
+					commentNo : commentNo,
+					boardNo : no
 					},  
 				success: function(data) {
 					var suc = data.trim();

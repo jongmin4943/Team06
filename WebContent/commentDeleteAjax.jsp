@@ -16,8 +16,9 @@ if(session.getAttribute("guestID")!=null) {
 	guestID = (String)session.getAttribute("guestID");
 }
 String commentNo = request.getParameter("commentNo");
+String boardNo = request.getParameter("boardNo");
 CommentDao cDao = new CommentDao();
-cDao.delete(commentNo);
+cDao.delete(commentNo,boardNo);
 JSONObject sendObj = new JSONObject();
 sendObj.put("sent","deleted");
 out.print(sendObj);

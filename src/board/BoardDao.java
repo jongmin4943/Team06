@@ -371,21 +371,27 @@ public class BoardDao {
 		return result;
 	}
 	public void increseCountCom(String boardNo) {
-		String increaseCountCom = "select * from board where no=? ";
-		String execute = "UPDATE board SET countCom = ? where no = ?";
+		String increaseCountCom = "update board set countCom = countCom + 1 where no = ?";
 		Connection connec = JdbcUtil.getConnection();
-		int cntCom = 0;
 		try {
 			pstmt = connec.prepareStatement(increaseCountCom);
 			pstmt.setString(1, boardNo);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				cntCom = (rs.getInt("countCom"));
+			int cnt = pstmt.executeUpdate();
+			if(cnt>0) {
+				System.out.println("수정성공");
+			} else {
+				System.out.println("수정실패");
 			}
-			cntCom++;
-			pstmt = connec.prepareStatement(execute);
-			pstmt.setInt(1, cntCom);
-			pstmt.setString(2, boardNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void decreseCountCom(String boardNo) {
+		String increaseCountCom = "update board set countCom = countCom - 1 where no = ?";
+		Connection connec = JdbcUtil.getConnection();
+		try {
+			pstmt = connec.prepareStatement(increaseCountCom);
+			pstmt.setString(1, boardNo);
 			int cnt = pstmt.executeUpdate();
 			if(cnt>0) {
 				System.out.println("수정성공");
