@@ -144,7 +144,7 @@ margin:0px;
 	String cate = request.getParameter("cate");
 	String keyword = request.getParameter("keyword");
 	BoardDao dao = new BoardDao();
-	int count = dao.selectSearchCnt(cate,keyword);
+	int count = dao.selectFilterCnt("지역");
 	String tempStart = request.getParameter("page");
 	int startPage = 0;
 	int onePageCnt = 10;
@@ -214,7 +214,7 @@ margin:0px;
 		
 		for (int i = 1; i <= count; i++) {
 		%>
-		<a href="boardList2.jsp?page=<%=i%>">[<%=i%>]
+		<a href="boardLocation.jsp?page=<%=i%>">[<%=i%>]
 		</a>
 
 		<%

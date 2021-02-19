@@ -60,11 +60,11 @@ iframe {
 		<div class="video-overlay"></div>
 		<div class="video-content">
 			<div class="inner">
-				<h2><a href="myList.jsp?where=mixed" style="text-decoration:none">전체 목록</a></h2>
+				<h2><a href="myList.jsp?where=mixed" style="text-decoration:none">: : : 전체 목록 : : : </a></h2>
 				<br />
 				<br />
 				<br />
-				<h2><a href="boardMyList.jsp?userID="<%=userID%> target="myList" style="text-decoration:none">내 목록</a></h2>
+				<h2><a href="boardMyList.jsp?userID="<%=userID%> target="myList" style="text-decoration:none">: : :   내 목록 : : :</a></h2>
 
 				<%if(loca.equals("mixed")) {%>
 					<iframe src="boardList2.jsp" name="myList"></iframe>
