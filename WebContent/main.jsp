@@ -31,6 +31,11 @@
 	rel="stylesheet">
 
 <script src="./js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+<style>
+.hoyList {
+	font-size : 20px;
+}
+</style>
 </head>
 
 <body style="background-color:#333;">
@@ -117,7 +122,11 @@
 				<div class='image' style="background-color:lightgray; height:100%; width: 100%; overflow: hidden;">
 					<h2>이 주의 Hot한 기록 TOP 5 <em>HOT LIST</em></h2>
 					<%for(int i = 0; i<list.size(); i++) { %>
-						<div><a href = 'myList.jsp?no=<%=list.get(i).getNo() %>&where=viewBoard'>[<%=i+1%>] <%=list.get(i).getTitle() %> [<%=list.get(i).getCountCom() %>]</a></div>
+						<div>
+						<p style = "color:black; font-size:14px; float:left;">[<%=i+1%>] </p>
+						<a style = "font-size:23px; float:left;" href = 'myList.jsp?no=<%=list.get(i).getNo() %>&where=viewBoard'><%=list.get(i).getTitle() %></a>
+						<p style = "color:red; font-size:16px;"> [<%=list.get(i).getCountCom() %>]</p>
+						</div>
 					<%}%>
 				</div>
 			</div>

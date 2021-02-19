@@ -123,7 +123,7 @@ margin:0px;
 			<form>
 				<select name="cate">
 					<option value="name">Name</option>
-					<option value="title">Title</option>
+					<option value="title" selected>Title</option>
 					<option value="writer">Writer</option>
 				</select>
 				<input type="text" placeholder="검색" name="keyword" id="keyword" maxlength="20" />

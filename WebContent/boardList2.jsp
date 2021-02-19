@@ -5,6 +5,12 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+String myID = null;
+if(session.getAttribute("myID") != null) {		
+	session.removeAttribute("myID");
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -154,14 +160,14 @@ margin:0px;
 		<hr>
 
 		<h1>Journey List</h1>
-		<p>맛집과 관광지가 기록된 곳.</p>
+		<p>모두의 맛집과 관광지가 기록된 곳.</p>
 		<br>
 		<br>
 		<div style="float:right">
 			<form id="searching">
 				<select name="cate" id="sel">
 					<option value="name">Name</option>
-					<option value="title">Title</option>
+					<option value="title" selected>Title</option>
 					<option value="writer">Writer</option>
 				</select>
 				<input type="text" placeholder="검색" name="keyword" id="keyword" maxlength="20" />
