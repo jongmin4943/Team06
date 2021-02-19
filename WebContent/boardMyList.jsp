@@ -9,8 +9,10 @@
 <%
 PrintWriter pr = response.getWriter();
 String userID = null;
+String myID = null;
 if(session.getAttribute("userID") != null) {		
 	userID = (String)session.getAttribute("userID");
+	session.setAttribute("myID", userID);
 }
 if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 	pr.println("<script>");
@@ -172,7 +174,7 @@ margin:0px;
 			<form id="searching">
 				<select name="cate" id="sel">
 					<option value="name">Name</option>
-					<option value="title">Title</option>
+					<option value="title" selected>Title</option>
 					<option value="writer">Writer</option>
 				</select>
 				<input type="text" placeholder="검색" name="keyword" id="keyword" maxlength="20" />
@@ -186,9 +188,9 @@ margin:0px;
 			<th id="no">No</th>
 			<th id="selector" style="width:55px"><span class="dropdown" style="font-size:13px; color:#00996b">필터▾
 					<span class="dropdown-content">
-					<a href="boardList2.jsp">모두보기</a>
-					<a href="boardLocation.jsp">지역</a>
-					<a href="boardRestaurant.jsp">식당</a>
+					<a href="boardMyList.jsp?">모두보기</a>
+					<a href="boardLocation.jsp?where=지역&cate=writer&keyword=<%=userID%>">지역</a>
+					<a href="boardRestaurant.jsp?where=식당&cate=writer&keyword=<%=userID%>">식당</a>
 					</span>
 				</span>
 			</th>

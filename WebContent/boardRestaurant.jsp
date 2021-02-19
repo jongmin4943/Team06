@@ -5,6 +5,16 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String userID = null;
+String myID = null;
+if(session.getAttribute("userID") != null) {		
+	userID = (String)session.getAttribute("userID");
+}
+if(session.getAttribute("myID") != null) {		
+	myID = (String)session.getAttribute("myID");
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -139,9 +149,9 @@ margin:0px;
 	<%
 	String cate = request.getParameter("cate");
 	String keyword = request.getParameter("keyword");
+	String where = request.getParameter("where");
 	BoardDao dao = new BoardDao();
-	int count = dao.selectFilterCnt("식당");
-	System.out.println(count);
+	int count = dao.selectFilterCnt(where);
 	String tempStart = request.getParameter("page");
 	int startPage = 0;
 	int onePageCnt = 10;
@@ -149,19 +159,33 @@ margin:0px;
 	if (tempStart != null) {
 		startPage = (Integer.parseInt(tempStart) - 1) * onePageCnt;
 	}
-	List<BoardDto> v = dao.boardfilter("board","'식당'",startPage, onePageCnt);
+	List<BoardDto> v = null;	
+	if(where == null){
+		v = dao.boardfilter("board","'식당'",startPage, onePageCnt);
+	} else if(where != null && cate != null && keyword != null) {
+		v = dao.searchInMine(keyword,cate,startPage, onePageCnt,"'"+where+"'");
+	} else {
+		v = dao.boardfilter("board","'"+where+"'",startPage, onePageCnt);
+	}
 	%>
 <hr>
 
-		<h1>Restaurant List</h1>
-		<p>인상 깊었던 맛집들이 기록 된 곳.</p>
+		<%if(myID == null){%>
+			<h1>Restaurant List</h1>
+			<p>인상 깊었던 맛집들이 기록 된 곳.</p>
+		
+		<%} else {%>
+			<h1>Restaurant List</h1>
+			<p>내가 가본 인상 깊었던 맛집들이 기록 된 곳.</p>
+		
+		<%} %>
 		<br>
 		<br>
 		<div style="float:right">
 			<form id="searching">
 				<select name="cate" id="sel">
 					<option value="name">Name</option>
-					<option value="title">Title</option>
+					<option value="title" selected>Title</option>
 					<option value="writer">Writer</option>
 				</select>
 				<input type="text" placeholder="검색" name="keyword" id="keyword" maxlength="20" />
@@ -175,9 +199,15 @@ margin:0px;
 			<th id="no">No</th>
 			<th id="selector" style="width:55px"><span class="dropdown" style="font-size:13px; color:#00996b">필터▾
 					<span class="dropdown-content">
+					<%if(myID == null){%>
 					<a href="boardList2.jsp">모두보기</a>
 					<a href="boardLocation.jsp">지역</a>
 					<a href="boardRestaurant.jsp">식당</a>
+					<%} else {%>
+					<a href="boardMyList.jsp">모두보기</a>
+					<a href="boardLocation.jsp?where=지역&cate=writer&keyword=<%=myID%>">지역</a>
+					<a href="boardRestaurant.jsp?where=식당&cate=writer&keyword=<%=myID%>">식당</a>
+					<%} %>					
 					</span>
 				</span>
 			</th>
