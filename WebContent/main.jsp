@@ -74,7 +74,7 @@
 
 
 	<div class="full-screen-portfolio" id="portfolio">
-		<div class="container-fluid" style="background-color:lightgray; height : 430px;">
+		<div class="container-fluid" style="background-color:lightgray;">
 			<div class="col-md-4 col-sm-6">
 				<div class="portfolio-item">
 					<div class="thumb">
@@ -88,7 +88,7 @@
 								</div>
 							</div>
 							<div class="image">
-								<img src="img/meal5.jpg" style="height: 430 ">
+								<img src="img/meal5.jpg">
 							</div>
 						</a>
 					</div>
@@ -107,27 +107,19 @@
 								</div>
 							</div>
 							<div class="image">
-								<img src="img/portfolio_item_2.jpg"  style="height: 430 ">
+								<img src="img/portfolio_item_2.jpg">
 							</div>
 						</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4 col-sm-6">
-				<div class="portfolio-item">
-					<div class="thumb">
-						<div class="hover-effect">
-							<div class="hover-content" style="background-color:lightgray;" >
-							</div>
-						</div>
-					</div>
+			<div class="col-md-4 col-sm-6" style="height: 100%">
+				<div class='image' style="background-color:lightgray; height:100%; width: 100%; overflow: hidden;">
+					<h2>이 주의 Hot한 기록 TOP 5 <em>HOT LIST</em></h2>
+					<%for(int i = 0; i<list.size(); i++) { %>
+						<div><a href = 'myList.jsp?no=<%=list.get(i).getNo() %>&where=viewBoard'>[<%=i+1%>] <%=list.get(i).getTitle() %> [<%=list.get(i).getCountCom() %>]</a></div>
+					<%}%>
 				</div>
-			<div class='image' style="background-color:lightgray; height:470px;">
-				<h2>이 주의 기록 <em>HOT LIST</em></h2>
-				<%for(int i = 0; i<list.size(); i++) { %>
-					<div><a href = 'myList.jsp?no=<%=list.get(i).getNo() %>&where=viewBoard'>[<%=i+1%>] <%=list.get(i).getTitle() %> [<%=list.get(i).getCountCom() %>]</a></div>
-				<%}%>
-			</div>
 			</div>
 
 		</div>
