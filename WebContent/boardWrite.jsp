@@ -142,13 +142,13 @@ if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 			<tr>
 				<td><label for="title">title</label></td>
 				<td><input type="text" name="title" id="title" placeholder="제목"
-					class="init" />
+					class="init" maxlength="15"/>
 				</td>
 			</tr>
 			<tr>
 				<td><label for="name">name</label></td>
 				<td><input type="text" name="name" id="name" placeholder="식당이나 지역이름을 적어주세요"
-					class="init" /><input type="radio" id="restaurant" name="selector" value="식당" />
+					class="init" maxlength="15" /><input type="radio" id="restaurant" name="selector" value="식당" />
 					<label for="restaurant">식당</label>
 					<input type="radio" id="place" name="selector" value="지역" />
 					<label for="place">지역</label></td>
@@ -156,7 +156,7 @@ if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 			<tr>
 				<td><label for="textarea">comment</label></td>
 				<td><textarea name="textarea" id="textarea" cols="30" rows="10" placeholder="생생한 이야기를 전달해주세요."
-						class="init"></textarea></td>
+						class="init" maxlength="1900"></textarea></td>
 				<td></td>
 			</tr>
 			<tr>
