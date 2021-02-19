@@ -133,12 +133,12 @@ BoardDto dto = BoardDao.selectOne(new BoardDto(no));
 			<tr>
 				<td><label for="title">title</label></td>
 				<td><input type="text" name="title" id="title" value="<%=dto.getTitle()  %>"
-					class="init" /></td>
+					class="init" maxlength="15" /></td>
 			</tr>
 			<tr>
 				<td><label for="name">name</label></td>
 				<td><input type="text" name="name" id="name" value="<%=dto.getName() %>"
-					class="init" /><input type="radio" id="restaurant" name="selector" value="식당" />
+					class="init" maxlength="15" /><input type="radio" id="restaurant" name="selector" value="식당" />
 					<label for="restaurant">식당</label>
 					<input type="radio" id="place" name="selector" value="지역" />
 					<label for="place">지역</label></td>
@@ -146,7 +146,7 @@ BoardDto dto = BoardDao.selectOne(new BoardDto(no));
 			<tr>
 				<td><label for="textarea">comment</label></td>
 				<td><textarea name="textarea" id="textarea" cols="30" rows="10"
-						class="init"><%=dto.getTextarea()%></textarea></td>
+						class="init"  maxlength="1900"><%=dto.getTextarea()%></textarea></td>
 			</tr>
 			<tr>
 				<td><label for="writer">writer</label></td>
