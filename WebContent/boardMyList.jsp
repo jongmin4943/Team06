@@ -159,7 +159,7 @@ margin:0px;
 	int startPage = 0;
 	int onePageCnt = 10;
 	count = (int) Math.ceil((double) count / (double) onePageCnt);
-	if (tempStart != null) {
+	if (tempStart != null && !(tempStart.equals("null"))) {
 		startPage = (Integer.parseInt(tempStart) - 1) * onePageCnt;
 	}
 	List<BoardDto> v = dao.search(userID,"writer",startPage, onePageCnt);
@@ -205,8 +205,8 @@ margin:0px;
 		<tr>
 			<td><%=v.get(i).getNo()%></td>
 			<td style="font-size:10px">[<%=v.get(i).getSelector()%>]</td>
-			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&who=<%=v.get(i).getWriter()%>"><%=v.get(i).getName()%></a></td>
-			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&who=<%=v.get(i).getWriter()%>"><%=v.get(i).getTitle()%></a></td>
+			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&who=<%=userID%>&currPage=<%=tempStart%>"><%=v.get(i).getName()%></a></td>
+			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&who=<%=userID%>&currPage=<%=tempStart%>"><%=v.get(i).getTitle()%></a></td>
 			<td><%=v.get(i).getWriter()%></td>
 			<td><%=v.get(i).getDate().substring(0, 11)%></td>
 		</tr>

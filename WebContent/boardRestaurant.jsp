@@ -156,7 +156,7 @@ margin:0px;
 	int startPage = 0;
 	int onePageCnt = 10;
 	count = (int) Math.ceil((double) count / (double) onePageCnt);
-	if (tempStart != null) {
+	if (tempStart != null && !(tempStart.equals("null"))) {
 		startPage = (Integer.parseInt(tempStart) - 1) * onePageCnt;
 	}
 	List<BoardDto> v = null;	

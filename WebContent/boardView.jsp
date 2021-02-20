@@ -16,7 +16,11 @@ String userID = null;
 String switching = "inline-block";
 String no = request.getParameter("no");
 String who = request.getParameter("who");
-//System.out.println("no => " + no);
+String currPage = request.getParameter("currPage");
+String cate = request.getParameter("cate");
+String keyword = request.getParameter("keyword");
+/* System.out.println("cate => " + cate);
+System.out.println("keyword => " + keyword); */
 BoardDto board = BoardDao.selectOne(new BoardDto(no));
 //	System.out.println(board);
 CommentDao cDao = new CommentDao();
@@ -83,8 +87,8 @@ $(function() {
 		});
 	}
 	
-	
 	getComment();// 시작과 동시에 댓글 호출
+	getAroundBoard();//현재 게시글의 전 , 현 , 후 글 불러오기
 	
 	
 	$('#cBtn').click(function() {
@@ -207,6 +211,67 @@ $(function() {
 			}
 		});
 	}
+	var currNo = null;
+	var preNo = null;
+	var nextNo = null;
+	function getAroundBoard() {
+		$.ajax({
+			type: "POST",
+			url: "boardPreNextAjax.jsp",
+			data: {
+				currentNo : no
+			},
+			success: function(data) {
+				sentJsObj = JSON.parse(data.trim());
+				var suc = null;
+				if(sentJsObj.preNextBoard != null) {
+					suc = sentJsObj.preNextBoard;
+					$("#previous").attr("disabled", false);
+					$("#next").attr("disabled", false);
+					$("#boardTitle").html(suc[1].title);
+					$("#boardName").html(suc[1].name);
+					$("#boardWriter").html(suc[1].writer);
+					$("#boardDate").html(suc[1].date);
+					$("#boardContent").html(suc[1].textarea);
+					currNo = suc[1].no;
+					preNo = suc[0].no;
+					nextNo = suc[2].no;
+				} else if (sentJsObj.nextBoard != null) {
+					suc = sentJsObj.nextBoard;
+					$("#previous").attr("disabled", true);
+					$("#next").attr("disabled", false);
+					$("#boardTitle").html(suc[0].title);
+					$("#boardName").html(suc[0].name);
+					$("#boardWriter").html(suc[0].writer);
+					$("#boardDate").html(suc[0].date);
+					$("#boardContent").html(suc[0].textarea);
+					currNo = suc[0].no;
+					nextNo = suc[1].no;
+				} else if (sentJsObj.preBoard != null) {
+					suc = sentJsObj.preBoard;
+					$("#previous").attr("disabled", false);
+					$("#next").attr("disabled", true);
+					$("#boardTitle").html(suc[1].title);
+					$("#boardName").html(suc[1].name);
+					$("#boardWriter").html(suc[1].writer);
+					$("#boardDate").html(suc[1].date);
+					$("#boardContent").html(suc[1].textarea);
+					currNo = suc[1].no;
+					preNo = suc[0].no;
+				}
+			}
+ 		});
+	}
+	$("#previous").click(function() {
+		no = preNo;
+		getAroundBoard();
+	});
+	$("#next").click(function() {
+		no = nextNo;
+		getAroundBoard();
+	});
+	
+	
 });
 </script>
 </head>
@@ -291,11 +356,15 @@ span {
 			<p>기억에 남은 식당을 기록하는 곳.</p>
 			<br>
 			<br>
+			<span>
+			<button id="previous" disabled="disabled" style="height:20px; width:40px; font-size:12px; padding-bottom:20px;">prev</button>
+			<button id="next" disabled="disabled" style="height:20px; width:40px; font-size:12px; padding-bottom:20px;">next</button>
+			</span>
 			<br>
 		<table>
 			<tr>
 				<td class="menu">title</td>
-				<td class="menu2" colspan="5"><%=board.getTitle()%></td>
+				<td class="menu2" colspan="5" id="boardTitle"></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -303,15 +372,15 @@ span {
 			</tr>
 			<tr>
 				<td class="menu">name</td>
-				<td class="menu2"><%=board.getName()%></td>
+				<td class="menu2" id="boardName"></td>
 				<td class="menu">writer</td>
-				<td class="menu2"><%=board.getWriter()%></td>
+				<td class="menu2" id="boardWriter"></td>
 				<td class="menu" >date</td>
-				<td class="menu2"><%=board.getDate().substring(0, 19)%></td>
+				<td class="menu2" id="boardDate"></td>
 			</tr>
 			<tr>
 				<td class="menu" id="comment">comment</td>
-				<td colspan="5" class="menu2"><%=board.getTextarea()%></td>
+				<td colspan="5" class="menu2" id="boardContent"></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -341,13 +410,15 @@ span {
 			</tr>
 		</table>
 	</form>
-	<%if(who == null) {%>
-		<span style="align:right"><a href="boardList2.jsp">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
-	<%} else {%>
-		<span style="align:right"><a href="boardMyList.jsp">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
-	<%}%>
-	<%
-	}
-	%>
+		<%if(who == null && (cate == null && keyword == null)) {%><!--전체목록에서 그냥 들어옴  -->
+			<span style="align:right"><a href="boardList2.jsp?page=<%=currPage%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+		<%} else if(who == null && cate != null && keyword != null) {%><!--전체목록에서 검색 후 들어옴  -->
+			<span style="align:right"><a href="boardSearch.jsp?page=<%=currPage%>&cate=<%=cate%>&keyword=<%=keyword%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+		<%} else if(who != null && cate != null && keyword != null){%><!--내 목록에서 검색 후 들어옴-->
+			<span style="align:right"><a href="boardSearch.jsp?page=<%=currPage%>&cate=<%=cate%>&keyword=<%=keyword%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+		<%} else {%><!--내 목록에서 그냥 들어옴-->
+			<span style="align:right"><a href="boardMyList.jsp?page=<%=currPage%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+		<%} %>
+	<%} %>
 </body>
 </html>
