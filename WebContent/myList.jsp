@@ -64,16 +64,16 @@ iframe {
 				<br />
 				<br />
 				<br />
-				<h2 style="font-size:40px;"><a href="myList.jsp?where=myList" target="myList" style="text-decoration:none">▸ My list </a></h2>
+				<h2 style="font-size:40px;"><a href="myList.jsp?where=myList"  style="text-decoration:none">▸ My list </a></h2>
 
 				<%if(loca.equals("mixed")) {%>
-					<iframe src="boardList2.jsp" name="myList"></iframe>
+					<iframe src="boardList2.jsp"></iframe>
 				<%} else if(loca.equals("myList")){%>
-					<iframe src="boardMyList.jsp?userID="<%=userID%> name="myList" ></iframe>
+					<iframe src="boardMyList.jsp?userID="<%=userID%>></iframe>
 				<%} else if(loca.equals("viewBoard")) {%>
-					<iframe src="boardView.jsp?no=<%=no%>" name="myList"></iframe>
+					<iframe src="boardView.jsp?no=<%=no%>"></iframe>
 				<%} else {%>
-					<iframe src="boardList2.jsp" name="myList"></iframe>
+					<iframe src="boardList2.jsp"></iframe>
 				<%}%>
 			</div>
 		</div>
