@@ -3,9 +3,12 @@
 <%@page import="board.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="org.json.JSONObject"%>
+<%@ page import="com.oreilly.servlet.MultipartRequest" %>
+<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
+<%@ page import="java.util.*" %>
 <%!
 %>
-
 <%
 String userID=null;
 PrintWriter pr = response.getWriter();
@@ -18,12 +21,49 @@ if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 	pr.println("top.location.href = 'signIn.jsp'");
 	pr.println("</script>");
 }
-String title = request.getParameter("title");
-String name = request.getParameter("name");
-String textarea = request.getParameter("textarea");
-String writer = request.getParameter("writer");
-String no = request.getParameter("no");
-String selector = request.getParameter("selector");
+
+String uploadPath = application.getRealPath("/img");
+//String uploadPath3 = request.getSession().getServletContext().getRealPath("/img");
+String userName = (String)session.getAttribute("userID");
+int size = 10*1024*1024;
+String name1="";
+String filename1="";
+String origfilename1="";
+request.setCharacterEncoding("utf-8");
+String fileName = request.getParameter("partFile1");
+MultipartRequest multi= null;
+try{
+	multi=new MultipartRequest(request,
+						uploadPath,
+						size, 
+						"UTF-8",
+			new DefaultFileRenamePolicy());
+		name1=multi.getParameter("name");
+	
+	Enumeration<?> files=multi.getFileNames();
+	
+	String file1 =(String)files.nextElement();
+	filename1=multi.getFilesystemName(file1);
+	origfilename1= multi.getOriginalFileName(file1);
+	
+}catch(Exception e){
+	e.printStackTrace();
+}
+
+int idx = uploadPath.indexOf("Team06")+6;
+String realPath = uploadPath.substring(idx,uploadPath.length());
+
+
+String title = multi.getParameter("title");
+String name = multi.getParameter("name");
+String textarea = multi.getParameter("textarea");
+String writer = multi.getParameter("writer");
+String no = multi.getParameter("no");
+String selector = multi.getParameter("selector");
+
+System.out.println(title);
+System.out.println(name);
+System.out.println(origfilename1);
 BoardDto dto = new BoardDto(no,title,name,textarea,writer,"NOW()",selector,BoardDao.getCommentCount(no));
 BoardDao.insert(dto);
 

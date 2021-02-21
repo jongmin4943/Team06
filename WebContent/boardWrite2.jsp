@@ -48,7 +48,7 @@
 				return;
 			}
 			this.action = "boardWrite_ok.jsp";
-			this.method = "POST";
+			this.method = "GET";
 			this.submit();
 		});
 	});
@@ -128,7 +128,7 @@ if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 	}
 ">
 
-	<form enctype="multipart/form-data">
+	<form>
 			<hr>
 
 			<h1>작성하기</h1>
@@ -164,10 +164,6 @@ if(userID == null) { //세션을 가지고 있지 않으면 접근 불가
 				<td align="left"><input readonly type="text" name="writer" id="writer"
 					value="<%=userID %>" class="init" /> <input type="hidden" name="no" id="no" value="null"/>
 				</td>
-			</tr>
-			<tr>
-				<td><label for="partFile1">picture</label></td>
-				<td align="left"><input id = "loca" type = "file" name = "partFile1" id = "partFile1"></td>
 			</tr>
 			<tr>
 				<td align="right" colspan="2"><input type="submit"
