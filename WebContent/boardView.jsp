@@ -19,10 +19,7 @@ String who = request.getParameter("who");
 String currPage = request.getParameter("currPage");
 String cate = request.getParameter("cate");
 String keyword = request.getParameter("keyword");
-/* System.out.println("cate => " + cate);
-System.out.println("keyword => " + keyword); */
 BoardDto board = BoardDao.selectOne(new BoardDto(no));
-//	System.out.println(board);
 CommentDao cDao = new CommentDao();
 List<CommentDto> list = cDao.getComment(no);
 
