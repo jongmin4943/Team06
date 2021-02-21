@@ -39,6 +39,7 @@
 	String realPath = uploadPath.substring(idx,uploadPath.length());
 	BoardDao bDao = new BoardDao();
 	//bDao.updatePicture(userName,origfilename1);
+	//boardwrite.jsp에서 글번호받아오기..
 	
 	response.sendRedirect("userAccount.jsp");
 %>
