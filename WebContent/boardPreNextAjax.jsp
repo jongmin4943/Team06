@@ -25,6 +25,7 @@ if (no == Integer.parseInt(list.get(list.size()-1).getNo())) {
 		jsObj.put("date", list.get(j).getDate());
 		jsObj.put("selector", list.get(j).getSelector());
 		jsObj.put("countCom", list.get(j).getCountCom());
+		jsObj.put("picUrl", list.get(j).getPicUrl());
 		jsArr.put(jsObj);
 	}
 	sendObj.put("preBoard",jsArr);
@@ -39,6 +40,7 @@ if (no == Integer.parseInt(list.get(list.size()-1).getNo())) {
 		jsObj.put("date", list.get(j).getDate());
 		jsObj.put("selector", list.get(j).getSelector());
 		jsObj.put("countCom", list.get(j).getCountCom());
+		jsObj.put("picUrl", list.get(j).getPicUrl());
 		jsArr.put(jsObj);
 	}
 	sendObj.put("nextBoard",jsArr);
@@ -55,6 +57,7 @@ if (no == Integer.parseInt(list.get(list.size()-1).getNo())) {
 				jsObj.put("date", list.get(j).getDate());
 				jsObj.put("selector", list.get(j).getSelector());
 				jsObj.put("countCom", list.get(j).getCountCom());
+				jsObj.put("picUrl", list.get(j).getPicUrl());
 				jsArr.put(jsObj);
 			}
 		}

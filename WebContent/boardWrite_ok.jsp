@@ -61,11 +61,8 @@ String writer = multi.getParameter("writer");
 String no = multi.getParameter("no");
 String selector = multi.getParameter("selector");
 
-System.out.println(title);
-System.out.println(name);
-System.out.println(origfilename1);
-BoardDto dto = new BoardDto(no,title,name,textarea,writer,"NOW()",selector,BoardDao.getCommentCount(no));
+BoardDto dto = new BoardDto(no,title,name,textarea,writer,"NOW()",selector,BoardDao.getCommentCount(no),origfilename1);
 BoardDao.insert(dto);
 
-response.sendRedirect("boardList2.jsp");
+response.sendRedirect("boardView.jsp?no="+no);
 %>

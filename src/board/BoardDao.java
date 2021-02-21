@@ -18,8 +18,8 @@ public class BoardDao {
 	private static ResultSet rs = null;
 	static final String SELECT = "SELECT * FROM BOARD ORDER BY no DESC";
 	static final String SELECTBD = "SELECT * FROM BOARD WHERE no=?";
-	static final String INSERT = "INSERT INTO BOARD VALUES(null,?,?,?,?,?,?,?)";
-	static final String UPDATE = "UPDATE BOARD SET title=?, name=?, textarea=?, selector=? WHERE no=?"; // 나중에처리
+	static final String INSERT = "INSERT INTO BOARD VALUES(null,?,?,?,?,?,?,?,?)";
+	static final String UPDATE = "UPDATE BOARD SET title=?, name=?, textarea=?, selector=?, picUrl=? WHERE no=?"; // 나중에처리
 	static final String DELETE = "DELETE FROM BOARD WHERE no=?"; // 나중에 다시선정
 	static final String UPSTREAM = "SELECT * FROM BOARD ";
 	public static void insert(BoardDto dto) {
@@ -34,6 +34,7 @@ public class BoardDao {
 			pstmt.setString(5, getDate());
 			pstmt.setString(6, dto.getSelector());
 			pstmt.setString(7, dto.getCountCom());
+			pstmt.setString(8, dto.getPicUrl());
 			int cnt = pstmt.executeUpdate();
 			if (cnt > 0) {
 //				System.out.println("저장 완료!");
@@ -110,6 +111,7 @@ public class BoardDao {
 				board.setDate(rs.getString(6));
 				board.setSelector(rs.getString(7));
 				board.setCountCom(rs.getString(8));
+				board.setPicUrl(rs.getString(9));
 				list.add(board);
 			}
 		} catch (SQLException e) {
@@ -144,6 +146,7 @@ public class BoardDao {
 				otd.setDate(rs.getString(6));
 				otd.setSelector(rs.getString(7));
 				otd.setCountCom(rs.getString(8));
+				otd.setPicUrl(rs.getString(9));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -192,7 +195,8 @@ public class BoardDao {
 			pstmt.setString(2, dto.getName());
 			pstmt.setString(3, dto.getTextarea());
 			pstmt.setString(4, dto.getSelector());
-			pstmt.setString(5, dto.getNo());
+			pstmt.setString(5, dto.getPicUrl());
+			pstmt.setString(6, dto.getNo());
 			int cnt = pstmt.executeUpdate();
 			if(cnt>0) {
 //				System.out.println("수정되었습니다.");
@@ -281,6 +285,7 @@ public class BoardDao {
 				dto.setDate(rs.getString("date"));
 				dto.setSelector(rs.getString("selector"));
 				dto.setCountCom(rs.getString("countCom"));
+				dto.setPicUrl(rs.getString("picUrl"));
 				v.add(dto);
 			}
 			
@@ -329,6 +334,7 @@ public class BoardDao {
 				bDto.setDate(rs.getString(6));
 				bDto.setSelector(rs.getString(7));
 				bDto.setCountCom(rs.getString(8));
+				bDto.setPicUrl(rs.getString(9));
 				list.add(bDto);
 			}
 		} catch (SQLException e) {
@@ -360,6 +366,7 @@ public class BoardDao {
 				bDto.setDate(rs.getString(6));
 				bDto.setSelector(rs.getString(7));
 				bDto.setCountCom(rs.getString(8));
+				bDto.setPicUrl(rs.getString(9));
 				list.add(bDto);
 			}
 		} catch (SQLException e) {
@@ -391,6 +398,7 @@ public class BoardDao {
 				bDto.setDate(rs.getString(6));
 				bDto.setSelector(rs.getString(7));
 				bDto.setCountCom(rs.getString(8));
+				bDto.setPicUrl(rs.getString(9));
 				list.add(bDto);
 			}
 		} catch (SQLException e) {
@@ -475,6 +483,7 @@ public class BoardDao {
 				dto.setDate(rs.getString(6));
 				dto.setSelector(rs.getString(7));
 				dto.setCountCom(rs.getString(8));
+				dto.setPicUrl(rs.getString(9));
 				list.add(dto);
 			}
 		} catch (SQLException e) {

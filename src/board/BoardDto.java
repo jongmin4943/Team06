@@ -9,7 +9,14 @@ public class BoardDto {
 	private String date;
 	private String selector;
 	private String countCom;
+	private String picUrl;
 	
+	public String getPicUrl() {
+		return picUrl;
+	}
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
 	public String getCountCom() {
 		return countCom;
 	}
@@ -60,7 +67,7 @@ public class BoardDto {
 	}
 
 	public BoardDto(String no, String title, String name, String textarea, String writer, String date,
-			String selector, String countCom) {
+			String selector, String countCom, String picUrl) {
 		this.no = no;
 		this.title = title;
 		this.name = name;
@@ -69,16 +76,18 @@ public class BoardDto {
 		this.date = date;
 		this.selector = selector;
 		this.countCom = countCom;
+		this.picUrl = picUrl;
 	}
 	public BoardDto(String no) {
-		this(no, "", "", "","","","","");
+		this(no, "", "", "","","","","","");
 	}
 	public BoardDto() {
+		this("", "", "", "","","","","","");
 	}
 	@Override
 	public String toString() {
 		return "BoardDto [no=" + no + ", title=" + title + ", name=" + name + ", textarea=" + textarea + ", writer="
-				+ writer + ", date=" + date + ", selector=" + selector + ", countCom=" + countCom + "]";
+				+ writer + ", date=" + date + ", selector=" + selector + ", countCom=" + countCom + ", picUrl=" + picUrl
+				+ "]";
 	}
-
 }

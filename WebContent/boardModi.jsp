@@ -50,7 +50,7 @@
 				return;
 			}
 			this.action = "boardModi_ok.jsp";
-			this.method = "GET";
+			this.method = "POST";
 			this.submit();
 		});
 	});
@@ -116,7 +116,7 @@ hr {
 		this.src = 'img/nightbtn.png'	
 	}
 ">
-	<form>
+	<form enctype="multipart/form-data">
 			<hr>
 
 			<h1>작성하기</h1>
@@ -153,6 +153,10 @@ BoardDto dto = BoardDao.selectOne(new BoardDto(no));
 				<td align="left"><input type="text" name="writer" id="writer"
 					value="<%=dto.getWriter() %>" class="init" /> <input type="hidden" name="no" id="no" value="<%=dto.getNo() %>"/>
 				</td>
+			</tr>
+			<tr>
+				<td><label for="partFile1">picture</label></td>
+				<td align="left"><input id = "loca" type = "file" name = "partFile1" id = "partFile1"></td>
 			</tr>
 			<tr>
 				<td align="right" colspan="2"><input type="submit"

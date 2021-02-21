@@ -27,7 +27,14 @@ String guestID=null;
 PrintWriter pr = response.getWriter();
 if(session.getAttribute("guestID") != null) {		
 	guestID = (String)session.getAttribute("guestID");
-}%>
+}
+if (session.getAttribute("userID") != null) {
+	userID = (String) session.getAttribute("userID");
+}
+if (userID==null||!userID.equals((String)board.getWriter())) {
+	switching = "none";
+}
+%>
 <script src="https://code.jquery.com/jquery.js"></script>
 <script>
 var guestID = "<%=guestID%>";
@@ -232,22 +239,35 @@ $(function() {
 					$("#boardWriter").html(suc[1].writer);
 					$("#boardDate").html(suc[1].date);
 					$("#boardContent").html(suc[1].textarea);
+					if(suc[1].picUrl == null || suc[1].picUrl == "undefined"){
+						suc[1].picUrl = "noPic.jpg";
+					};
+					$("#picUrl").attr("src", "img/"+suc[1].picUrl)
 					//전 게시글 값 담기
 					$("#preBoardTitle").html(suc[0].title);
 					$("#preBoardName").html(suc[0].name);
 					$("#preBoardWriter").html(suc[0].writer);
 					$("#preBoardDate").html(suc[0].date);
 					$("#preBoardContent").html(suc[0].textarea);
+					if(suc[0].picUrl == null || suc[0].picUrl == "undefined"){
+						suc[0].picUrl = "noPic.jpg";
+					};
+					$("#prePicUrl").attr("src", "img/"+suc[0].picUrl)
 					//후 게시글 값 담기
 					$("#nextBoardTitle").html(suc[2].title);
 					$("#nextBoardName").html(suc[2].name);
 					$("#nextBoardWriter").html(suc[2].writer);
 					$("#nextBoardDate").html(suc[2].date);
 					$("#nextBoardContent").html(suc[2].textarea);
+					if(suc[2].picUrl == null || suc[2].picUrl == "undefined"){
+						suc[2].picUrl = "noPic.jpg";
+					};
+					$("#nextPicUrl").attr("src", "img/"+suc[2].picUrl)
 					resetBoardLocation();
 					currNo = suc[1].no;
 					preNo = suc[0].no;
 					nextNo = suc[2].no;
+					resetBoardMenu(currNo);
 				} else if (sentJsObj.nextBoard != null) {
 					suc = sentJsObj.nextBoard;
 					$("#previous").attr("disabled", true);
@@ -259,15 +279,24 @@ $(function() {
 					$("#boardWriter").html(suc[0].writer);
 					$("#boardDate").html(suc[0].date);
 					$("#boardContent").html(suc[0].textarea);
+					if(suc[0].picUrl == null || suc[0].picUrl == "undefined"){
+						suc[0].picUrl = "noPic.jpg";
+					};
+					$("#picUrl").attr("src", "img/"+suc[0].picUrl)
 					//후 게시글 값 담기
 					$("#nextBoardTitle").html(suc[1].title);
 					$("#nextBoardName").html(suc[1].name);
 					$("#nextBoardWriter").html(suc[1].writer);
 					$("#nextBoardDate").html(suc[1].date);
 					$("#nextBoardContent").html(suc[1].textarea);
+					if(suc[1].picUrl == null || suc[1].picUrl == "undefined"){
+						suc[1].picUrl = "noPic.jpg";
+					};
+					$("#nextPicUrl").attr("src", "img/"+suc[1].picUrl)
 					resetBoardLocation();
 					currNo = suc[0].no;
 					nextNo = suc[1].no;
+					resetBoardMenu(currNo);
 				} else if (sentJsObj.preBoard != null) {
 					suc = sentJsObj.preBoard;
 					$("#previous").attr("disabled", false);
@@ -279,15 +308,24 @@ $(function() {
 					$("#boardWriter").html(suc[1].writer);
 					$("#boardDate").html(suc[1].date);
 					$("#boardContent").html(suc[1].textarea);
+					if(suc[1].picUrl == null || suc[1].picUrl == "undefined"){
+						suc[1].picUrl = "noPic.jpg";
+					};
+					$("#picUrl").attr("src", "img/"+suc[1].picUrl)
 					//전 게시글 값 담기
 					$("#preBoardTitle").html(suc[0].title);
 					$("#preBoardName").html(suc[0].name);
 					$("#preBoardWriter").html(suc[0].writer);
 					$("#preBoardDate").html(suc[0].date);
 					$("#preBoardContent").html(suc[0].textarea);
+					if(suc[0].picUrl == null || suc[0].picUrl == "undefined"){
+						suc[0].picUrl = "noPic.jpg";
+					};
+					$("#prePicUrl").attr("src", "img/"+suc[0].picUrl)
 					resetBoardLocation();
 					currNo = suc[1].no;
 					preNo = suc[0].no;
+					resetBoardMenu(currNo);
 				}
 			}
  		});
@@ -338,6 +376,17 @@ $(function() {
 		},0,function(){
 			clicked = false;
 		});
+	}
+	
+	function resetBoardMenu(no) {
+		var currPage = <%=currPage%>;
+		var switching = "<%=switching%>";
+		var cate = <%=cate%>;
+		var keyword = <%=keyword%>;
+		$("#boardMenu01").html('<a href="boardList2.jsp?page='+currPage+'">목록</a><span id="non" style="display:'+switching+'"><a href="boardDelete.jsp?no='+no+'" onclick=\'return confirm("삭제 하시겠습니까?")\'>삭제</a><a href="boardModi.jsp?no='+no+'">수정</a></span>');
+		$("#boardMenu02").html('<a href="boardSearch.jsp?page='+currPage+'&cate='+cate+'&keyword='+keyword+'">목록</a><span id="non" style="display:'+switching+'"><a href="boardDelete.jsp?no='+no+'" onclick=\'return confirm("삭제 하시겠습니까?")\'>삭제</a><a href="boardModi.jsp?no='+no+'">수정</a></span>');
+		$("#boardMenu03").html('<a href="boardSearch.jsp?page='+currPage+'&cate='+cate+'&keyword='+keyword+'">목록</a><span id="non" style="display:'+switching+'"><a href="boardDelete.jsp?no='+no+'" onclick=\'return confirm("삭제 하시겠습니까?")\'>삭제</a><a href="boardModi.jsp?no='+no+'">수정</a></span>');
+		$("#boardMenu04").html('<a href="boardMyList.jsp?page='+currPage+'">목록</a><span id="non" style="display:'+switching+'"><a href="boardDelete.jsp?no='+no+'" onclick=\'return confirm("삭제 하시겠습니까?")\'>삭제</a><a href="boardModi.jsp?no='+no+'">수정</a></span>');
 	}
 });
 </script>
@@ -410,6 +459,9 @@ span {
 	 float : left;
 	 max-height:580px;
 }
+img {
+	
+}
 </style>
 <body data-mode="day">
 	<input type="image" src="img/nightbtn.png" id="changebtn" align="right"
@@ -430,12 +482,6 @@ span {
 		">
 
 	<%
-	if (session.getAttribute("userID") != null) {
-		userID = (String) session.getAttribute("userID");
-	}
-	if (userID==null||!userID.equals((String)board.getWriter())) {
-		switching = "none";
-	}
 	if (board != null) {
 	%>
 			<hr>
@@ -470,8 +516,8 @@ span {
 						</tr>
 						<tr>
 							<td class="menu" id="comment">comment</td>
-							<td colspan="5" class="menu2" id="preBoardContent"></td>
-							<td></td>
+							<td colspan="4" class="menu2" id="preBoardContent" style="max-width: 500px;"></td>
+							<td align=right><img id="prePicUrl" src="img/noPic.jpg" style="width:500px;height:300px;"></img></td>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -498,8 +544,8 @@ span {
 						</tr>
 						<tr>
 							<td class="menu" id="comment">comment</td>
-							<td colspan="5" class="menu2" id="boardContent"></td>
-							<td></td>
+							<td colspan="4" class="menu2" id="boardContent" style="max-width: 500px;"></td>
+							<td align=right><img id="picUrl" src="img/noPic.jpg" style="width:500px;height:300px;"></img></td>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -526,8 +572,8 @@ span {
 						</tr>
 						<tr>
 							<td class="menu" id="comment">comment</td>
-							<td colspan="5" class="menu2" id="nextBoardContent"></td>
-							<td></td>
+							<td colspan="4" class="menu2" id="nextBoardContent" style="max-width: 50px;"></td>
+							<td align=right><img id="nextPicUrl" src="img/noPic.jpg" style="width:500px;height:300px;"></img></td>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -561,13 +607,17 @@ span {
 		</table>
 	</form>
 		<%if(who == null && (cate == null && keyword == null)) {%><!--전체목록에서 그냥 들어옴  -->
-			<span style="align:right"><a href="boardList2.jsp?page=<%=currPage%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+			<span id="boardMenu01" style="align:right"><a href="boardList2.jsp?page=<%=currPage%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=no%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a>
+			<a href="boardModi.jsp?no=<%=no%>">수정</a></span></span>
 		<%} else if(who == null && cate != null && keyword != null) {%><!--전체목록에서 검색 후 들어옴  -->
-			<span style="align:right"><a href="boardSearch.jsp?page=<%=currPage%>&cate=<%=cate%>&keyword=<%=keyword%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+			<span id="boardMenu02" style="align:right"><a href="boardSearch.jsp?page=<%=currPage%>&cate=<%=cate%>&keyword=<%=keyword%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=no%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a>
+			<a href="boardModi.jsp?no=<%=no%>">수정</a></span></span>
 		<%} else if(who != null && cate != null && keyword != null){%><!--내 목록에서 검색 후 들어옴-->
-			<span style="align:right"><a href="boardSearch.jsp?page=<%=currPage%>&cate=<%=cate%>&keyword=<%=keyword%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+			<span id="boardMenu03" style="align:right"><a href="boardSearch.jsp?page=<%=currPage%>&cate=<%=cate%>&keyword=<%=keyword%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=no%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a>
+			<a href="boardModi.jsp?no=<%=no%>">수정</a></span></span>
 		<%} else {%><!--내 목록에서 그냥 들어옴-->
-			<span style="align:right"><a href="boardMyList.jsp?page=<%=currPage%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=board.getNo()%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a><a href="boardModi.jsp?no=<%=board.getNo()%>">수정</a></span></span>
+			<span id="boardMenu04" style="align:right"><a href="boardMyList.jsp?page=<%=currPage%>">목록</a><span id="non" style="display:<%=switching%>"><a href="boardDelete.jsp?no=<%=no%>" onclick='return confirm("삭제 하시겠습니까?")'>삭제</a>
+			<a href="boardModi.jsp?no=<%=no%>">수정</a></span></span>
 		<%} %>
 	<%} %>
 </body>
