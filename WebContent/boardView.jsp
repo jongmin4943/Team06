@@ -228,11 +228,26 @@ $(function() {
 					suc = sentJsObj.preNextBoard;
 					$("#previous").attr("disabled", false);
 					$("#next").attr("disabled", false);
+					
+					//현 게시글 값 담기
 					$("#boardTitle").html(suc[1].title);
 					$("#boardName").html(suc[1].name);
 					$("#boardWriter").html(suc[1].writer);
 					$("#boardDate").html(suc[1].date);
 					$("#boardContent").html(suc[1].textarea);
+					//전 게시글 값 담기
+					$("#preBoardTitle").html(suc[0].title);
+					$("#preBoardName").html(suc[0].name);
+					$("#preBoardWriter").html(suc[0].writer);
+					$("#preBoardDate").html(suc[0].date);
+					$("#preBoardContent").html(suc[0].textarea);
+					//후 게시글 값 담기
+					$("#nextBoardTitle").html(suc[2].title);
+					$("#nextBoardName").html(suc[2].name);
+					$("#nextBoardWriter").html(suc[2].writer);
+					$("#nextBoardDate").html(suc[2].date);
+					$("#nextBoardContent").html(suc[2].textarea);
+					resetBoardLocation();
 					currNo = suc[1].no;
 					preNo = suc[0].no;
 					nextNo = suc[2].no;
@@ -240,38 +255,93 @@ $(function() {
 					suc = sentJsObj.nextBoard;
 					$("#previous").attr("disabled", true);
 					$("#next").attr("disabled", false);
+					
+					//현 게시글 값 담기
 					$("#boardTitle").html(suc[0].title);
 					$("#boardName").html(suc[0].name);
 					$("#boardWriter").html(suc[0].writer);
 					$("#boardDate").html(suc[0].date);
 					$("#boardContent").html(suc[0].textarea);
+					//후 게시글 값 담기
+					$("#nextBoardTitle").html(suc[1].title);
+					$("#nextBoardName").html(suc[1].name);
+					$("#nextBoardWriter").html(suc[1].writer);
+					$("#nextBoardDate").html(suc[1].date);
+					$("#nextBoardContent").html(suc[1].textarea);
+					resetBoardLocation();
 					currNo = suc[0].no;
 					nextNo = suc[1].no;
 				} else if (sentJsObj.preBoard != null) {
 					suc = sentJsObj.preBoard;
 					$("#previous").attr("disabled", false);
 					$("#next").attr("disabled", true);
+					
+					//현 게시글 값 담기
 					$("#boardTitle").html(suc[1].title);
 					$("#boardName").html(suc[1].name);
 					$("#boardWriter").html(suc[1].writer);
 					$("#boardDate").html(suc[1].date);
 					$("#boardContent").html(suc[1].textarea);
+					//전 게시글 값 담기
+					$("#preBoardTitle").html(suc[0].title);
+					$("#preBoardName").html(suc[0].name);
+					$("#preBoardWriter").html(suc[0].writer);
+					$("#preBoardDate").html(suc[0].date);
+					$("#preBoardContent").html(suc[0].textarea);
+					resetBoardLocation();
 					currNo = suc[1].no;
 					preNo = suc[0].no;
 				}
 			}
  		});
 	}
+	var clicked = false;
 	$("#previous").click(function() {
-		no = preNo;
-		getAroundBoard();
-	});
+		if(!clicked) {
+			clicked = true;
+			$(".board").animate({
+				left:1200
+			});
+			$(".preBoard").animate({
+				left:0
+			},500,function(){
+				no = preNo;
+				getAroundBoard();
+				getComment();
+			});
+		}//end click check;
+	});//end previous
 	$("#next").click(function() {
-		no = nextNo;
-		getAroundBoard();
-	});
+		if(!clicked) {
+			clicked = true;
+			$(".board").animate({
+				left:-1200
+			});
+			$(".nextBoard").animate({
+				left:0
+			},500,function(){
+				no = nextNo;
+				getAroundBoard();
+				getComment();	
+			});
+		}//end click check
+	});//end next
 	
-	
+	function resetBoardLocation() {
+		$(".board").animate({
+			left:0
+		},0);
+		$(".nextBoard").animate({
+			left:1200
+		},0,function(){
+			clicked = false;
+		});
+		$(".preBoard").animate({
+			left:-1200
+		},0,function(){
+			clicked = false;
+		});
+	}
 });
 </script>
 </head>
@@ -323,6 +393,26 @@ span {
 .reply{
 	border-bottom:1px solid lightgray; 
 }
+.preBoard {
+	position: relative;
+	left : -1200px;
+	top : 1px;
+}
+.board {
+	position: relative;
+	left : 0px;
+	top : -555px;
+}
+.nextBoard {
+	position: relative;
+	left : 1200px;
+	top : -1111px;
+}
+.allBoard {
+	 white-space: nowrap;
+	 float : left;
+	 max-height:580px;
+}
 </style>
 <body data-mode="day">
 	<input type="image" src="img/nightbtn.png" id="changebtn" align="right"
@@ -356,45 +446,108 @@ span {
 			<p>기억에 남은 식당을 기록하는 곳.</p>
 			<br>
 			<br>
-			<span>
-			<button id="previous" disabled="disabled" style="height:20px; width:40px; font-size:12px; padding-bottom:20px;">prev</button>
-			<button id="next" disabled="disabled" style="height:20px; width:40px; font-size:12px; padding-bottom:20px;">next</button>
-			</span>
+			<h4 style="float:left; margin-left: 500px; padding-right: 50px;">
+			<button id="previous" disabled="disabled">◀</button></h4>
+			<h4><button id="next" disabled="disabled">▶</button></h4>
 			<br>
-		<table>
-			<tr>
-				<td class="menu">title</td>
-				<td class="menu2" colspan="5" id="boardTitle"></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="menu">name</td>
-				<td class="menu2" id="boardName"></td>
-				<td class="menu">writer</td>
-				<td class="menu2" id="boardWriter"></td>
-				<td class="menu" >date</td>
-				<td class="menu2" id="boardDate"></td>
-			</tr>
-			<tr>
-				<td class="menu" id="comment">comment</td>
-				<td colspan="5" class="menu2" id="boardContent"></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</table>
-		<div style="backgroundColor=lightgray; margin:10px; width:1080px; border: 1px solid lightgray;">
+			
+		<div style="max-width:1200px; margin : 0 auto; overflow:hidden; ">
+			<div class="allBoard">
+				<div class="preBoard"><!-- 전 테이블시작 -->
+					<table>
+						<tr>
+							<td class="menu">title</td>
+							<td class="menu2" colspan="5" id="preBoardTitle"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="menu">name</td>
+							<td class="menu2" id="preBoardName"></td>
+							<td class="menu">writer</td>
+							<td class="menu2" id="preBoardWriter"></td>
+							<td class="menu" >date</td>
+							<td class="menu2" id="preBoardDate"></td>
+						</tr>
+						<tr>
+							<td class="menu" id="comment">comment</td>
+							<td colspan="5" class="menu2" id="preBoardContent"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div><!-- 테이블 끝 -->
+				<div class="board" style="white-space: nowrap;"><!-- 현 테이블시작 -->
+					<table>
+						<tr>
+							<td class="menu">title</td>
+							<td class="menu2" colspan="5" id="boardTitle"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="menu">name</td>
+							<td class="menu2" id="boardName"></td>
+							<td class="menu">writer</td>
+							<td class="menu2" id="boardWriter"></td>
+							<td class="menu" >date</td>
+							<td class="menu2" id="boardDate"></td>
+						</tr>
+						<tr>
+							<td class="menu" id="comment">comment</td>
+							<td colspan="5" class="menu2" id="boardContent"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div><!-- 테이블 끝 -->
+				<div class="nextBoard" style="white-space: nowrap;"><!-- 후 테이블시작 -->
+					<table>
+						<tr>
+							<td class="menu">title</td>
+							<td class="menu2" colspan="5" id="nextBoardTitle"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="menu">name</td>
+							<td class="menu2" id="nextBoardName"></td>
+							<td class="menu">writer</td>
+							<td class="menu2" id="nextBoardWriter"></td>
+							<td class="menu" >date</td>
+							<td class="menu2" id="nextBoardDate"></td>
+						</tr>
+						<tr>
+							<td class="menu" id="comment">comment</td>
+							<td colspan="5" class="menu2" id="nextBoardContent"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div><!-- 테이블 끝 -->
+			</div>
+		</div>
+		
+		<div style="width:1089px; border: 1px solid lightgray;">
 			<div style="margin-left:7px;">
 				<span style="width:150px;">ID</span>
 				<span style="width:730px;">comment</span>
 				<span style="text-align:left; width:150px;">date</span>
 			</div>
 		</div>
-		<div style="backgroundColor=lightgray; margin:10px; width:1080px; border: 1px solid lightgray;">
+		<div style="margin:10px 0px; width:1089px; border: 1px solid lightgray;">
 			<div class="reply" id="reply"><!-- 받은것 넣는곳 --></div>
 		</div>
 	<form>

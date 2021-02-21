@@ -5,9 +5,10 @@
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%@ page import="java.util.*" %>
 <%
-	String uploadPath = request.getServletContext().getRealPath("/img");	
-	String uploadPath2 = application.getRealPath("/img");	
-	System.out.println(uploadPath);
+	//String uploadPath = "//학원컴 절대 path 찾아보기";	
+	String uploadPath = application.getRealPath("/img");
+	String uploadPath3 = request.getSession().getServletContext().getRealPath("/img");
+	//System.out.println(uploadPath3);
 	String userName = (String)session.getAttribute("userID");
 	int size = 10*1024*1024;
 	String name="";
