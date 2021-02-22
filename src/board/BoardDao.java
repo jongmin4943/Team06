@@ -164,17 +164,16 @@ public class BoardDao {
 	public static BoardDto selectOneAfterInsert(BoardDto dto) {
 		BoardDto otd = null;
 		conn = JdbcUtil.getConnection();
-		String SAI="select no from board where Title=? and Name=? and Textarea=? and Writer=? and date=? and Selector=? and countCom=? and picUrl=?";
+		String SAI="select no from board where Title=? and Name=? and Textarea=? and Writer=? and Selector=? and countCom=? and picUrl=?";
 		try {
 			pstmt = conn.prepareStatement(SAI);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getName());
 			pstmt.setString(3, dto.getTextarea());
 			pstmt.setString(4, dto.getWriter());
-			pstmt.setString(5, dto.getDate());
-			pstmt.setString(6, dto.getSelector());
-			pstmt.setString(7, dto.getCountCom());
-			pstmt.setString(8, dto.getPicUrl());
+			pstmt.setString(5, dto.getSelector());
+			pstmt.setString(6, dto.getCountCom());
+			pstmt.setString(7, dto.getPicUrl());
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				otd = new BoardDto();
