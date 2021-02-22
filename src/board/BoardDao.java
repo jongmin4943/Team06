@@ -177,14 +177,6 @@ public class BoardDao {
 			if (rs.next()) {
 				otd = new BoardDto();
 				otd.setNo(rs.getString(1));
-				otd.setTitle(rs.getString(2));
-				otd.setName(rs.getString(3));
-				otd.setTextarea(rs.getString(4));
-				otd.setWriter(rs.getString(5));
-				otd.setDate(rs.getString(6));
-				otd.setSelector(rs.getString(7));
-				otd.setCountCom(rs.getString(8));
-				otd.setPicUrl(rs.getString(9));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

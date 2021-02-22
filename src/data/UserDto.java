@@ -16,7 +16,6 @@ public class UserDto {
 
 
 	public UserDto(String userID, String userPassword, String userName, String userEmail, String profileUrl) {
-		super();
 		this.userID = userID;
 		this.userPassword = userPassword;
 		this.userName = userName;

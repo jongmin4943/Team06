@@ -132,7 +132,7 @@ public class UserDao {
 			pstmt.setString(2, dto.getUserPassword());
 			pstmt.setString(3, dto.getUserName());
 			pstmt.setString(4, dto.getUserEmail());
-			pstmt.setString(5, dto.getProfileUrl());
+			pstmt.setString(5, "noPic.jpg");
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
