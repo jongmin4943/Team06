@@ -5,7 +5,7 @@
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%@ page import="java.util.*" %>
 <%
-	//String uploadPath = "//학원컴 절대 path 찾아보기";	
+	//String uploadPath = "C:\\JONGMIN20210111\\JSPwork\\Team06\\WebContent\\img";	//학원 path
 	String uploadPath = application.getRealPath("/img");
 	String uploadPath3 = request.getSession().getServletContext().getRealPath("/img");
 	//System.out.println(uploadPath3);
