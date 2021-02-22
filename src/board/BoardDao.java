@@ -160,6 +160,43 @@ public class BoardDao {
 		}
 		return otd;
 	}
+	
+	public static BoardDto selectOneAfterInsert(BoardDto dto) {
+		BoardDto otd = null;
+		conn = JdbcUtil.getConnection();
+		String SAI="select no from board where Title=? and Name=? and Textarea=? and Writer=? and Selector=?";
+		try {
+			pstmt = conn.prepareStatement(SAI);
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getName());
+			pstmt.setString(3, dto.getTextarea());
+			pstmt.setString(4, dto.getWriter());
+			pstmt.setString(5, dto.getSelector());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				otd = new BoardDto();
+				otd.setNo(rs.getString(1));
+				otd.setTitle(rs.getString(2));
+				otd.setName(rs.getString(3));
+				otd.setTextarea(rs.getString(4));
+				otd.setWriter(rs.getString(5));
+				otd.setDate(rs.getString(6));
+				otd.setSelector(rs.getString(7));
+				otd.setCountCom(rs.getString(8));
+				otd.setPicUrl(rs.getString(9));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			JdbcUtil.close(rs, pstmt, conn);
+		}
+		return otd;
+	}
 
 	public static void delete(BoardDto dto) {
 		conn = JdbcUtil.getConnection();

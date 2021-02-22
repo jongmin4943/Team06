@@ -63,6 +63,7 @@ String selector = multi.getParameter("selector");
 
 BoardDto dto = new BoardDto(no,title,name,textarea,writer,"NOW()",selector,BoardDao.getCommentCount(no),origfilename1);
 BoardDao.insert(dto);
+BoardDto currDto = BoardDao.selectOneAfterInsert(dto);
 
-response.sendRedirect("boardView.jsp?no="+no);
+response.sendRedirect("boardView.jsp?no="+currDto.getNo());
 %>
