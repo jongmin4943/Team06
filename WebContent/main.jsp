@@ -41,6 +41,9 @@ a:link{
 a:visited{
 	color:black;
 }
+#non-click{
+pointer-events:none;
+}
 </style>
 </head>
 
@@ -136,7 +139,7 @@ a:visited{
 									<%for(int i = 0; i<list.size(); i++) { %>
 									<em style = "color:red; font-size:19px; float:left; padding-right:3px;">[<%=i+1%>] </em>
 									<a style = "font-size:20px; float:left;" href = 'myList.jsp?no=<%=list.get(i).getNo() %>&where=viewBoard'><%=list.get(i).getTitle() %></a>
-									<p style = "color:blue; font-size:18px;"> [<%=list.get(i).getCountCom() %>]</p>
+									<p id="non-click" style = "color:blue; font-size:18px;"> [<%=list.get(i).getCountCom() %>]</p>
 									<br />
 									<%}%>
 							</div>
