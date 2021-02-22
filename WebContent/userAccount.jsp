@@ -131,7 +131,7 @@ function goSignOut() {	//로그아웃
 				<fieldset class="form-group">
 					<legend>프로필</legend><!-- 위에서 날아온 userID를 담아서 실시간으로 보여줌 -->
 						<h3 class="form-group" style="text-align: center;">My Profile</h3>
-						<img id="profile" src="" style="width:200px;height:150px;margin-bottom:10px;">
+						<img id="profile" src="img/noPic.jpg" style="width:200px;height:150px;margin-bottom:10px;">
 						<input id = "loca" type = "file" name = "partFile1" id = "partFile1"> <!-- preview 이미지 -->
 						<input style="margin-top: 10px"type = "submit" value = "사진수정"/>
 						<br>
