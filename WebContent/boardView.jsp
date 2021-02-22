@@ -385,8 +385,8 @@ $(function() {
 	
 	function resetBoardMenu(no) {
 		var currPage = <%=currPage%>;
-		var cate = <%=cate%>;
-		var keyword = <%=keyword%>;
+		var cate = "<%=cate%>";
+		var keyword = "<%=keyword%>";
 		if (userID=='null' ||userID != currWriter) {
 			switching = "none";
 		} else {
