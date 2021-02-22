@@ -451,17 +451,17 @@ span {
 .preBoard {
 	position: relative;
 	left : -1200px;
-	top : 1px;
+	top : 8px;
 }
 .board {
 	position: relative;
 	left : 0px;
-	top : -555px;
+	top : -550px;
 }
 .nextBoard {
 	position: relative;
 	left : 1200px;
-	top : -1111px;
+	top : -1108px;
 }
 .allBoard {
 	 white-space: nowrap;
