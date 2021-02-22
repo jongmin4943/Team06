@@ -39,6 +39,7 @@ if (userID==null||!userID.equals((String)board.getWriter())) {
 <script>
 var guestID = "<%=guestID%>";
 var no = "<%=no%>";
+var userID = "<%=userID%>";
 var flag = false;
 $(function() {
 	function getComment() {	//댓글 불러오기 함수
@@ -218,6 +219,7 @@ $(function() {
 	var currNo = null;
 	var preNo = null;
 	var nextNo = null;
+	var currWriter = null;
 	function getAroundBoard() {
 		$.ajax({
 			type: "POST",
@@ -267,6 +269,7 @@ $(function() {
 					currNo = suc[1].no;
 					preNo = suc[0].no;
 					nextNo = suc[2].no;
+					currWriter = suc[1].writer;
 					resetBoardMenu(currNo);
 				} else if (sentJsObj.nextBoard != null) {
 					suc = sentJsObj.nextBoard;
@@ -296,6 +299,7 @@ $(function() {
 					resetBoardLocation();
 					currNo = suc[0].no;
 					nextNo = suc[1].no;
+					currWriter = suc[0].writer;
 					resetBoardMenu(currNo);
 				} else if (sentJsObj.preBoard != null) {
 					suc = sentJsObj.preBoard;
@@ -325,6 +329,7 @@ $(function() {
 					resetBoardLocation();
 					currNo = suc[1].no;
 					preNo = suc[0].no;
+					currWriter = suc[1].writer;
 					resetBoardMenu(currNo);
 				}
 			}
@@ -380,14 +385,18 @@ $(function() {
 	
 	function resetBoardMenu(no) {
 		var currPage = <%=currPage%>;
-		var switching = "<%=switching%>";
 		var cate = <%=cate%>;
 		var keyword = <%=keyword%>;
+		if (userID=='null' ||userID != currWriter) {
+			switching = "none";
+		} else {
+			switching = "inline-block";
+		}
 		$("#boardMenu01").html('<a href="boardList2.jsp?page='+currPage+'">목록</a><span id="non" style="display:'+switching+'"><a href="boardDelete.jsp?no='+no+'" onclick=\'return confirm("삭제 하시겠습니까?")\'>삭제</a><a href="boardModi.jsp?no='+no+'">수정</a></span>');
 		$("#boardMenu02").html('<a href="boardSearch.jsp?page='+currPage+'&cate='+cate+'&keyword='+keyword+'">목록</a><span id="non" style="display:'+switching+'"><a href="boardDelete.jsp?no='+no+'" onclick=\'return confirm("삭제 하시겠습니까?")\'>삭제</a><a href="boardModi.jsp?no='+no+'">수정</a></span>');
 		$("#boardMenu03").html('<a href="boardSearch.jsp?page='+currPage+'&cate='+cate+'&keyword='+keyword+'">목록</a><span id="non" style="display:'+switching+'"><a href="boardDelete.jsp?no='+no+'" onclick=\'return confirm("삭제 하시겠습니까?")\'>삭제</a><a href="boardModi.jsp?no='+no+'">수정</a></span>');
 		$("#boardMenu04").html('<a href="boardMyList.jsp?page='+currPage+'">목록</a><span id="non" style="display:'+switching+'"><a href="boardDelete.jsp?no='+no+'" onclick=\'return confirm("삭제 하시겠습니까?")\'>삭제</a><a href="boardModi.jsp?no='+no+'">수정</a></span>');
-	}
+	}//if문이 안먹는다....
 });
 </script>
 </head>
