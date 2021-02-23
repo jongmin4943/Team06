@@ -206,7 +206,7 @@ margin:0px;
 			<td><%=v.get(i).getNo()%></td>
 			<td style="font-size:10px">[<%=v.get(i).getSelector()%>]</td>
 			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&who=<%=userID%>&currPage=<%=tempStart%>"><%=v.get(i).getName()%></a></td>
-			<td><a href="boardView.jsp?no=<%=v.get(i).getNo()%>&who=<%=userID%>&currPage=<%=tempStart%>"><%=v.get(i).getTitle()%></a></td>
+			<td><a style="float:left" href="boardView.jsp?no=<%=v.get(i).getNo()%>&who=<%=userID%>&currPage=<%=tempStart%>"><%=v.get(i).getTitle()%></a><h6 style="color:#afafaf;font-size:16px;font-weight:500;">&nbsp;[<%=v.get(i).getCountCom()%>]</h6></td>
 			<td><%=v.get(i).getWriter()%></td>
 			<td><%=v.get(i).getDate().substring(0, 11)%></td>
 		</tr>
@@ -216,7 +216,7 @@ margin:0px;
 	</table>
 	<div>
 		<div style="float:left">
-			<a href="boardWrite.jsp" id="aa"> 새 게시글 작성 </a>
+			<a href="boardWrite.jsp"><input type="image" src="img/write.png" id="aa" style="box-shadow:2px 2px 5px gray"/></a>
 		</div>
 	</div><br>
 	<div>

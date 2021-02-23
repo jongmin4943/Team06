@@ -561,7 +561,7 @@ span {
 						</tr>
 					</table>
 				</div><!-- 테이블 끝 -->
-				<div class="nextBoard""><!-- 후 테이블시작 -->
+				<div class="nextBoard"><!-- 후 테이블시작 -->
 					<table>
 						<tr>
 							<td class="menu">title</td>
