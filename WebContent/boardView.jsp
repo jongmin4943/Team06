@@ -452,24 +452,24 @@ span {
 	position: relative;
 	left : -1200px;
 	top : 8px;
+	word-break: break-all;
 }
 .board {
 	position: relative;
 	left : 0px;
 	top : -550px;
+	word-break: break-all;
 }
 .nextBoard {
 	position: relative;
 	left : 1200px;
 	top : -1108px;
+	word-break: break-all;
 }
 .allBoard {
 	 white-space: nowrap;
 	 float : left;
 	 max-height:580px;
-}
-img {
-	
 }
 </style>
 <body data-mode="day">
@@ -525,7 +525,7 @@ img {
 						</tr>
 						<tr>
 							<td class="menu" id="comment">comment</td>
-							<td colspan="4" class="menu2" id="preBoardContent" style="max-width: 500px;"></td>
+							<td colspan="4" class="menu2" style="max-width: 500px; white-space: normal;"><span id="preBoardContent"></span></td>
 							<td align=right><img id="prePicUrl" src="img/noPic.jpg" style="width:500px;height:300px;"></img></td>
 							<td></td>
 							<td></td>
@@ -533,7 +533,7 @@ img {
 						</tr>
 					</table>
 				</div><!-- 테이블 끝 -->
-				<div class="board" style="white-space: nowrap;"><!-- 현 테이블시작 -->
+				<div class="board"><!-- 현 테이블시작 -->
 					<table>
 						<tr>
 							<td class="menu">title</td>
@@ -553,7 +553,7 @@ img {
 						</tr>
 						<tr>
 							<td class="menu" id="comment">comment</td>
-							<td colspan="4" class="menu2" id="boardContent" style="max-width: 500px;"></td>
+							<td colspan="4" class="menu2" style="max-width: 500px; white-space: normal;"><span id="boardContent"></span></td>
 							<td align=right><img id="picUrl" src="img/noPic.jpg" style="width:500px;height:300px;"></img></td>
 							<td></td>
 							<td></td>
@@ -561,7 +561,7 @@ img {
 						</tr>
 					</table>
 				</div><!-- 테이블 끝 -->
-				<div class="nextBoard" style="white-space: nowrap;"><!-- 후 테이블시작 -->
+				<div class="nextBoard""><!-- 후 테이블시작 -->
 					<table>
 						<tr>
 							<td class="menu">title</td>
@@ -581,7 +581,7 @@ img {
 						</tr>
 						<tr>
 							<td class="menu" id="comment">comment</td>
-							<td colspan="4" class="menu2" id="nextBoardContent" style="max-width: 50px;"></td>
+							<td colspan="4" class="menu2" style="max-width: 50px; white-space: normal;"><span id="nextBoardContent"></span></td>
 							<td align=right><img id="nextPicUrl" src="img/noPic.jpg" style="width:500px;height:300px;"></img></td>
 							<td></td>
 							<td></td>
