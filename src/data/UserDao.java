@@ -243,17 +243,4 @@ public class UserDao {
 		}
 		
 	}
-	
-	
-	
-	public static void main(String[] args) {
-		UserDao dao = new UserDao();
-//		user.insert(new UserDto("min","2345","민종윤","bad"));
-//		user.update(new UserDto("Yoon","1357","민종윤","bad"));
-//		user.delete(new UserDto(null,null,null,"bad"));
-		List<UserDto> list = dao.getAll();
-		for(UserDto users : list) {
-			System.out.println(users);
-		}
-	}
 }

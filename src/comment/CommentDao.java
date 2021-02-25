@@ -158,7 +158,7 @@ public class CommentDao {
 			if(cnt > 0) {
 //				System.out.println("삭제성공");
 			} else {
-				System.out.println("삭제할 댓글이 없음");
+//				System.out.println("삭제할 댓글이 없음");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

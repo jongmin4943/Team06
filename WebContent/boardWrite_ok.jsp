@@ -50,10 +50,6 @@ try{
 	e.printStackTrace();
 }
 
-int idx = uploadPath.indexOf("Team06")+6;
-String realPath = uploadPath.substring(idx,uploadPath.length());
-
-
 String title = multi.getParameter("title");
 String name = multi.getParameter("name");
 String textarea = multi.getParameter("textarea");
