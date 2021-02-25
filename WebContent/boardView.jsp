@@ -331,6 +331,25 @@ $(function() {
 					preNo = suc[0].no;
 					currWriter = suc[1].writer;
 					resetBoardMenu(currNo);
+				} else if (sentJsObj.oneBoard != null) {
+					suc = sentJsObj.oneBoard;
+					$("#previous").attr("disabled", true);
+					$("#next").attr("disabled", true);
+					
+					//현 게시글 값 담기
+					$("#boardTitle").html(suc[0].title);
+					$("#boardName").html(suc[0].name);
+					$("#boardWriter").html(suc[0].writer);
+					$("#boardDate").html(suc[0].date);
+					$("#boardContent").html(suc[0].textarea);
+					if(suc[0].picUrl == null || suc[0].picUrl == "undefined"){
+						suc[0].picUrl = "noPic.jpg";
+					};
+					$("#picUrl").attr("src", "img/"+suc[0].picUrl)
+					resetBoardLocation();
+					currNo = suc[0].no;
+					currWriter = suc[0].writer;
+					resetBoardMenu(currNo);
 				}
 			}
  		});

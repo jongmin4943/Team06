@@ -14,7 +14,7 @@ BoardDao bDao = new BoardDao();
 list = bDao.selectAll();
 JSONArray jsArr = new JSONArray();
 JSONObject sendObj = new JSONObject();
-if (no == Integer.parseInt(list.get(list.size()-1).getNo())) {
+if (list.size()>1 &&no == Integer.parseInt(list.get(list.size()-1).getNo())) {
 	for(int j = list.size()-2; j<list.size(); j++) {
 		JSONObject jsObj = new JSONObject();
 		jsObj.put("no", list.get(j).getNo());
@@ -29,7 +29,7 @@ if (no == Integer.parseInt(list.get(list.size()-1).getNo())) {
 		jsArr.put(jsObj);
 	}
 	sendObj.put("preBoard",jsArr);
-} else if (no == Integer.parseInt(list.get(0).getNo())) {
+} else if (list.size()>1 &&no == Integer.parseInt(list.get(0).getNo())) {
 	for(int j = 0; j<2; j++) {
 		JSONObject jsObj = new JSONObject();
 		jsObj.put("no", list.get(j).getNo());
@@ -44,7 +44,7 @@ if (no == Integer.parseInt(list.get(list.size()-1).getNo())) {
 		jsArr.put(jsObj);
 	}
 	sendObj.put("nextBoard",jsArr);
-} else {
+} else if(list.size()>1) {
 	for(int i = 0; i<list.size(); i++) {
 		 if (no == Integer.parseInt(list.get(i).getNo())) {
 			for(int j = i-1; j<=i+1; j++) {
@@ -63,6 +63,19 @@ if (no == Integer.parseInt(list.get(list.size()-1).getNo())) {
 		}
 	}
 	sendObj.put("preNextBoard",jsArr);
+} else {
+	JSONObject jsObj = new JSONObject();
+	jsObj.put("no", list.get(0).getNo());
+	jsObj.put("title", list.get(0).getTitle());
+	jsObj.put("name", list.get(0).getName());
+	jsObj.put("textarea", list.get(0).getTextarea());
+	jsObj.put("writer", list.get(0).getWriter());
+	jsObj.put("date", list.get(0).getDate());
+	jsObj.put("selector", list.get(0).getSelector());
+	jsObj.put("countCom", list.get(0).getCountCom());
+	jsObj.put("picUrl", list.get(0).getPicUrl());
+	jsArr.put(jsObj);
+	sendObj.put("oneBoard",jsArr);
 }
 	out.println(sendObj);
 %>

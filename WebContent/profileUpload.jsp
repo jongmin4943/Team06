@@ -7,8 +7,7 @@
 <%
 	//String uploadPath = "C:\\JONGMIN20210111\\JSPwork\\Team06\\WebContent\\img";	//학원 path
 	String uploadPath = application.getRealPath("/img");
-	String uploadPath3 = request.getSession().getServletContext().getRealPath("/img");
-	//System.out.println(uploadPath3);
+//	String uploadPath3 = request.getSession().getServletContext().getRealPath("/img");
 	String userName = (String)session.getAttribute("userID");
 	int size = 10*1024*1024;
 	String name="";
@@ -35,8 +34,8 @@
 		e.printStackTrace();
 	}
 	
-	int idx = uploadPath.indexOf("Team06")+6;
-	String realPath = uploadPath.substring(idx,uploadPath.length());
+//	int idx = uploadPath.indexOf("Team06")+6;
+//	String realPath = uploadPath.substring(idx,uploadPath.length());
 	UserDao dao = new UserDao();
 	dao.updateProfile(userName,origfilename1);
 	

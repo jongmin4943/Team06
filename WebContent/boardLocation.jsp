@@ -1,4 +1,3 @@
-<%@page import="board.BtnDto"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Vector"%>
 <%@page import="board.BoardDao"%>

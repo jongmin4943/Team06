@@ -45,9 +45,8 @@ try{
 }catch(Exception e){
 	e.printStackTrace();
 }
-
-int idx = uploadPath.indexOf("Team06")+6;
-String realPath = uploadPath.substring(idx,uploadPath.length());
+//int idx = uploadPath.indexOf("Team06")+6;
+//String realPath = uploadPath.substring(idx,uploadPath.length());
 
 String no= multi.getParameter("no");
 String name= multi.getParameter("name");
@@ -55,6 +54,9 @@ String title= multi.getParameter("title");
 String writer= multi.getParameter("writer");
 String textarea= multi.getParameter("textarea");
 String selector= multi.getParameter("selector");
+if(origfilename1 == null) {
+	origfilename1 = BoardDao.selectOne(new BoardDto(no)).getPicUrl();
+}
 BoardDao.modify(new BoardDto(no,title,name,textarea,writer,"NOW()",selector,null,origfilename1));
 
 response.sendRedirect("boardView.jsp?no="+no);
