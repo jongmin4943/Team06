@@ -513,8 +513,8 @@ span {
 	if (board != null) {
 	%>
 			<hr>
-			<h1>맛집보기</h1>
-			<p>기억에 남은 식당을 기록하는 곳.</p>
+			<h1>추억 보기</h1>
+			<p style="color:gray">기억에 남은 식당이나 여행지가 기록된 곳.</p>
 			<br>
 			<br>
 			<h4 style="float:left; margin-left: 500px; padding-right: 50px;">
